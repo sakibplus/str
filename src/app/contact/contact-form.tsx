@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Label } from '@/components/ui/label';
-import { Card } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
 const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
@@ -54,26 +54,28 @@ Message: ${message}
     };
 
     return (
-        <Card className="shadow-lg p-6 md:p-8">
-            <form onSubmit={handleWhatsAppSubmit} className="space-y-4">
-                <div>
-                    <Label htmlFor="name" className="font-semibold">আপনার নাম</Label>
-                    <Input id="name" type="text" placeholder="সম্পূর্ণ নাম" className="mt-2" value={name} onChange={(e) => setName(e.target.value)} />
-                </div>
-                <div>
-                    <Label htmlFor="email" className="font-semibold">আপনার ইমেইল</Label>
-                    <Input id="email" type="email" placeholder="ইমেইল অ্যাড্রেস" className="mt-2" value={email} onChange={(e) => setEmail(e.target.value)} />
-                </div>
-                <div>
-                    <Label htmlFor="message" className="font-semibold">আপনার বার্তা</Label>
-                    <Textarea id="message" placeholder="আপনার প্রশ্ন বা বার্তাটি এখানে লিখুন..." className="mt-2" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
-                </div>
-                {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-                <Button type="submit" size="lg" className="w-full h-12 text-base md:h-14 md:text-lg bg-green-500 hover:bg-green-600 text-white">
-                    <WhatsappIcon className="mr-3 h-6 w-6" />
-                    হোয়াটসঅ্যাপে পাঠান
-                </Button>
-            </form>
+        <Card className="shadow-lg">
+            <CardContent className="p-6 md:p-8">
+                <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+                    <div>
+                        <Label htmlFor="name" className="font-semibold text-base">আপনার নাম</Label>
+                        <Input id="name" type="text" placeholder="সম্পূর্ণ নাম" className="mt-2 h-12" value={name} onChange={(e) => setName(e.target.value)} />
+                    </div>
+                    <div>
+                        <Label htmlFor="email" className="font-semibold text-base">আপনার ইমেইল</Label>
+                        <Input id="email" type="email" placeholder="ইমেইল অ্যাড্রেস" className="mt-2 h-12" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div>
+                        <Label htmlFor="message" className="font-semibold text-base">আপনার বার্তা</Label>
+                        <Textarea id="message" placeholder="আপনার প্রশ্ন বা বার্তাটি এখানে লিখুন..." className="mt-2" rows={6} value={message} onChange={(e) => setMessage(e.target.value)} />
+                    </div>
+                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                    <Button type="submit" size="lg" className="w-full h-14 text-lg font-bold bg-green-500 hover:bg-green-600 text-white flex items-center justify-center gap-3">
+                        <WhatsappIcon className="h-6 w-6" />
+                        <span>হোয়াটসঅ্যাপে পাঠান</span>
+                    </Button>
+                </form>
+            </CardContent>
         </Card>
     )
 }
