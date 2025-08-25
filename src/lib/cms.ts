@@ -6,7 +6,8 @@ import Papa from 'papaparse';
 
 // Helper function to fetch and parse CSV data
 async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
-  if (!url || url === 'YOUR_GOOGLE_SHEET_CSV_URL_HERE') {
+  if (!url || url.includes('YOUR_GOOGLE_SHEET_CSV_URL_HERE')) {
+    console.warn(`Google Sheet URL is not configured: ${url}`);
     return [];
   }
   try {
@@ -32,9 +33,7 @@ async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
         complete: (results) => {
           if (results.errors.length) {
             console.error(`Errors parsing CSV from ${url}:`, results.errors);
-            // Even with parsing errors, we might have some valid data.
-            // Resolve with what we have, but the errors are logged.
-            resolve(results.data);
+            resolve(results.data || []);
           } else {
             resolve(results.data);
           }

@@ -9,26 +9,43 @@ import { CourseCarousel } from '@/components/course-carousel';
 import { FreeVideosForm } from '@/components/free-videos-form';
 import { WhyChooseUs } from '@/components/why-choose-us';
 import {
-  getHeroData,
-  getCourseCarouselData,
-  getCourses,
-  getAboutUsData,
-  getTestimonials,
-  getWhyChooseUsData,
-  getNavLinks,
-  getFooterData,
-} from '@/lib/cms';
+  heroData,
+  courseCarouselData,
+  courses,
+  aboutUsData,
+  testimonials,
+  whyChooseUsData,
+} from '@/lib/data';
+import type { NavLink, FooterData } from '@/lib/cms';
+
+
+const navLinks: NavLink[] = [
+    { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট' },
+    { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন' },
+    { href: '#about', label: 'আমাদের সম্পর্কে' },
+    { href: '#courses', label: 'আমাদের কোর্স' },
+    { href: '#testimonials', label: 'শিক্ষার্থীদের মতামত' },
+    { href: '#contact', label: 'যোগাযোগ' },
+];
+
+const footerData: FooterData = {
+    description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+    newsletter_heading: "নিউজলেটার",
+    newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।",
+    links: [
+        { href: "#about", label: "আমাদের সম্পর্কে"},
+        { href: "#courses", label: "আমাদের কোর্স"},
+        { href: "#blog", label: "ব্লগ"},
+        { href: "#", label: "গোপনীয়তা নীতি"},
+    ],
+    contact: {
+        line1: "ঢাকা, বাংলাদেশ",
+        line2: "info@skillshikhun.com",
+        line3: "+880 1234 567890",
+    }
+};
 
 export default async function Home() {
-  const heroData = await getHeroData();
-  const courseCarouselData = await getCourseCarouselData();
-  const courses = await getCourses();
-  const aboutUsData = await getAboutUsData();
-  const testimonials = await getTestimonials();
-  const whyChooseUsData = await getWhyChooseUsData();
-  const navLinks = await getNavLinks();
-  const footerData = await getFooterData();
-
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <TopBanner />
