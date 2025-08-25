@@ -2,19 +2,20 @@ import Image from "next/image";
 import { Building, Goal, Eye } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getAboutUsData } from "@/lib/cms";
+import { getNavLinks, getFooterData, getAboutUsData, getNavbarData } from "@/lib/cms";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AboutPage() {
-  const [navLinks, footerData, aboutUsData] = await Promise.all([
+  const [navLinks, footerData, aboutUsData, navbarData] = await Promise.all([
     getNavLinks(),
     getFooterData(),
     getAboutUsData(),
+    getNavbarData(),
   ]);
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      <Navbar navLinks={navLinks} />
+      <Navbar navLinks={navLinks} data={navbarData} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-primary text-white py-20">

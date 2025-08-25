@@ -2,7 +2,7 @@ import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { getNavLinks, getFooterData } from "@/lib/cms";
+import { getNavLinks, getFooterData, getNavbarData } from "@/lib/cms";
 import { Mail, Phone, MapPin } from "lucide-react";
 
 const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -23,9 +23,10 @@ const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
   );
 
 export default async function ContactPage() {
-  const [navLinks, footerData] = await Promise.all([
+  const [navLinks, footerData, navbarData] = await Promise.all([
     getNavLinks(),
     getFooterData(),
+    getNavbarData(),
   ]);
 
   const contactInfo = [
@@ -50,7 +51,7 @@ export default async function ContactPage() {
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
-      <Navbar navLinks={navLinks} />
+      <Navbar navLinks={navLinks} data={navbarData} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="bg-primary text-white py-20">

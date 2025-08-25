@@ -11,10 +11,10 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink } from '@/lib/cms';
+import type { NavLink, NavbarData } from '@/lib/cms';
 
 
-export function Navbar({ navLinks }: { navLinks: NavLink[] }) {
+export function Navbar({ navLinks, data }: { navLinks: NavLink[], data: NavbarData }) {
   const allNavLinks = [
     ...navLinks,
     { href: "/about", label: "আমাদের সম্পর্কে" },
@@ -26,7 +26,7 @@ export function Navbar({ navLinks }: { navLinks: NavLink[] }) {
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src="/logo.png"
+            src={data.logo_url}
             alt="SkillShikhun Logo"
             width={120}
             height={32}
@@ -46,7 +46,7 @@ export function Navbar({ navLinks }: { navLinks: NavLink[] }) {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button className="hidden md:flex bg-gray-800 text-white hover:bg-gray-900">লগ ইন/সাইন আপ</Button>
+          <Button className="hidden md:flex bg-gray-800 text-white hover:bg-gray-900">{data.button_text}</Button>
 
           <div className="md:hidden">
             <Sheet>
@@ -60,7 +60,7 @@ export function Navbar({ navLinks }: { navLinks: NavLink[] }) {
                 <SheetHeader>
                   <Link href="/" className="flex items-center gap-2 mb-4">
                     <Image
-                      src="/logo.png"
+                      src={data.logo_url}
                       alt="SkillShikhun Logo"
                       width={150}
                       height={40}
@@ -77,7 +77,7 @@ export function Navbar({ navLinks }: { navLinks: NavLink[] }) {
                       {link.label}
                     </Link>
                   ))}
-                   <Button className="bg-gray-800 text-white hover:bg-gray-900">লগ ইন/সাইন আপ</Button>
+                   <Button className="bg-gray-800 text-white hover:bg-gray-900">{data.button_text}</Button>
                 </div>
               </SheetContent>
             </Sheet>

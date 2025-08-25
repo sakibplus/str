@@ -22,7 +22,7 @@ export function Footer({ data }: { data: FooterData }) {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <Image src="/logo-white.png" alt="SkillShikhun Logo" width={150} height={40} />
+              <Image src={contact.logo_url} alt="SkillShikhun Logo" width={150} height={40} />
             </Link>
             <p className="text-sm text-primary-foreground/80">
               {description}

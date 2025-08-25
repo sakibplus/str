@@ -4,6 +4,7 @@
 // It fetches data from Google Sheets CSV URLs.
 
 // Bypassing .env file to fix persistent caching issues. URLs are now hardcoded.
+const GOOGLE_SHEET_NAVBAR_DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=785293248&single=true&output=csv";
 const GOOGLE_SHEET_NAVLINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=0&single=true&output=csv";
 const GOOGLE_SHEET_HERO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1013684368&single=true&output=csv";
 const GOOGLE_SHEET_COURSE_CAROUSEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1532617770&single=true&output=csv";
@@ -104,6 +105,21 @@ function transformKeyValue(data: any, fallback: any): any {
         }
         return obj;
     }, {});
+}
+
+
+export type NavbarData = {
+    logo_url: string;
+    button_text: string;
+}
+export const getNavbarData = async (): Promise<NavbarData> => {
+    const fallback: NavbarData = { logo_url: '/logo.png', button_text: 'লগ ইন/সাইন আপ' };
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_NAVBAR_DATA_URL, [fallback], 'NavbarData');
+    const transformedData = transformKeyValue(data, fallback);
+    return {
+        logo_url: transformedData.logo_url || fallback.logo_url,
+        button_text: transformedData.button_text || fallback.button_text,
+    };
 }
 
 
@@ -258,6 +274,7 @@ export type FooterContact = {
     line1: string;
     line2: string;
     line3: string;
+    logo_url: string;
 }
 export type FooterData = {
     main: {
@@ -276,7 +293,7 @@ export const getFooterData = async (): Promise<FooterData> => {
             newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করুন।",
         },
         links: [],
-        contact: { line1: "ঢাকা, বাংলাদেশ", line2: "info@skillshikhun.com", line3: "+8801234567890" }
+        contact: { line1: "ঢাকা, বাংলাদেশ", line2: "info@skillshikhun.com", line3: "+8801234567890", logo_url: '/logo-white.png' }
     };
     const footerInfo = await fetchAndParseCsv(GOOGLE_SHEET_FOOTER_URL, [], 'FooterInfo');
     const links = await fetchAndParseCsv(GOOGLE_SHEET_FOOTER_LINKS_URL, [], 'FooterLinks');
@@ -296,6 +313,7 @@ export const getFooterData = async (): Promise<FooterData> => {
             line1: contactData.line1 || fallback.contact.line1,
             line2: contactData.line2 || fallback.contact.line2,
             line3: contactData.line3 || fallback.contact.line3,
+            logo_url: contactData.logo_url || fallback.contact.logo_url,
         }
     };
 }

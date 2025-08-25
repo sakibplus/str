@@ -10,6 +10,7 @@ import { CourseCarousel } from '@/components/course-carousel';
 import { FreeVideosForm } from '@/components/free-videos-form';
 import { WhyChooseUs } from '@/components/why-choose-us';
 import { 
+    getNavbarData,
     getNavLinks,
     getHeroData,
     getCourseCarouselData,
@@ -23,6 +24,7 @@ import {
 export default async function Home() {
   // Fetch all data from the CMS in parallel
   const [
+    navbarData,
     navLinks,
     heroData,
     courseCarouselData,
@@ -32,6 +34,7 @@ export default async function Home() {
     whyChooseUsData,
     footerData
   ] = await Promise.all([
+    getNavbarData(),
     getNavLinks(),
     getHeroData(),
     getCourseCarouselData(),
@@ -45,7 +48,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <TopBanner />
-      <Navbar navLinks={navLinks} />
+      <Navbar navLinks={navLinks} data={navbarData} />
       <main className="flex-1">
         <HeroSection data={heroData} />
         <CourseCarousel courses={courseCarouselData} />

@@ -29,6 +29,7 @@ export default function CourseDetailClientPage({ course }: { course: Course }) {
   
   // Dummy data for Navbar and Footer as we cannot fetch them here directly in a client component easily
   // In a real app, this might be handled by a layout or passed differently.
+  const DUMMY_NAVBAR_DATA = { logo_url: '/logo.png', button_text: 'লগ ইন' };
   const DUMMY_NAV_LINKS = [
     { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট' },
     { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন' },
@@ -51,12 +52,13 @@ export default function CourseDetailClientPage({ course }: { course: Course }) {
         line1: "ঢাকা, বাংলাদেশ",
         line2: "info@skillshikhun.com",
         line3: "+880 1234 567890",
+        logo_url: '/logo-white.png',
     }
   };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Navbar navLinks={DUMMY_NAV_LINKS} />
+      <Navbar navLinks={DUMMY_NAV_LINKS} data={DUMMY_NAVBAR_DATA} />
       <main className="flex-1 py-12 md:py-20">
         <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12">
