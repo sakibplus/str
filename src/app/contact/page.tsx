@@ -1,4 +1,5 @@
 
+
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/cms";
@@ -36,34 +37,34 @@ export default async function ContactPage() {
       <Navbar navLinks={navLinks} data={navbarData} courses={courses} />
       <main className="flex-1">
         {/* Hero Section */}
-        <section className="bg-primary text-white py-16 md:py-20">
+        <section className="bg-primary text-white py-12 md:py-16">
           <div className="container mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold font-headline">
+            <h1 className="text-3xl md:text-5xl font-bold font-headline">
               {contactPageData.hero_title}
             </h1>
-            <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
+            <p className="mt-3 text-base md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
               {contactPageData.hero_subtitle}
             </p>
           </div>
         </section>
 
         {/* Contact Info Cards */}
-        <section className="py-12 md:py-16">
+        <section className="py-10 md:py-12">
           <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6">
               {contactInfoCards.map((item: ContactInfoCard, index: number) => {
                 const IconComponent = iconComponents[item.icon] || Mail;
                 return (
                   <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                    <CardContent className="p-6 flex flex-row items-center gap-4">
+                    <CardContent className="p-4 flex flex-row items-center gap-4">
                       <div className="bg-accent/10 p-3 rounded-full">
-                        <IconComponent className="h-8 w-8 text-accent" />
+                        <IconComponent className="h-6 w-6 md:h-8 md:w-8 text-accent" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-bold font-headline text-primary mb-1">
+                        <h3 className="text-md md:text-lg font-bold font-headline text-primary mb-1">
                           {item.title}
                         </h3>
-                        <a href={item.link} className="text-muted-foreground hover:text-accent text-sm md:text-base">
+                        <a href={item.link} className="text-muted-foreground hover:text-accent text-sm md:text-base break-all">
                           {item.value}
                         </a>
                       </div>
@@ -76,11 +77,11 @@ export default async function ContactPage() {
         </section>
 
         {/* Form and Map Section */}
-        <section className="pb-12 md:pb-24 bg-white pt-12">
+        <section className="pb-10 md:pb-20 bg-white pt-8">
           <div className="container mx-auto px-4">
-            <div className="text-center mb-12">
+            <div className="text-center mb-10">
                 <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{contactPageData.form_title}</h2>
-                <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">{contactPageData.form_subtitle}</p>
+                <p className="text-base md:text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">{contactPageData.form_subtitle}</p>
             </div>
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               {/* Contact Form */}
@@ -89,7 +90,7 @@ export default async function ContactPage() {
               </div>
 
               {/* Google Map */}
-              <div className="order-1 lg:order-2 h-80 lg:h-full w-full rounded-xl overflow-hidden shadow-lg border">
+              <div className="order-1 lg:order-2 h-72 lg:h-full w-full rounded-xl overflow-hidden shadow-lg border">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.879940198188!2d90.39053831543154!3d23.75167699462529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1f1178de1f6f3!2sDhaka!5e0!3m2!1sen!2sbd!4v1678886363028!5m2!1sen!2sbd"
                   width="100%"
