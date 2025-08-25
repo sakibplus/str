@@ -1,21 +1,13 @@
+
 'use client';
+
+import { useState } from 'react';
 import { X } from 'lucide-react';
-import React, { useState, useEffect } from 'react';
-import { Button } from './ui/button';
 
 export function TopBanner() {
-  const [isClient, setIsClient] = useState(false);
-  const [isBannerVisible, setIsBannerVisible] = useState(true);
+  const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
-  const handleClose = () => {
-    setIsBannerVisible(false);
-  };
-
-  if (!isClient || !isBannerVisible) {
+  if (!isVisible) {
     return null;
   }
 
@@ -36,9 +28,14 @@ export function TopBanner() {
                 <div className="hidden md:block">
                      <span className="font-bold text-yellow-400 text-lg">SUPER <span className="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full">SALE</span></span>
                 </div>
-                <Button type="button" variant="ghost" size="icon" onClick={handleClose} className="hover:bg-white/20">
+                <button 
+                    type="button" 
+                    className="p-2 rounded-full hover:bg-white/20"
+                    aria-label="Close banner"
+                    onClick={() => setIsVisible(false)}
+                >
                     <X className="h-5 w-5" />
-                </Button>
+                </button>
             </div>
         </div>
     </div>
