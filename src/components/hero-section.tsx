@@ -18,9 +18,11 @@ export function HeroSection({ data }: { data: HeroData }) {
         </p>
         <div className="bg-white/10 p-6 rounded-lg border border-white/20">
           <p className="text-neutral-200 mb-2">কোর্স সম্পর্কিত যেকোনো তথ্যের জন্য কল করুন</p>
-          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg w-full">
-            <Phone className="mr-2 h-5 w-5" />
-            09613823645
+          <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg w-full" asChild>
+            <a href="tel:09613823645">
+              <Phone className="mr-2 h-5 w-5" />
+              09613823645
+            </a>
           </Button>
         </div>
       </div>
