@@ -16,7 +16,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
   if (!courses || courses.length === 0) return null;
 
   return (
-    <section id="courses" className="py-12 md:py-20 bg-gray-50">
+    <section id="courses" className="pb-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
@@ -56,7 +56,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                     </p>
                   </CardContent>
                   <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                     <span className="font-bold text-primary">৳{course.price} {course.priceSuffix}</span>
+                     <span className="font-bold text-primary">৳{course.price}</span>
                      <Button asChild variant="outline" size="sm">
                       <Link href={`/course/${course.id}`}>
                         বিস্তারিত দেখুন
