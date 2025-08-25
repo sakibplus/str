@@ -192,29 +192,33 @@ export type FooterContact = {
     line3: string;
 }
 export type FooterData = {
-    description: string;
-    newsletter_heading: string;
-    newsletter_placeholder: string;
+    main: {
+      description: string;
+      newsletter_heading: string;
+      newsletter_placeholder: string;
+    };
     links: FooterLink[];
     contact: FooterContact;
 }
 export const getFooterData = async (): Promise<FooterData> => {
-     const fallback = {
-        description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
-        newsletter_heading: "নিউজলেটার",
-        newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করুন।",
+     const fallback: FooterData = {
+        main: {
+            description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+            newsletter_heading: "নিউজলেটার",
+            newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করুন।",
+        },
         links: [],
         contact: { line1: "ঢাকা, বাংলাদেশ", line2: "info@skillshikhun.com", line3: "+8801234567890" }
     };
-    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL, [fallback], 'FooterInfo');
+    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL, [fallback.main], 'FooterInfo');
     const links = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL, [], 'FooterLinks');
     const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL, [fallback.contact], 'FooterContact');
 
-    const mainData = footerInfo[0] || fallback;
+    const mainData = footerInfo[0] || fallback.main;
     const contactData = contactInfo[0] || fallback.contact;
 
     return { 
-        ...mainData, 
+        main: mainData,
         links: links, 
         contact: contactData
     };

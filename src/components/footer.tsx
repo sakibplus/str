@@ -5,8 +5,10 @@ import type { FooterData } from '@/lib/cms';
 
 export function Footer({ data }: { data: FooterData }) {
 
-  if (!data) return null;
-  const { description, newsletter_heading, newsletter_placeholder, links, contact } = data;
+  if (!data?.main) return null;
+  const { main, links, contact } = data;
+  const { description, newsletter_heading, newsletter_placeholder } = main;
+
 
   return (
     <footer id="contact" className="bg-primary text-primary-foreground">
