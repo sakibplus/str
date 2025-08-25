@@ -1,20 +1,31 @@
+
 import { notFound } from 'next/navigation';
-import { getCourseCarouselData } from '@/lib/cms';
+import { getCourseCarouselData, getCourses } from '@/lib/cms';
 import CourseDetailClientPage from './client-page';
 
 // This is a server component to fetch data
 export default async function CourseDetailPage({ params }: { params: { id: string } }) {
-  const allCourses = await getCourseCarouselData();
+  // Fetch data from both course sheets in parallel for better performance
+  const carouselCoursesPromise = getCourseCarouselData();
+  const regularCoursesPromise = getCourses();
+
+  const [carouselCourses, regularCourses] = await Promise.all([
+    carouselCoursesPromise,
+    regularCoursesPromise,
+  ]);
+
+  // Combine the lists to search for the course in both
+  const allCourses = [...carouselCourses, ...regularCourses];
   
-  // In a real app, you would fetch the specific course details.
-  // Here we are filtering from the carousel data for simplicity.
+  // Find the course by its ID from the combined list
   const course = allCourses.find((c) => c.id.toString() === params.id);
 
+  // If the course is not found in either list, show a 404 page
   if (!course) {
     notFound();
   }
 
-  // A mock details object, since it's not in our current CMS sheet
+  // A mock details object, which can be expanded in the CMS later
   const courseDetails = {
     details: [
         { heading: 'কোর্সটি কাদের জন্য?', points: ['নতুন শিক্ষার্থী', 'যারা অনলাইনে আয় করতে চান', 'স্টুডেন্ট এবং চাকরিজীবী'] },
