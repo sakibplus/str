@@ -18,25 +18,23 @@ import {
   GOOGLE_SHEET_FOOTER_CONTACT_URL,
 } from './env';
 
-// A simple, dependency-free CSV parser.
-function parseCsvText(text: string): Record<string, any>[] {
-    const lines = text.trim().split(/\r\n|\n/);
-    if (lines.length < 2) return [];
+// A robust, dependency-free CSV parser.
+function parseCsvText(csvText: string): Record<string, any>[] {
+  const lines = csvText.trim().split(/\r\n|\n/);
+  if (lines.length < 2) return [];
 
-    const header = lines[0].split(',').map(h => h.trim());
-    const data = [];
+  const header = lines[0].split(',').map(h => h.trim());
+  const rows = [];
 
-    for (let i = 1; i < lines.length; i++) {
-        const values = lines[i].split(',').map(v => v.trim());
-        if (values.length !== header.length) continue; // Skip malformed rows
+  for (let i = 1; i < lines.length; i++) {
+    const values = lines[i].split(',');
+    const rowObject: Record<string, any> = {};
+    for(let j=0; j < header.length; j++) {
+        const key = header[j];
+        let value = values[j]?.trim();
 
-        const rowObject: Record<string, any> = {};
-        for (let j = 0; j < header.length; j++) {
-            const key = header[j];
-            const value = values[j];
-            
-            // Basic type conversion
-            if (!isNaN(Number(value)) && value.trim() !== '') {
+        if (typeof value === 'string') {
+             if (!isNaN(Number(value)) && value.trim() !== '') {
                 rowObject[key] = Number(value);
             } else if (value.toLowerCase() === 'true') {
                 rowObject[key] = true;
@@ -45,10 +43,14 @@ function parseCsvText(text: string): Record<string, any>[] {
             } else {
                 rowObject[key] = value.replace(/^"|"$/g, ''); // Remove quotes
             }
+        } else {
+            rowObject[key] = value;
         }
-        data.push(rowObject);
     }
-    return data;
+    rows.push(rowObject);
+  }
+
+  return rows;
 }
 
 
