@@ -3,10 +3,9 @@
 // This file is the single source of truth for all data in the app.
 // It fetches data from Google Sheets CSV URLs.
 
-// Bypassing .env file to fix persistent caching issues. URLs are now hardcoded.
-const GOOGLE_SHEET_NAVBAR_DATA_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=785293248&single=true&output=csv";
+// URLs are hardcoded to bypass potential .env caching issues on some platforms.
 const GOOGLE_SHEET_NAVLINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=0&single=true&output=csv";
-const GOOGLE_SHEET_HERO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1013684368&single=true&output=csv";
+const GOOGLE_SHEET_HERO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1013684368&single=true&output=csv"; // Also used for Navbar Data
 const GOOGLE_SHEET_COURSE_CAROUSEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1532617770&single=true&output=csv";
 const GOOGLE_SHEET_COURSES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1672836539&single=true&output=csv";
 const GOOGLE_SHEET_ABOUT_US_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1619751893&single=true&output=csv";
@@ -114,7 +113,7 @@ export type NavbarData = {
 }
 export const getNavbarData = async (): Promise<NavbarData> => {
     const fallback: NavbarData = { logo_url: '/logo.png', button_text: 'লগ ইন/সাইন আপ' };
-    const data = await fetchAndParseCsv(GOOGLE_SHEET_NAVBAR_DATA_URL, [fallback], 'NavbarData');
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_HERO_URL, [fallback], 'NavbarData');
     const transformedData = transformKeyValue(data, fallback);
     return {
         logo_url: transformedData.logo_url || fallback.logo_url,
@@ -317,3 +316,5 @@ export const getFooterData = async (): Promise<FooterData> => {
         }
     };
 }
+
+    
