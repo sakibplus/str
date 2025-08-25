@@ -2,7 +2,8 @@
 
 import * as React from 'react';
 import Link from 'next/link';
-import { Book, Menu, Newspaper, UserCircle, X } from 'lucide-react';
+import Image from 'next/image';
+import { Menu } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import {
   Dialog,
@@ -52,7 +53,7 @@ export function Navbar() {
       toast({
         title: newLoginStatus ? 'সফলভাবে লগইন হয়েছে' : 'সফলভাবে লগআউট হয়েছে',
         description: newLoginStatus
-          ? 'রঙিনবাড়ি আইটি-তে আপনাকে স্বাগতম!'
+          ? 'SkillShikhun-এ আপনাকে স্বাগতম!'
           : 'আবার আসবেন!',
       });
     } catch (error) {
@@ -91,20 +92,17 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
+      <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <Book className="h-6 w-6 text-primary" />
-          <span className="text-xl font-bold font-headline text-primary">
-            রঙিনবাড়ি আইটি
-          </span>
+           <Image src="/logo.png" alt="SkillShikhun Logo" width={150} height={40} />
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
+        <nav className="hidden md:flex items-center gap-6 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+              className="text-muted-foreground transition-colors hover:text-primary"
             >
               {link.label}
             </Link>
@@ -112,34 +110,7 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-4">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button variant="ghost" size="icon">
-                <UserCircle className="h-5 w-5" />
-                <span className="sr-only">অ্যাকাউন্ট</span>
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-[425px]">
-              <DialogHeader>
-                <DialogTitle>
-                  {isLoggedIn ? 'আমার অ্যাকাউন্ট' : 'অ্যাকাউন্ট তৈরি করুন'}
-                </DialogTitle>
-                <DialogDescription>
-                  {isLoading
-                    ? 'লোড হচ্ছে...'
-                    : relevantInfo ||
-                      'আপনার অ্যাকাউন্টে লগইন করে নতুন নতুন সুবিধা উপভোগ করুন।'}
-                </DialogDescription>
-              </DialogHeader>
-              <Button onClick={handleLoginToggle} disabled={isLoading}>
-                {isLoading
-                  ? 'লোড হচ্ছে...'
-                  : isLoggedIn
-                  ? 'লগ আউট'
-                  : 'লগইন করুন'}
-              </Button>
-            </DialogContent>
-          </Dialog>
+           <Button>লগইন করুন</Button>
 
           <div className="md:hidden">
             <Sheet>
@@ -152,10 +123,7 @@ export function Navbar() {
               <SheetContent side="right">
                 <SheetHeader>
                   <Link href="/" className="flex items-center gap-2 mb-4">
-                     <Book className="h-6 w-6 text-primary" />
-                      <span className="text-xl font-bold font-headline text-primary">
-                        রঙিনবাড়ি আইটি
-                      </span>
+                     <Image src="/logo.png" alt="SkillShikhun Logo" width={150} height={40} />
                   </Link>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">

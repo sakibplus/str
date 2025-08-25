@@ -2,9 +2,16 @@ import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
+import { Hind_Siliguri } from 'next/font/google';
+
+const hindSiliguri = Hind_Siliguri({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['bengali'],
+  variable: '--font-hind-siliguri',
+});
 
 export const metadata: Metadata = {
-  title: 'রঙিনবাড়ি আইটি',
+  title: 'SkillShikhun',
   description: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।',
 };
 
@@ -15,21 +22,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="bn" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link
-          rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossOrigin="anonymous"
-        />
-        <link
-          href="https://fonts.googleapis.com/css2?family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-          rel="stylesheet"
-        />
-      </head>
       <body
         className={cn(
-          'min-h-screen bg-background font-body antialiased'
+          'min-h-screen bg-background font-body antialiased',
+          hindSiliguri.variable
         )}
       >
         {children}

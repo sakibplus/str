@@ -1,5 +1,6 @@
 import Link from 'next/link';
-import { Book, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import Image from 'next/image';
+import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
 
 export function Footer() {
   return (
@@ -8,10 +9,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <Book className="h-8 w-8" />
-              <span className="text-2xl font-bold font-headline">
-                রঙিনবাড়ি আইটি
-              </span>
+              <Image src="/logo-white.png" alt="SkillShikhun Logo" width={150} height={40} />
             </Link>
             <p className="text-sm text-primary-foreground/80">
               আপনার দক্ষতা বিকাশে আমাদের পথচলা।
@@ -44,7 +42,7 @@ export function Footer() {
             <h3 className="font-bold font-headline mb-4">যোগাযোগ</h3>
             <ul className="space-y-2 text-sm text-primary-foreground/80">
               <li>ঢাকা, বাংলাদেশ</li>
-              <li>info@ronginbariit.com</li>
+              <li>info@skillshikhun.com</li>
               <li>+880 1234 567890</li>
             </ul>
           </div>
@@ -58,7 +56,7 @@ export function Footer() {
           </div>
         </div>
         <div className="border-t border-primary-foreground/20 mt-8 pt-6 text-center text-sm text-primary-foreground/80">
-          <p>&copy; ২০২৪ রঙিনবাড়ি আইটি। সর্বস্বত্ব সংরক্ষিত।</p>
+          <p>&copy; ২০২৪ SkillShikhun। সর্বস্বত্ব সংরক্ষিত।</p>
         </div>
       </div>
     </footer>

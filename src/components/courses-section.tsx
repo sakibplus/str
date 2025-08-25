@@ -19,7 +19,7 @@ type Course = {
 
 export function CoursesSection({ courses }: { courses: Course[] }) {
   return (
-    <section id="courses" className="py-12 md:py-20 bg-secondary">
+    <section id="courses" className="py-12 md:py-20 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
@@ -33,7 +33,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
           {courses.map((course) => (
             <Card
               key={course.id}
-              className="overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-xl"
+              className="overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-xl rounded-lg border"
             >
               <CardHeader className="p-0">
                 <Image
@@ -46,14 +46,14 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                 />
               </CardHeader>
               <CardContent className="p-6 flex-grow">
-                <CardTitle className="mb-2 font-headline text-xl">{course.title}</CardTitle>
+                <CardTitle className="mb-2 font-headline text-lg font-semibold">{course.title}</CardTitle>
                 <p className="text-muted-foreground text-sm line-clamp-3">
                   {course.description}
                 </p>
               </CardContent>
               <CardFooter className="flex flex-col items-start p-6 pt-0">
                 <div className="w-full flex justify-between items-center mb-4">
-                  <Badge variant="default" className="text-lg bg-accent text-accent-foreground py-1 px-3">
+                  <Badge variant="destructive" className="text-lg py-1 px-3">
                     {course.price}
                   </Badge>
                 </div>
@@ -67,7 +67,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                     <span>{course.students} শিক্ষার্থী</span>
                   </div>
                 </div>
-                <Button asChild className="w-full mt-auto">
+                <Button asChild className="w-full mt-auto" variant="outline">
                   <Link href={course.link}>
                     বিস্তারিত দেখুন <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>

@@ -1,4 +1,3 @@
-import { HeaderAd } from '@/components/header-ad';
 import { Navbar } from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { CoursesSection } from '@/components/courses-section';
@@ -17,7 +16,6 @@ import {
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col">
-      <HeaderAd />
       <Navbar />
       <main className="flex-1">
         <HeroSection data={heroData} />
