@@ -5,7 +5,8 @@ const cache = new Map<string, any>();
 
 async function fetchAndParseCsv<T>(url: string | undefined): Promise<T[]> {
     if (!url) {
-        console.error("CSV URL is not defined.");
+        // Return empty array if URL is not defined, instead of trying to fetch.
+        // This prevents errors for optional sheets.
         return [];
     }
 
