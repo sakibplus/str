@@ -1,22 +1,22 @@
 'use server';
 
 // This file is the single source of truth for all data in the app.
-// It fetches data from Google Sheets CSV URLs defined in environment variables.
+// It fetches data from Google Sheets CSV URLs.
 
-import {
-  GOOGLE_SHEET_NAVLINKS_URL,
-  GOOGLE_SHEET_HERO_URL,
-  GOOGLE_SHEET_COURSE_CAROUSEL_URL,
-  GOOGLE_SHEET_COURSES_URL,
-  GOOGLE_SHEET_ABOUT_US_URL,
-  GOOGLE_SHEET_ABOUT_US_STATS_URL,
-  GOOGLE_SHEET_TESTIMONIALS_URL,
-  GOOGLE_SHEET_WHY_CHOOSE_US_URL,
-  GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL,
-  GOOGLE_SHEET_FOOTER_URL,
-  GOOGLE_SHEET_FOOTER_LINKS_URL,
-  GOOGLE_SHEET_FOOTER_CONTACT_URL,
-} from './env';
+// Bypassing .env file to fix persistent caching issues. URLs are now hardcoded.
+const GOOGLE_SHEET_NAVLINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=0&single=true&output=csv";
+const GOOGLE_SHEET_HERO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1013684368&single=true&output=csv";
+const GOOGLE_SHEET_COURSE_CAROUSEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1532617770&single=true&output=csv";
+const GOOGLE_SHEET_COURSES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1672836539&single=true&output=csv";
+const GOOGLE_SHEET_ABOUT_US_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1619751893&single=true&output=csv";
+const GOOGLE_SHEET_ABOUT_US_STATS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=338665560&single=true&output=csv";
+const GOOGLE_SHEET_TESTIMONIALS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1600324589&single=true&output=csv";
+const GOOGLE_SHEET_WHY_CHOOSE_US_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1563300107&single=true&output=csv";
+const GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=312235772&single=true&output=csv";
+const GOOGLE_SHEET_FOOTER_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=2041864803&single=true&output=csv";
+const GOOGLE_SHEET_FOOTER_LINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1301954674&single=true&output=csv";
+const GOOGLE_SHEET_FOOTER_CONTACT_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1357018130&single=true&output=csv";
+
 
 // A robust, dependency-free CSV parser.
 function parseCsvText(csvText: string): Record<string, any>[] {
