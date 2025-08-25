@@ -24,6 +24,7 @@ type Course = {
     description?: string;
     details?: { heading: string; points: string[] }[];
     promoCode?: string;
+    priceSuffix?: string;
 };
 
 type EnrollDialogProps = {
@@ -102,7 +103,7 @@ Please guide me with the next steps. Thank you!
                 <h3 className="font-bold text-lg text-primary">{course.title}</h3>
                 <div className="flex items-center text-sm">
                   {course.discountedPrice ? (
-                      <p className="font-bold text-accent text-lg">৳{course.discountedPrice}/মাস</p>
+                      <p className="font-bold text-accent text-lg">৳{course.discountedPrice} {course.priceSuffix}</p>
                   ) : (
                       <p className="font-bold text-accent text-lg">৳৭৫০</p>
                   )}

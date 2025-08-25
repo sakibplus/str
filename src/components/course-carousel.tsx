@@ -64,7 +64,7 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
                             <>
                               <p className="text-sm">{course.duration}</p>
                               <div className="bg-white text-gray-800 font-bold py-1 px-4 rounded-lg inline-block text-sm">
-                                {course.discountedPrice}৳ প্রতি মাস
+                                {course.discountedPrice}৳ {course.priceSuffix}
                               </div>
                             </>
                           ) : (
