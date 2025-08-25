@@ -27,7 +27,7 @@ export function TopBanner() {
                 <div className="hidden md:block">
                      <span className="font-bold text-yellow-400 text-lg">SUPER <span className="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full">SALE</span></span>
                 </div>
-                <Button variant="ghost" size="icon" onClick={() => setIsVisible(false)} className="hover:bg-white/20">
+                <Button type="button" variant="ghost" size="icon" onClick={() => setIsVisible(false)} className="hover:bg-white/20">
                     <X className="h-5 w-5" />
                 </Button>
             </div>

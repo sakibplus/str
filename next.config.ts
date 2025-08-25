@@ -27,6 +27,12 @@ const nextConfig: NextConfig = {
         hostname: 'ecdn.dhakatribune.net',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'image4.owler.com',
+        port: '',
+        pathname: '/**',
       }
     ],
   },

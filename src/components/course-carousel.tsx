@@ -36,7 +36,7 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
                         alt={course.title}
                         width={300}
                         height={300}
-                        className="w-full h-full object-cover aspect-square"
+                        className="w-full h-auto object-cover aspect-square"
                         data-ai-hint={course.dataAiHint}
                       />
                       <div className="absolute inset-0 bg-black/20"></div>
