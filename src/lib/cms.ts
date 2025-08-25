@@ -8,6 +8,7 @@ const GOOGLE_SHEET_NAVLINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PAC
 const GOOGLE_SHEET_HERO_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1013684368&single=true&output=csv"; // Also used for Navbar Data
 const GOOGLE_SHEET_COURSE_CAROUSEL_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1532617770&single=true&output=csv";
 const GOOGLE_SHEET_COURSES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1672836539&single=true&output=csv";
+const GOOGLE_SHEET_INQUIRY_COURSES_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1672836539&single=true&output=csv"; // Using same as courses for now, user should change this
 const GOOGLE_SHEET_ABOUT_US_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1619751893&single=true&output=csv";
 const GOOGLE_SHEET_ABOUT_US_STATS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=338665560&single=true&output=csv";
 const GOOGLE_SHEET_TESTIMONIALS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1600324589&single=true&output=csv";
@@ -187,6 +188,7 @@ export type CourseCarouselData = {
     promoCode?: string;
     duration?: string;
     description: string;
+    priceSuffix?: string;
 };
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
     const fallback: CourseCarouselData[] = [];
@@ -209,6 +211,13 @@ export type Course = {
 export const getCourses = async (): Promise<Course[]> => {
     const fallback: Course[] = [];
     const data = await fetchAndParseCsv(GOOGLE_SHEET_COURSES_URL, fallback, 'Courses');
+    return Array.isArray(data) ? data : fallback;
+}
+
+
+export const getInquiryCourses = async (): Promise<Course[]> => {
+    const fallback: Course[] = [];
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_INQUIRY_COURSES_URL, fallback, 'InquiryCourses');
     return Array.isArray(data) ? data : fallback;
 }
 

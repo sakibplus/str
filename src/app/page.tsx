@@ -18,7 +18,8 @@ import {
     getAboutUsData,
     getTestimonials,
     getWhyChooseUsData,
-    getFooterData
+    getFooterData,
+    getInquiryCourses
 } from '@/lib/cms';
 
 export default async function Home() {
@@ -29,6 +30,7 @@ export default async function Home() {
     heroData,
     courseCarouselData,
     courses,
+    inquiryCourses,
     aboutUsData,
     testimonials,
     whyChooseUsData,
@@ -39,6 +41,7 @@ export default async function Home() {
     getHeroData(),
     getCourseCarouselData(),
     getCourses(),
+    getInquiryCourses(),
     getAboutUsData(),
     getTestimonials(),
     getWhyChooseUsData(),
@@ -52,7 +55,7 @@ export default async function Home() {
       <main className="flex-1">
         <HeroSection data={heroData} />
         <CourseCarousel courses={courseCarouselData} />
-        <FreeVideosForm courses={courses} />
+        <FreeVideosForm courses={inquiryCourses} />
         <CoursesSection courses={courses} />
         <AboutUsSection data={aboutUsData} />
         <TestimonialsSection testimonials={testimonials} />
