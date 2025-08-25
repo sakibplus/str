@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -43,7 +44,7 @@ export function CourseCarousel({ courses }: { courses: Course[] }) {
                         alt={course.title}
                         width={300}
                         height={450}
-                        className="w-full h-full object-cover"
+                        className="w-full h-full object-cover aspect-square sm:aspect-[2/3]"
                         data-ai-hint={course.dataAiHint}
                       />
                       <div className="absolute inset-0 bg-black/20"></div>
