@@ -64,7 +64,7 @@ function transformKeyValue(data: any[], fallback: any): any {
         return fallback;
     }
     return data.reduce((obj, item) => {
-        if (item.key) {
+        if (item && typeof item === 'object' && item.key) {
             obj[item.key] = item.value;
         }
         return obj;
@@ -266,3 +266,5 @@ export const getFooterData = async (): Promise<FooterData> => {
         }
     };
 }
+
+    
