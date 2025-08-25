@@ -418,3 +418,6 @@ export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
         link: item.link
     }));
 }
+
+
+    
