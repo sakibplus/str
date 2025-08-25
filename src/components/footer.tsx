@@ -1,20 +1,12 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import type { FooterData, FooterLink, FooterContact } from '@/lib/cms';
+import type { FooterData } from '@/lib/cms';
 
-type FooterProps = {
-    data: {
-        main: FooterData;
-        links: FooterLink[];
-        contact: FooterContact;
-    }
-}
+export function Footer({ data }: { data: FooterData }) {
 
-export function Footer({ data }: FooterProps) {
-  const { main, links, contact } = data;
-
-  if (!main) return null;
+  if (!data) return null;
+  const { description, newsletter_heading, newsletter_placeholder, links, contact } = data;
 
   return (
     <footer id="contact" className="bg-primary text-primary-foreground">
@@ -25,7 +17,7 @@ export function Footer({ data }: FooterProps) {
               <Image src="/logo-white.png" alt="SkillShikhun Logo" width={150} height={40} />
             </Link>
             <p className="text-sm text-primary-foreground/80">
-              {main.description}
+              {description}
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">
@@ -61,8 +53,8 @@ export function Footer({ data }: FooterProps) {
             )}
           </div>
           <div>
-            <h3 className="font-bold font-headline mb-4">{main.newsletter_heading}</h3>
-            <p className="text-sm text-primary-foreground/80 mb-4">{main.newsletter_placeholder}</p>
+            <h3 className="font-bold font-headline mb-4">{newsletter_heading}</h3>
+            <p className="text-sm text-primary-foreground/80 mb-4">{newsletter_placeholder}</p>
             <form className="flex">
               <input type="email" placeholder="আপনার ইমেইল" className="w-full rounded-l-md px-3 py-2 text-foreground focus:outline-none" />
               <button type="submit" className="bg-accent hover:bg-accent/90 text-accent-foreground px-4 py-2 rounded-r-md">সাবস্ক্রাইব</button>

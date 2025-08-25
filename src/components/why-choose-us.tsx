@@ -1,14 +1,9 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import type { WhyChooseUsData, WhyChooseUsFeature } from '@/lib/cms';
+import type { WhyChooseUsData } from '@/lib/cms';
 
-type WhyChooseUsProps = {
-    data: WhyChooseUsData & {
-        features: WhyChooseUsFeature[];
-    }
-}
 
-export function WhyChooseUs({ data }: { data: WhyChooseUsProps }) {
+export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {
   if (!data?.title) return null;
 
   return (
