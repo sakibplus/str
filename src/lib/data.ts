@@ -1,3 +1,4 @@
+
 export const heroData = {
   title: 'স্কিল শিখুন এর হাত ধরে শিখুন ঘরে বসে আয় করার মাধ্যম!',
   subtitle: 'সাশ্রয়ী মূল্যে ঘরে বসে লাইভ ক্লাস করুন ইন্সট্রাক্টর এর সাথে!',
@@ -77,6 +78,21 @@ export const courseCarouselData = [
             { heading: 'কোর্সটি কাদের জন্য?', points: ['ব্যবসা উদ্যোক্তা', 'মার্কেটিং প্রফেশনাল', 'যারা ডিজিটাল দুনিয়ায় কাজ করতে চান'] },
             { heading: 'কোর্সে কী কী থাকছে?', points: ['মার্কেট রিসার্চ', 'ক্যাম্পেইন স্ট্র্যাটেজি', 'অ্যানালিটিক্স এবং রিপোর্টিং', 'বাজেট ম্যানেজমেন্ট'] },
         ]
+    },
+    {
+        id: 6,
+        title: 'সিসি ক্যামেরা সেটআপ',
+        image: 'https://placehold.co/600x400.png',
+        dataAiHint: 'cctv camera',
+        price: "১,৫০০",
+        discountedPrice: "৯৯৯",
+        promoCode: "SKILL999",
+        duration: "১ মাসের কোর্স",
+        description: 'সিসিটিভি ক্যামেরা সেটআপ এবং রক্ষণাবেক্ষণ শিখে একজন সিকিউরিটি সিস্টেম এক্সপার্ট হোন।',
+        details: [
+            { heading: 'কোর্সটি কাদের জন্য?', points: ['যারা সিকিউরিটি ইন্ডাস্ট্রিতে কাজ করতে চান', 'ইলেকট্রনিক্স ভালোবাসেন', 'টেকনিক্যাল কাজে আগ্রহী'] },
+            { heading: 'কোর্সে কী কী থাকছে?', points: ['ক্যামেরা প্রকারভেদ', 'নেটওয়ার্কিং', 'ডিভিআর/এনভিআর কনফিগারেশন', 'ট্রাবলশুটিং'] },
+        ]
     }
 ];
 
@@ -123,6 +139,80 @@ export const courses = [
     price: '১৫০০',
     live: true,
     priceSuffix: 'প্রতি মাস',
+  },
+  {
+    id: 6,
+    title: 'সিসি ক্যামেরা সেটআপ',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'cctv camera',
+    link: '/course/6',
+    duration: '১ মাসের',
+    price: '১০০০',
+    live: true,
+    priceSuffix: 'প্রতি মাস',
+  },
+  {
+    id: 7,
+    title: 'অফিস অ্যাপ্লিকেশন কোর্স',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'office software',
+    link: '/course/7',
+    duration: '২ মাসের',
+    price: '১২০০',
+    live: true,
+    priceSuffix: 'প্রতি মাস',
+  },
+  {
+    id: 8,
+    title: 'ফ্রিল্যান্সিং কেয়ার',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'freelancer support',
+    link: '/course/8',
+    duration: '১ মাসের',
+    price: '৯০০',
+    live: true,
+    priceSuffix: 'প্রতি মাস',
+  },
+  {
+    id: 9,
+    title: 'পিসি বিল্ড',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'computer building',
+    link: '/course/9',
+    duration: '১ মাসের',
+    price: '১০০০',
+    live: true,
+    priceSuffix: 'প্রতি মাস',
+  },
+  {
+    id: 10,
+    title: 'কম্পিউটার সার্টিফিকেট অর্জন',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'computer certificate',
+    link: '/course/10',
+    duration: '৬ মাসের',
+    price: '৫০০০',
+    live: false,
+  },
+  {
+    id: 11,
+    title: '১ বছর মেয়াদী ডিপ্লোমা',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'diploma certificate',
+    link: '/course/11',
+    duration: '১ বছরের',
+    price: '১০,০০০',
+    live: false,
+  },
+  {
+    id: 12,
+    title: 'বেসিক কম্পিউটার নলেজ',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'basic computer',
+    link: '/course/12',
+    duration: '১ মাসের',
+    price: '৫০০',
+    live: true,
   },
 ];
 
