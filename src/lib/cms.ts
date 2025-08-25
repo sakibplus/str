@@ -67,8 +67,12 @@ export type NavLink = {
     label: string;
 };
 export const getNavLinks = async (): Promise<NavLink[]> => {
-    const fallback: NavLink[] = [];
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, fallback, 'NavLinks');
+    const fallback: NavLink[] = [
+        { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট (ফলব্যাক)' },
+        { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন (ফলব্যাক)' },
+    ];
+    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, fallback, 'NavLinks');
+    return Array.isArray(data) ? data : fallback;
 };
 
 
@@ -77,9 +81,9 @@ export type HeroData = {
     subtitle: string;
 };
 export const getHeroData = async (): Promise<HeroData> => {
-    const fallback: HeroData = { title: 'SkillShikhun (Fallback)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
+    const fallback: HeroData = { title: 'SkillShikhun (ফলব্যাক)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
     const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL, [fallback], 'Hero');
-    return data[0] || fallback;
+    return (Array.isArray(data) && data.length > 0) ? data[0] : fallback;
 };
 
 
@@ -96,7 +100,8 @@ export type CourseCarouselData = {
 };
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
     const fallback: CourseCarouselData[] = [];
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL, fallback, 'CourseCarousel');
+    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL, fallback, 'CourseCarousel');
+    return Array.isArray(data) ? data : fallback;
 }
 
 
@@ -113,7 +118,8 @@ export type Course = {
 };
 export const getCourses = async (): Promise<Course[]> => {
     const fallback: Course[] = [];
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL, fallback, 'Courses');
+    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL, fallback, 'Courses');
+    return Array.isArray(data) ? data : fallback;
 }
 
 
@@ -127,7 +133,7 @@ export type AboutUsData = {
 };
 export const getAboutUsData = async (): Promise<AboutUsData> => {
     const fallback = {
-        title: "আমরা কারা?",
+        title: "আমরা কারা? (ফলব্যাক)",
         heading: "আপনার সফলতার পথে, আমরা আপনার বিশ্বস্ত সঙ্গী।",
         description: "SkillShikhun একটি শীর্ষস্থানীয় আইটি প্রশিক্ষণ কেন্দ্র...",
         image: "https://placehold.co/800x600.png",
@@ -137,8 +143,8 @@ export const getAboutUsData = async (): Promise<AboutUsData> => {
     const aboutUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_URL, [fallback], 'AboutUsInfo');
     const stats = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_STATS_URL, [], 'AboutUsStats');
     
-    const data = aboutUsInfo[0] || fallback;
-    return { ...data, stats: stats };
+    const data = (Array.isArray(aboutUsInfo) && aboutUsInfo.length > 0) ? aboutUsInfo[0] : fallback;
+    return { ...data, stats: Array.isArray(stats) ? stats : [] };
 };
 
 
@@ -152,7 +158,8 @@ export type Testimonial = {
 };
 export const getTestimonials = async (): Promise<Testimonial[]> => {
     const fallback: Testimonial[] = [];
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL, fallback, 'Testimonials');
+    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL, fallback, 'Testimonials');
+    return Array.isArray(data) ? data : fallback;
 }
 
 
@@ -170,15 +177,15 @@ export type WhyChooseUsData = {
 }
 export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
     const fallback = {
-        title: "স্কিলশিখুন কেন বেছে নেবেন?",
+        title: "স্কিলশিখুন কেন বেছে নেবেন? (ফলব্যাক)",
         subtitle: "ফিচারগুলো দেখে নিন!",
         features: []
     }
     const whyChooseUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL, [fallback], 'WhyChooseUsInfo');
     const features = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL, [], 'WhyChooseUsFeatures');
 
-    const data = whyChooseUsInfo[0] || fallback;
-    return { ...data, features: features };
+    const data = (Array.isArray(whyChooseUsInfo) && whyChooseUsInfo.length > 0) ? whyChooseUsInfo[0] : fallback;
+    return { ...data, features: Array.isArray(features) ? features : [] };
 }
 
 
@@ -203,7 +210,7 @@ export type FooterData = {
 export const getFooterData = async (): Promise<FooterData> => {
      const fallback: FooterData = {
         main: {
-            description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+            description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা। (ফলব্যাক)",
             newsletter_heading: "নিউজলেটার",
             newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করুন।",
         },
@@ -214,12 +221,12 @@ export const getFooterData = async (): Promise<FooterData> => {
     const links = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL, [], 'FooterLinks');
     const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL, [fallback.contact], 'FooterContact');
 
-    const mainData = footerInfo[0] || fallback.main;
-    const contactData = contactInfo[0] || fallback.contact;
+    const mainData = (Array.isArray(footerInfo) && footerInfo.length > 0) ? footerInfo[0] : fallback.main;
+    const contactData = (Array.isArray(contactInfo) && contactInfo.length > 0) ? contactInfo[0] : fallback.contact;
 
     return { 
         main: mainData,
-        links: links, 
+        links: Array.isArray(links) ? links : [], 
         contact: contactData
     };
 }
