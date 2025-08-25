@@ -1,5 +1,4 @@
 
-
 'use server';
 
 // This file is the single source of truth for all data in the app.
@@ -95,8 +94,8 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
   
   try {
     const response = await fetch(url, { 
-        cache: 'no-store', // Ensures fresh data on every request
-        next: { revalidate: 0 } // Revalidate cache every 0 seconds
+        cache: 'no-store',
+        next: { revalidate: 0 } 
     });
     
     if (!response.ok) {
@@ -412,11 +411,12 @@ export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
     
     if (cardData.length === 0) return fallback;
 
-    // The key from the sheet is the title for the card
     return cardData.map(item => ({
         icon: item.icon,
-        title: item.key, // Use item.key as title
+        title: item.key,
         value: item.value,
         link: item.link
     }));
 }
+
+    
