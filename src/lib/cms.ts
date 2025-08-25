@@ -352,3 +352,5 @@ export const getFooterData = async (): Promise<FooterData> => {
         }
     };
 }
+
+    
