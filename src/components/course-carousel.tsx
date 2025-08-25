@@ -21,7 +21,7 @@ type Course = {
 
 export function CourseCarousel({ courses }: { courses: Course[] }) {
   return (
-    <section className="bg-primary py-12">
+    <section className="bg-primary pt-0 pb-12">
       <div className="container mx-auto">
         <Carousel
           opts={{
