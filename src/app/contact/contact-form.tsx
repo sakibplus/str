@@ -54,8 +54,8 @@ Message: ${message}
     };
 
     return (
-        <Card className="shadow-lg p-8">
-            <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+        <Card className="shadow-lg p-6 md:p-8">
+            <form onSubmit={handleWhatsAppSubmit} className="space-y-4">
                 <div>
                     <Label htmlFor="name" className="font-semibold">আপনার নাম</Label>
                     <Input id="name" type="text" placeholder="সম্পূর্ণ নাম" className="mt-2" value={name} onChange={(e) => setName(e.target.value)} />
@@ -69,7 +69,7 @@ Message: ${message}
                     <Textarea id="message" placeholder="আপনার প্রশ্ন বা বার্তাটি এখানে লিখুন..." className="mt-2" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
                 </div>
                 {error && <p className="text-red-500 text-sm text-center">{error}</p>}
-                <Button type="submit" size="lg" className="w-full h-14 text-lg bg-green-500 hover:bg-green-600 text-white">
+                <Button type="submit" size="lg" className="w-full h-12 text-base md:h-14 md:text-lg bg-green-500 hover:bg-green-600 text-white">
                     <WhatsappIcon className="mr-3 h-6 w-6" />
                     হোয়াটসঅ্যাপে পাঠান
                 </Button>
