@@ -1,4 +1,3 @@
-
 // This file is the single source of truth for all data in the app.
 // It fetches data from Google Sheets CSV URLs defined in environment variables.
 
