@@ -1,10 +1,8 @@
-// @ts-nocheck
 'use server';
 
 // This file is the single source of truth for all data in the app.
 // It fetches data from Google Sheets CSV URLs defined in environment variables.
 
-import Papa from 'papaparse';
 import {
   GOOGLE_SHEET_NAVLINKS_URL,
   GOOGLE_SHEET_HERO_URL,
@@ -20,56 +18,76 @@ import {
   GOOGLE_SHEET_FOOTER_CONTACT_URL,
 } from './env';
 
+// A simple, dependency-free CSV parser.
+function parseCsvText(text: string): Record<string, any>[] {
+    const lines = text.trim().split(/\r\n|\n/);
+    if (lines.length < 2) return [];
+
+    const header = lines[0].split(',').map(h => h.trim());
+    const data = [];
+
+    for (let i = 1; i < lines.length; i++) {
+        const values = lines[i].split(',').map(v => v.trim());
+        if (values.length !== header.length) continue; // Skip malformed rows
+
+        const rowObject: Record<string, any> = {};
+        for (let j = 0; j < header.length; j++) {
+            const key = header[j];
+            const value = values[j];
+            
+            // Basic type conversion
+            if (!isNaN(Number(value)) && value.trim() !== '') {
+                rowObject[key] = Number(value);
+            } else if (value.toLowerCase() === 'true') {
+                rowObject[key] = true;
+            } else if (value.toLowerCase() === 'false') {
+                rowObject[key] = false;
+            } else {
+                rowObject[key] = value.replace(/^"|"$/g, ''); // Remove quotes
+            }
+        }
+        data.push(rowObject);
+    }
+    return data;
+}
+
 
 // Helper function to fetch and parse CSV data reliably.
 async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetName: string): Promise<any> {
   if (!url || !url.startsWith('https://docs.google.com/spreadsheets/d/e/')) {
-    // console.warn(`Invalid or missing Google Sheet URL for ${sheetName}. Using fallback data.`);
+    console.warn(`Invalid or missing Google Sheet URL for ${sheetName}. Using fallback data.`);
     return fallback;
   }
   
   try {
     const response = await fetch(url, { 
         cache: 'no-store', // Ensures fresh data on every request
-        next: { revalidate: 0 } // Revalidate cache every 0 seconds (effectively disabling it)
+        next: { revalidate: 0 } // Revalidate cache every 0 seconds
     });
     
     if (!response.ok) {
-      // console.error(`Failed to fetch CSV for ${sheetName} from ${url}: ${response.status} ${response.statusText}`);
+      console.error(`Failed to fetch CSV for ${sheetName} from ${url}: ${response.status} ${response.statusText}`);
       return fallback;
     }
 
     const text = await response.text();
     
     if (text.trim().toLowerCase().includes('<!doctype html>')) {
-        // console.error(`Failed to fetch CSV for ${sheetName}: Received HTML content. Please check the Google Sheet's 'Publish to the web' settings.`);
+        console.error(`Failed to fetch CSV for ${sheetName}: Received HTML content. Please check the Google Sheet's 'Publish to the web' settings.`);
         return fallback;
     }
+    
+    const parsedData = parseCsvText(text);
 
-    return new Promise((resolve) => {
-      Papa.parse(text, {
-        header: true,
-        skipEmptyLines: 'greedy',
-        dynamicTyping: true,
-        complete: (results) => {
-          if (results.errors.length) {
-            // console.error(`Errors parsing CSV for ${sheetName} from ${url}:`, results.errors);
-            resolve(fallback);
-          } else if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.values(results.data[0] as object).every(v => v === null || v === ''))) {
-             // console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
-             resolve(fallback);
-          } else {
-             resolve(results.data);
-          }
-        },
-        error: (error: Error) => {
-          // console.error(`PapaParse error on URL ${url} for ${sheetName}:`, error);
-          resolve(fallback);
-        },
-      });
-    });
+    if (!parsedData || parsedData.length === 0) {
+        console.warn(`CSV for ${sheetName} is empty or invalid after parsing. Using fallback.`);
+        return fallback;
+    }
+    
+    return parsedData;
+
   } catch (error) {
-    // console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
+    console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
     return fallback;
   }
 }
@@ -179,7 +197,7 @@ export const getAboutUsData = async (): Promise<AboutUsData> => {
         description: transformedData.description || fallback.description,
         image: transformedData.image || fallback.image,
         dataAiHint: transformedData.dataAiHint || fallback.dataAiHint,
-        stats: Array.isArray(stats) ? stats : fallback.stats,
+        stats: Array.isArray(stats) && stats.length > 0 ? stats : fallback.stats,
     };
 };
 
@@ -225,7 +243,7 @@ export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
     return { 
         title: transformedData.title || fallback.title,
         subtitle: transformedData.subtitle || fallback.subtitle,
-        features: Array.isArray(features) ? features : fallback.features 
+        features: Array.isArray(features) && features.length > 0 ? features : fallback.features 
     };
 }
 
@@ -271,7 +289,7 @@ export const getFooterData = async (): Promise<FooterData> => {
             newsletter_heading: mainData.newsletter_heading || fallback.main.newsletter_heading,
             newsletter_placeholder: mainData.newsletter_placeholder || fallback.main.newsletter_placeholder,
         },
-        links: Array.isArray(links) ? links : fallback.links,
+        links: Array.isArray(links) && links.length > 0 ? links : fallback.links,
         contact: {
             line1: contactData.line1 || fallback.contact.line1,
             line2: contactData.line2 || fallback.contact.line2,
