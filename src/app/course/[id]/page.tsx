@@ -1,3 +1,7 @@
+
+'use client';
+
+import { useState } from 'react';
 import { courseCarouselData } from '@/lib/data';
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
@@ -11,8 +15,10 @@ import {
     AccordionItem,
     AccordionTrigger,
   } from "@/components/ui/accordion"
+import { EnrollDialog } from '@/components/enroll-dialog';
 
 export default function CourseDetailPage({ params }: { params: { id: string } }) {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const course = courseCarouselData.find((c) => c.id.toString() === params.id);
 
   if (!course) {
@@ -72,7 +78,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
                                      </div>
                                 </div>
                                 <p className="text-sm text-muted-foreground mb-4">কোর্সটি করে নিজের পছন্দের জবে জয়েন করুন অথবা ফ্রিল্যান্সিং করে আয় করুন।</p>
-                                <Button size="lg" className="w-full h-12 text-lg">কোর্সে এনরোল করুন</Button>
+                                <Button size="lg" className="w-full h-12 text-lg" onClick={() => setIsDialogOpen(true)}>কোর্সে এনরোল করুন</Button>
 
                                 <div className="text-center mt-4">
                                      <p className="text-sm text-muted-foreground">কোর্স প্রোমো কোড: <span className="font-bold text-accent">{course.promoCode || 'SKILL750'}</span></p>
@@ -85,6 +91,7 @@ export default function CourseDetailPage({ params }: { params: { id: string } })
         </div>
       </main>
       <Footer />
+      <EnrollDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} course={course} />
     </div>
   );
 }
