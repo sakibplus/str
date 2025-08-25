@@ -1,3 +1,4 @@
+
 'use client'
 
 import Image from 'next/image';
@@ -31,7 +32,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
         >
           <CarouselContent className="-ml-4">
             {courses.map((course) => (
-              <CarouselItem key={course.id} className="pl-4 basis-1/2 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+              <CarouselItem key={course.id} className="pl-4 basis-1/2 md:basis-1/3 lg:basis-1/4">
                 <Card
                   className="overflow-hidden flex flex-col bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full"
                 >
@@ -41,7 +42,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                       alt={course.title}
                       width={600}
                       height={400}
-                      className="w-full h-auto object-cover rounded-t-lg aspect-[4/3] md:aspect-video"
+                      className="w-full h-auto object-cover rounded-t-lg aspect-[4/3]"
                       data-ai-hint={course.dataAiHint}
                     />
                   </div>
