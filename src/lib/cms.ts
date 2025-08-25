@@ -31,7 +31,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
   try {
     const response = await fetch(url, { 
         cache: 'no-store', // Ensures fresh data on every request
-        next: { revalidate: 5 } // Revalidate cache every 5 seconds
+        next: { revalidate: 0 } // Revalidate cache every 0 seconds (effectively disabling it)
     });
     
     if (!response.ok) {
