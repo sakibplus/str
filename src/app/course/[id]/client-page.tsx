@@ -1,3 +1,4 @@
+
 'use client';
 
 import { useState } from 'react';
@@ -7,14 +8,22 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy } from 'lucide-react';
 import { EnrollDialog } from '@/components/enroll-dialog';
-import type { CourseCarouselData } from '@/lib/cms';
+import type { Course, CourseCarouselData, NavbarData, NavLink, FooterData } from '@/lib/cms';
 import { useToast } from '@/hooks/use-toast';
 
-type Course = CourseCarouselData & {
+type CoursePageProps = CourseCarouselData & {
     details?: { heading: string; points: string[] }[];
 }
 
-export default function CourseDetailClientPage({ course }: { course: Course }) {
+type CourseDetailClientPageProps = {
+  course: CoursePageProps, 
+  courses: Course[],
+  navbarData: NavbarData,
+  navLinks: NavLink[],
+  footerData: FooterData,
+}
+
+export default function CourseDetailClientPage({ course, courses, navbarData, navLinks, footerData }: CourseDetailClientPageProps) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const { toast } = useToast();
 
@@ -26,39 +35,10 @@ export default function CourseDetailClientPage({ course }: { course: Course }) {
       description: "প্রোমো কোড আপনার ক্লিপবোর্ডে কোপি করা হয়েছে।",
     });
   };
-  
-  // Dummy data for Navbar and Footer as we cannot fetch them here directly in a client component easily
-  // In a real app, this might be handled by a layout or passed differently.
-  const DUMMY_NAVBAR_DATA = { logo_url: '/logo.png', button_text: 'লগ ইন' };
-  const DUMMY_NAV_LINKS = [
-    { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট' },
-    { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন' },
-    { href: '#', label: 'বেসিক কম্পিউটার' },
-    { href: '#', label: 'সিসি ক্যামেরা সেটআপ' },
-  ];
-  const DUMMY_FOOTER_DATA = {
-    main: {
-      description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
-      newsletter_heading: "নিউজলেটার",
-      newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।",
-    },
-    links: [
-        { href: "#about", label: "আমাদের সম্পর্কে"},
-        { href: "#courses", label: "আমাদের কোর্স"},
-        { href: "#blog", label: "ব্লগ"},
-        { href: "#", label: "গোপনীয়তা নীতি"},
-    ],
-    contact: {
-        line1: "ঢাকা, বাংলাদেশ",
-        line2: "info@skillshikhun.com",
-        line3: "+880 1234 567890",
-        logo_url: '/logo-white.png',
-    }
-  };
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <Navbar navLinks={DUMMY_NAV_LINKS} data={DUMMY_NAVBAR_DATA} />
+      <Navbar navLinks={navLinks} data={navbarData} courses={courses} />
       <main className="flex-1 py-12 md:py-20">
         <div className="container mx-auto px-4">
             <div className="grid md:grid-cols-2 gap-12">
@@ -132,7 +112,7 @@ export default function CourseDetailClientPage({ course }: { course: Course }) {
             </div>
         </div>
       </main>
-      <Footer data={DUMMY_FOOTER_DATA} />
+      <Footer data={footerData} />
       <EnrollDialog isOpen={isDialogOpen} setIsOpen={setIsDialogOpen} course={course} />
     </div>
   );

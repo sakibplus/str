@@ -1,21 +1,27 @@
 
 import { notFound } from 'next/navigation';
-import { getCourseCarouselData, getCourses } from '@/lib/cms';
+import { getCourseCarouselData, getCourses, getNavbarData, getNavLinks, getFooterData } from '@/lib/cms';
 import CourseDetailClientPage from './client-page';
 
 // This is a server component to fetch data
 export default async function CourseDetailPage({ params }: { params: { id: string } }) {
-  // Fetch data from both course sheets in parallel for better performance
-  const carouselCoursesPromise = getCourseCarouselData();
-  const regularCoursesPromise = getCourses();
-
-  const [carouselCourses, regularCourses] = await Promise.all([
-    carouselCoursesPromise,
-    regularCoursesPromise,
+  // Fetch all data in parallel
+  const [
+    carouselCourses, 
+    allRegularCourses,
+    navbarData,
+    navLinks,
+    footerData
+  ] = await Promise.all([
+    getCourseCarouselData(),
+    getCourses(),
+    getNavbarData(),
+    getNavLinks(),
+    getFooterData()
   ]);
 
   // Combine the lists to search for the course in both
-  const allCourses = [...carouselCourses, ...regularCourses];
+  const allCourses = [...carouselCourses, ...allRegularCourses];
   
   // Find the course by its ID from the combined list
   const course = allCourses.find((c) => c.id.toString() === params.id);
@@ -35,5 +41,11 @@ export default async function CourseDetailPage({ params }: { params: { id: strin
 
   const fullCourseData = { ...course, ...courseDetails };
 
-  return <CourseDetailClientPage course={fullCourseData} />;
+  return <CourseDetailClientPage 
+            course={fullCourseData} 
+            courses={allRegularCourses}
+            navbarData={navbarData}
+            navLinks={navLinks}
+            footerData={footerData}
+          />;
 }
