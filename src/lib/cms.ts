@@ -13,7 +13,6 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
   try {
     const response = await fetch(url, { 
         cache: 'no-store',
-        // Add a timeout to prevent long waits
         signal: AbortSignal.timeout(5000) 
     });
     
@@ -24,7 +23,6 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
 
     const text = await response.text();
     
-    // Check if the content is HTML, which indicates a permissions or publishing error on the Sheet.
     if (text.trim().toLowerCase().includes('<!doctype html>')) {
         console.error(`Failed to fetch CSV for ${sheetName}: Received HTML content. Please check the Google Sheet's 'Publish to the web' settings.`);
         return fallback;
@@ -40,7 +38,6 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
             console.error(`Errors parsing CSV for ${sheetName} from ${url}:`, results.errors);
             resolve(fallback);
           } else {
-             // If results.data is empty or just contains an empty object, use fallback
              if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.keys(results.data[0] as object).length === 0) ) {
                 console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
                 resolve(fallback);
@@ -59,6 +56,19 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
     console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
     return fallback;
   }
+}
+
+// Helper function to transform key-value pair array into an object
+function transformKeyValue(data: any[], fallback: any): any {
+    if (!Array.isArray(data) || data.length === 0) {
+        return fallback;
+    }
+    return data.reduce((obj, item) => {
+        if (item.key) {
+            obj[item.key] = item.value;
+        }
+        return obj;
+    }, {});
 }
 
 
@@ -83,7 +93,12 @@ export type HeroData = {
 export const getHeroData = async (): Promise<HeroData> => {
     const fallback: HeroData = { title: 'SkillShikhun (ফলব্যাক)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
     const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL, [fallback], 'Hero');
-    return (Array.isArray(data) && data.length > 0) ? data[0] : fallback;
+    const transformedData = transformKeyValue(data, fallback);
+    // Ensure the returned object has the correct shape
+    return {
+        title: transformedData.title || fallback.title,
+        subtitle: transformedData.subtitle || fallback.subtitle,
+    };
 };
 
 
@@ -140,11 +155,19 @@ export const getAboutUsData = async (): Promise<AboutUsData> => {
         dataAiHint: "team meeting",
         stats: [],
     };
-    const aboutUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_URL, [fallback], 'AboutUsInfo');
+    const aboutUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_URL, [], 'AboutUsInfo');
     const stats = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_STATS_URL, [], 'AboutUsStats');
     
-    const data = (Array.isArray(aboutUsInfo) && aboutUsInfo.length > 0) ? aboutUsInfo[0] : fallback;
-    return { ...data, stats: Array.isArray(stats) ? stats : [] };
+    const transformedData = transformKeyValue(aboutUsInfo, fallback);
+
+    return {
+        title: transformedData.title || fallback.title,
+        heading: transformedData.heading || fallback.heading,
+        description: transformedData.description || fallback.description,
+        image: transformedData.image || fallback.image,
+        dataAiHint: transformedData.dataAiHint || fallback.dataAiHint,
+        stats: Array.isArray(stats) ? stats : fallback.stats,
+    };
 };
 
 
@@ -181,11 +204,16 @@ export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
         subtitle: "ফিচারগুলো দেখে নিন!",
         features: []
     }
-    const whyChooseUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL, [fallback], 'WhyChooseUsInfo');
+    const whyChooseUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL, [], 'WhyChooseUsInfo');
     const features = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL, [], 'WhyChooseUsFeatures');
 
-    const data = (Array.isArray(whyChooseUsInfo) && whyChooseUsInfo.length > 0) ? whyChooseUsInfo[0] : fallback;
-    return { ...data, features: Array.isArray(features) ? features : [] };
+    const transformedData = transformKeyValue(whyChooseUsInfo, fallback);
+
+    return { 
+        title: transformedData.title || fallback.title,
+        subtitle: transformedData.subtitle || fallback.subtitle,
+        features: Array.isArray(features) ? features : fallback.features 
+    };
 }
 
 
@@ -217,16 +245,24 @@ export const getFooterData = async (): Promise<FooterData> => {
         links: [],
         contact: { line1: "ঢাকা, বাংলাদেশ", line2: "info@skillshikhun.com", line3: "+8801234567890" }
     };
-    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL, [fallback.main], 'FooterInfo');
+    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL, [], 'FooterInfo');
     const links = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL, [], 'FooterLinks');
-    const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL, [fallback.contact], 'FooterContact');
+    const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL, [], 'FooterContact');
 
-    const mainData = (Array.isArray(footerInfo) && footerInfo.length > 0) ? footerInfo[0] : fallback.main;
-    const contactData = (Array.isArray(contactInfo) && contactInfo.length > 0) ? contactInfo[0] : fallback.contact;
-
+    const mainData = transformKeyValue(footerInfo, fallback.main);
+    const contactData = transformKeyValue(contactInfo, fallback.contact);
+    
     return { 
-        main: mainData,
-        links: Array.isArray(links) ? links : [], 
-        contact: contactData
+        main: {
+            description: mainData.description || fallback.main.description,
+            newsletter_heading: mainData.newsletter_heading || fallback.main.newsletter_heading,
+            newsletter_placeholder: mainData.newsletter_placeholder || fallback.main.newsletter_placeholder,
+        },
+        links: Array.isArray(links) ? links : fallback.links,
+        contact: {
+            line1: contactData.line1 || fallback.contact.line1,
+            line2: contactData.line2 || fallback.contact.line2,
+            line3: contactData.line3 || fallback.contact.line3,
+        }
     };
 }
