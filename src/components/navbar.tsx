@@ -19,15 +19,6 @@ import type { Course } from '@/lib/cms';
 export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data: NavbarData, courses: Course[] }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
-  const existingHrefs = new Set(navLinks.map(link => link.href));
-  const staticLinks = [
-    { href: "/about", label: "আমাদের সম্পর্কে" },
-    { href: "/blog", label: "ব্লগ" },
-    { href: "/contact", label: "যোগাযোগ" },
-  ].filter(link => !existingHrefs.has(link.href));
-
-  const allNavLinks = [...navLinks, ...staticLinks];
-
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
@@ -41,7 +32,7 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {allNavLinks?.map((link, index) => (
+          {navLinks?.map((link, index) => (
             <Link
               key={`${link.href}-${index}`}
               href={link.href}
@@ -80,7 +71,7 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
                   </Link>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">
-                  {allNavLinks?.map((link, index) => (
+                  {navLinks?.map((link, index) => (
                     <Link
                       key={`${link.href}-${index}-mobile`}
                       href={link.href}

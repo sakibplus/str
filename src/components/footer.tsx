@@ -9,16 +9,6 @@ export function Footer({ data }: { data: FooterData }) {
   const { main, links, contact } = data;
   const { description, newsletter_heading, newsletter_placeholder } = main;
   
-  const existingHrefs = new Set(links.map(link => link.href));
-  const staticLinks = [
-      { href: "/about", label: "আমাদের সম্পর্কে" },
-      { href: "/blog", label: "ব্লগ" },
-      { href: "/contact", label: "যোগাযোগ" },
-  ].filter(link => !existingHrefs.has(link.href));
-
-  const allFooterLinks = [...links, ...staticLinks];
-
-
   return (
     <footer id="contact" className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -48,7 +38,7 @@ export function Footer({ data }: { data: FooterData }) {
           <div>
             <h3 className="font-bold font-headline mb-4">গুরুত্বপূর্ণ লিংক</h3>
             <ul className="space-y-2 text-sm">
-              {allFooterLinks?.map((link, index) => (
+              {links?.map((link, index) => (
                  <li key={`${link.href}-${index}`}><Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground">{link.label}</Link></li>
               ))}
             </ul>
