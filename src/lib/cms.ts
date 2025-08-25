@@ -30,8 +30,8 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
   
   try {
     const response = await fetch(url, { 
-        cache: 'no-store',
-        signal: AbortSignal.timeout(5000) 
+        cache: 'no-store', // Ensures fresh data on every request
+        next: { revalidate: 5 } // Revalidate cache every 5 seconds
     });
     
     if (!response.ok) {
@@ -69,11 +69,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
       });
     });
   } catch (error) {
-    if (error instanceof Error && error.name === 'TimeoutError') {
-        // console.error(`Timeout fetching CSV for ${sheetName} from ${url}`);
-    } else {
-        // console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
-    }
+    // console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
     return fallback;
   }
 }
