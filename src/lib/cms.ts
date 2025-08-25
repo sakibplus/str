@@ -18,6 +18,9 @@ const GOOGLE_SHEET_FOOTER_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-
 const GOOGLE_SHEET_FOOTER_LINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1301954674&single=true&output=csv";
 const GOOGLE_SHEET_FOOTER_CONTACT_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1357018130&single=true&output=csv";
 const GOOGLE_SHEET_BLOG_POSTS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=90967797&single=true&output=csv";
+const GOOGLE_SHEET_CONTACT_PAGE_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=215761925&single=true&output=csv";
+// IMPORTANT: You need to create a new sheet for the contact info cards and update the GID in the URL below.
+const GOOGLE_SHEET_CONTACT_INFO_CARDS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=215761925&single=true&output=csv";
 
 
 // A robust, dependency-free CSV parser.
@@ -369,5 +372,40 @@ export type BlogPost = {
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
     const fallback: BlogPost[] = [];
     const data = await fetchAndParseCsv(GOOGLE_SHEET_BLOG_POSTS_URL, fallback, 'BlogPosts');
+    return Array.isArray(data) ? data : fallback;
+}
+
+export type ContactPageData = {
+    hero_title: string;
+    hero_subtitle: string;
+    form_title: string;
+    form_subtitle: string;
+}
+export const getContactPageData = async (): Promise<ContactPageData> => {
+    const fallback: ContactPageData = {
+        hero_title: "যোগাযোগ করুন (ফলব্যাক)",
+        hero_subtitle: "আপনার যেকোনো প্রশ্ন, পরামর্শ বা সহযোগিতার জন্য আমরা সর্বদা প্রস্তুত।",
+        form_title: "আমাদের মেসেজ পাঠান (ফলব্যাক)",
+        form_subtitle: "আমরা আপনার বার্তার অপেক্ষায় আছি।",
+    };
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_CONTACT_PAGE_URL, [fallback], 'ContactPageData');
+    const transformedData = transformKeyValue(data, fallback);
+    return {
+        hero_title: transformedData.hero_title || fallback.hero_title,
+        hero_subtitle: transformedData.hero_subtitle || fallback.hero_subtitle,
+        form_title: transformedData.form_title || fallback.form_title,
+        form_subtitle: transformedData.form_subtitle || fallback.form_subtitle,
+    };
+}
+
+export type ContactInfoCard = {
+    icon: string;
+    title: string;
+    value: string;
+    link?: string;
+}
+export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
+    const fallback: ContactInfoCard[] = [];
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_CONTACT_INFO_CARDS_URL, fallback, 'ContactInfoCards');
     return Array.isArray(data) ? data : fallback;
 }

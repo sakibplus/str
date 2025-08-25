@@ -1,38 +1,35 @@
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getNavbarData, getCourses } from "@/lib/cms";
+import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/cms";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ContactForm from "./contact-form";
 import { Card, CardContent } from "@/components/ui/card";
+import type { ContactInfoCard } from "@/lib/cms";
+
+const iconComponents: { [key: string]: React.ElementType } = {
+  Mail,
+  Phone,
+  MapPin,
+};
+
 
 export default async function ContactPage() {
-  const [navLinks, footerData, navbarData, courses] = await Promise.all([
+  const [
+    navLinks,
+    footerData,
+    navbarData,
+    courses,
+    contactPageData,
+    contactInfoCards,
+  ] = await Promise.all([
     getNavLinks(),
     getFooterData(),
     getNavbarData(),
-    getCourses()
+    getCourses(),
+    getContactPageData(),
+    getContactInfoCards(),
   ]);
-
-  const contactInfo = [
-    {
-      icon: <Mail className="h-8 w-8 text-accent" />,
-      title: "ইমেইল",
-      value: footerData.contact.line2,
-      link: `mailto:${footerData.contact.line2}`,
-    },
-    {
-      icon: <Phone className="h-8 w-8 text-accent" />,
-      title: "ফোন",
-      value: footerData.contact.line3,
-      link: `tel:${footerData.contact.line3}`,
-    },
-    {
-      icon: <MapPin className="h-8 w-8 text-accent" />,
-      title: "অফিস",
-      value: footerData.contact.line1,
-    },
-  ];
 
   return (
     <div className="flex min-h-screen flex-col bg-gray-50">
@@ -42,11 +39,10 @@ export default async function ContactPage() {
         <section className="bg-primary text-white py-16 md:py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold font-headline">
-              যোগাযোগ করুন
+              {contactPageData.hero_title}
             </h1>
             <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
-              আপনার যেকোনো প্রশ্ন, পরামর্শ বা সহযোগিতার জন্য আমরা সর্বদা প্রস্তুত।
-              নিচের যেকোনো মাধ্যমে আমাদের সাথে যোগাযোগ করুন।
+              {contactPageData.hero_subtitle}
             </p>
           </div>
         </section>
@@ -55,23 +51,26 @@ export default async function ContactPage() {
         <section className="py-12 md:py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
-              {contactInfo.map((item, index) => (
-                <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
-                  <CardContent className="p-6 flex flex-row items-center gap-4">
-                    <div className="bg-accent/10 p-3 rounded-full">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-lg font-bold font-headline text-primary mb-1">
-                        {item.title}
-                      </h3>
-                      <a href={item.link} className="text-muted-foreground hover:text-accent text-sm md:text-base">
-                        {item.value}
-                      </a>
-                    </div>
-                  </CardContent>
-                </Card>
-              ))}
+              {contactInfoCards.map((item: ContactInfoCard, index: number) => {
+                const IconComponent = iconComponents[item.icon] || Mail;
+                return (
+                  <Card key={index} className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <CardContent className="p-6 flex flex-row items-center gap-4">
+                      <div className="bg-accent/10 p-3 rounded-full">
+                        <IconComponent className="h-8 w-8 text-accent" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold font-headline text-primary mb-1">
+                          {item.title}
+                        </h3>
+                        <a href={item.link} className="text-muted-foreground hover:text-accent text-sm md:text-base">
+                          {item.value}
+                        </a>
+                      </div>
+                    </CardContent>
+                  </Card>
+                )
+              })}
             </div>
           </div>
         </section>
@@ -80,8 +79,8 @@ export default async function ContactPage() {
         <section className="pb-12 md:pb-24 bg-white pt-12">
           <div className="container mx-auto px-4">
             <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">আমাদের মেসেজ পাঠান</h2>
-                <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">আমরা আপনার বার্তার অপেক্ষায় আছি।</p>
+                <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">{contactPageData.form_title}</h2>
+                <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">{contactPageData.form_subtitle}</p>
             </div>
             <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
               {/* Contact Form */}
