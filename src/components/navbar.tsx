@@ -11,13 +11,27 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink, NavbarData } from '@/lib/cms';
-import { ServiceInquiryDialog } from './service-inquiry-dialog';
-import type { Course } from '@/lib/cms';
+import type { NavLink, NavbarData, Course } from '@/lib/cms';
+import { ServiceInquiryDialog } from '@/components/service-inquiry-dialog';
 
-
-export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data: NavbarData, courses: Course[] }) {
+export function Navbar({
+  navLinks,
+  data,
+  courses,
+}: {
+  navLinks: NavLink[];
+  data: NavbarData;
+  courses: Course[];
+}) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
+
+  const existingHrefs = new Set(navLinks.map(link => link.href));
+  const staticLinks = [
+    { href: '/about', label: 'আমাদের সম্পর্কে' },
+    { href: '/contact', label: 'যোগাযোগ' },
+  ].filter(link => !existingHrefs.has(link.href));
+
+  const allNavLinks = [...navLinks, ...staticLinks];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
@@ -32,7 +46,7 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {navLinks?.map((link, index) => (
+          {allNavLinks?.map((link, index) => (
             <Link
               key={`${link.href}-${index}`}
               href={link.href}
@@ -44,9 +58,9 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button 
-             className="hidden md:flex bg-accent text-white hover:bg-accent/90"
-             onClick={() => setIsDialogOpen(true)}
+          <Button
+            className="hidden md:flex bg-accent text-white hover:bg-accent/90"
+            onClick={() => setIsDialogOpen(true)}
           >
             সার্ভিস নিন
           </Button>
@@ -71,7 +85,7 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
                   </Link>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">
-                  {navLinks?.map((link, index) => (
+                  {allNavLinks?.map((link, index) => (
                     <Link
                       key={`${link.href}-${index}-mobile`}
                       href={link.href}
@@ -80,19 +94,19 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
                       {link.label}
                     </Link>
                   ))}
-                   <Button 
+                  <Button
                     className="bg-accent text-white hover:bg-accent/90"
                     onClick={() => setIsDialogOpen(true)}
-                   >
-                     সার্ভিস নিন
-                   </Button>
+                  >
+                    সার্ভিস নিন
+                  </Button>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
       </div>
-      <ServiceInquiryDialog 
+      <ServiceInquiryDialog
         isOpen={isDialogOpen}
         setIsOpen={setIsDialogOpen}
         courses={courses}
