@@ -36,7 +36,7 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
             {courses.map((course, index) => (
               <CarouselItem
                 key={`${course.id}-${index}`}
-                className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+                className="basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
                 <Link href={`/course/${course.id}`}>
                   <Card className="overflow-hidden rounded-2xl border-0 shadow-lg bg-transparent cursor-pointer">

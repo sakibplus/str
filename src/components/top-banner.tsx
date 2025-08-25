@@ -1,16 +1,23 @@
 'use client';
 import { X } from 'lucide-react';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 
 export function TopBanner() {
+  const [isClient, setIsClient] = useState(false);
+  const [isBannerVisible, setIsBannerVisible] = useState(true);
 
-  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const banner = (e.currentTarget as HTMLElement).closest('#top-banner');
-    if (banner) {
-      (banner as HTMLElement).style.display = 'none';
-    }
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  const handleClose = () => {
+    setIsBannerVisible(false);
   };
+
+  if (!isClient || !isBannerVisible) {
+    return null;
+  }
 
   return (
     <div id="top-banner" className="bg-purple-800 text-white">
