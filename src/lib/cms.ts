@@ -17,6 +17,7 @@ const GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL = "https://docs.google.com/spreads
 const GOOGLE_SHEET_FOOTER_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=2041864803&single=true&output=csv";
 const GOOGLE_SHEET_FOOTER_LINKS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1301954674&single=true&output=csv";
 const GOOGLE_SHEET_FOOTER_CONTACT_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=1357018130&single=true&output=csv";
+const GOOGLE_SHEET_BLOG_POSTS_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRQzae0RQCcwOu5HBrAFbwffnkPKkuXrSp7bkUVhyo4lq4HfA5iGzi1_RTS9fZgbPfVaxt3eUDnh0ZV/pub?gid=90967797&single=true&output=csv";
 
 
 // A robust, dependency-free CSV parser.
@@ -353,4 +354,20 @@ export const getFooterData = async (): Promise<FooterData> => {
     };
 }
 
-    
+
+export type BlogPost = {
+  id: number;
+  title: string;
+  excerpt: string;
+  image: string;
+  dataAiHint: string;
+  date: string;
+  author: string;
+  author_avatar: string;
+  content: string;
+};
+export const getBlogPosts = async (): Promise<BlogPost[]> => {
+    const fallback: BlogPost[] = [];
+    const data = await fetchAndParseCsv(GOOGLE_SHEET_BLOG_POSTS_URL, fallback, 'BlogPosts');
+    return Array.isArray(data) ? data : fallback;
+}

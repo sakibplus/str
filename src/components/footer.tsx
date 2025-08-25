@@ -12,6 +12,7 @@ export function Footer({ data }: { data: FooterData }) {
   const existingHrefs = new Set(links.map(link => link.href));
   const staticLinks = [
       { href: "/about", label: "আমাদের সম্পর্কে" },
+      { href: "/blog", label: "ব্লগ" },
       { href: "/contact", label: "যোগাযোগ" },
   ].filter(link => !existingHrefs.has(link.href));
 
