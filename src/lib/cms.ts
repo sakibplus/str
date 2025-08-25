@@ -38,7 +38,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
             console.error(`Errors parsing CSV for ${sheetName} from ${url}:`, results.errors);
             resolve(fallback);
           } else {
-             if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.keys(results.data[0] as object).length === 0) ) {
+             if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.values(results.data[0] as object).every(v => v === null || v === ''))) {
                 console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
                 resolve(fallback);
              } else {
@@ -53,17 +53,28 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
       });
     });
   } catch (error) {
-    console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
+    if (error instanceof Error && error.name === 'TimeoutError') {
+        console.error(`Timeout fetching CSV for ${sheetName} from ${url}`);
+    } else {
+        console.error(`General error fetching or parsing CSV for ${sheetName} from ${url}:`, error);
+    }
     return fallback;
   }
 }
 
 // Helper function to transform key-value pair array into an object
-function transformKeyValue(data: any[], fallback: any): any {
-    if (!Array.isArray(data) || data.length === 0) {
+function transformKeyValue(data: any, fallback: any): any {
+    if (!data) {
         return fallback;
     }
-    return data.reduce((obj, item) => {
+    // Ensure data is an array
+    const dataArray = Array.isArray(data) ? data : [data];
+
+    if (dataArray.length === 0) {
+        return fallback;
+    }
+
+    return dataArray.reduce((obj, item) => {
         if (item && typeof item === 'object' && item.key) {
             obj[item.key] = item.value;
         }
@@ -94,7 +105,6 @@ export const getHeroData = async (): Promise<HeroData> => {
     const fallback: HeroData = { title: 'SkillShikhun (ফলব্যাক)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
     const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL, [fallback], 'Hero');
     const transformedData = transformKeyValue(data, fallback);
-    // Ensure the returned object has the correct shape
     return {
         title: transformedData.title || fallback.title,
         subtitle: transformedData.subtitle || fallback.subtitle,
@@ -266,5 +276,3 @@ export const getFooterData = async (): Promise<FooterData> => {
         }
     };
 }
-
-    
