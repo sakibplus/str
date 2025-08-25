@@ -1,13 +1,17 @@
-
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { X } from 'lucide-react';
 
 export function TopBanner() {
+  const [isClient, setIsClient] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  if (!isVisible) {
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
+
+  if (!isClient || !isVisible) {
     return null;
   }
 

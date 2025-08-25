@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Hind_Siliguri } from 'next/font/google';
+import { BackToTopButton } from '@/components/back-to-top-button';
 
 const hindSiliguri = Hind_Siliguri({
   weight: ['400', '500', '600', '700'],
@@ -30,6 +31,7 @@ export default function RootLayout({
       >
         {children}
         <Toaster />
+        <BackToTopButton />
       </body>
     </html>
   );
