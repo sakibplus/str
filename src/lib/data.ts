@@ -6,6 +6,60 @@ export const heroData = {
   ctaLink: '#',
 };
 
+export const courseCarouselData = [
+    {
+        id: 1,
+        title: 'ফ্রিল্যান্সিং কমপ্লিট গাইডলাইন',
+        image: '/images/instructor-1.png',
+        dataAiHint: 'freelancing guide instructor',
+        bgColor: 'bg-yellow-500',
+    },
+    {
+        id: 2,
+        title: 'ওয়েব ডেভেলপমেন্ট',
+        image: '/images/instructor-2.png',
+        dataAiHint: 'web development instructor',
+        bgColor: 'bg-blue-800',
+        price: "১,৫০০",
+        discountedPrice: "৯৯৯",
+        promoCode: "SKILL999",
+        duration: "৩ মাসের কোর্স"
+    },
+    {
+        id: 3,
+        title: 'ভিডিও এডিটিং',
+        image: '/images/instructor-3.png',
+        dataAiHint: 'video editing instructor',
+        bgColor: 'bg-red-600',
+        price: "১,৫০০",
+        discountedPrice: "৯৯৯",
+        promoCode: "SKILL999",
+        duration: "২ মাসের কোর্স"
+    },
+    {
+        id: 4,
+        title: 'গ্রাফিক ডিজাইন',
+        image: '/images/instructor-4.png',
+        dataAiHint: 'graphic design instructor',
+        bgColor: 'bg-purple-900',
+        price: "১,৫০০",
+        discountedPrice: "৯৯৯",
+        promoCode: "SKILL999",
+        duration: "৩ মাসের কোর্স"
+    },
+    {
+        id: 5,
+        title: 'ডিজিটাল মার্কেটিং',
+        image: '/images/instructor-5.png',
+        dataAiHint: 'digital marketing instructor',
+        bgColor: 'bg-green-800',
+        price: "১,৫০০",
+        discountedPrice: "৯৯৯",
+        promoCode: "SKILL999",
+        duration: "২ মাসের কোর্স"
+    }
+];
+
 export const courses = [
   {
     id: 1,

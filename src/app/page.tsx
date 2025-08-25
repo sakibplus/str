@@ -12,7 +12,10 @@ import {
   testimonials,
   blogPosts,
   aboutUsData,
+  courseCarouselData,
 } from '@/lib/data';
+import { CourseCarousel } from '@/components/course-carousel';
+import { FreeVideosForm } from '@/components/free-videos-form';
 
 export default function Home() {
   return (
@@ -21,6 +24,8 @@ export default function Home() {
       <Navbar />
       <main className="flex-1">
         <HeroSection data={heroData} />
+        <CourseCarousel courses={courseCarouselData} />
+        <FreeVideosForm />
         <CoursesSection courses={courses} />
         <AboutUsSection data={aboutUsData} />
         <TestimonialsSection testimonials={testimonials} />
