@@ -5,9 +5,10 @@ import Image from 'next/image';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Copy } from 'lucide-react';
 import { EnrollDialog } from '@/components/enroll-dialog';
 import type { CourseCarouselData } from '@/lib/cms';
+import { useToast } from '@/hooks/use-toast';
 
 type Course = CourseCarouselData & {
     details?: { heading: string; points: string[] }[];
@@ -15,6 +16,16 @@ type Course = CourseCarouselData & {
 
 export default function CourseDetailClientPage({ course }: { course: Course }) {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const { toast } = useToast();
+
+  const handleCopyPromoCode = () => {
+    const promoCode = course.promoCode || 'SKILL750';
+    navigator.clipboard.writeText(promoCode);
+    toast({
+      title: "কোপি হয়েছে!",
+      description: "প্রোমো কোড আপনার ক্লিপবোর্ডে কোপি করা হয়েছে।",
+    });
+  };
   
   // Dummy data for Navbar and Footer as we cannot fetch them here directly in a client component easily
   // In a real app, this might be handled by a layout or passed differently.
@@ -99,7 +110,18 @@ export default function CourseDetailClientPage({ course }: { course: Course }) {
                                 <Button size="lg" className="w-full h-12 text-lg" onClick={() => setIsDialogOpen(true)}>কোর্সে এনরোল করুন</Button>
 
                                 <div className="text-center mt-4">
-                                     <p className="text-sm text-muted-foreground">কোর্স প্রোমো কোড: <span className="font-bold text-accent">{course.promoCode || 'SKILL750'}</span></p>
+                                     <div className="flex items-center justify-center gap-2 text-sm text-muted-foreground">
+                                        <span>কোর্স প্রোমো কোড:</span>
+                                        <span className="font-bold text-accent">{course.promoCode || 'SKILL750'}</span>
+                                        <Button
+                                            variant="ghost"
+                                            size="icon"
+                                            className="h-7 w-7"
+                                            onClick={handleCopyPromoCode}
+                                        >
+                                            <Copy className="h-4 w-4" />
+                                        </Button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
