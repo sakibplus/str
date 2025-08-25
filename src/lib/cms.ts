@@ -41,7 +41,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
             resolve(fallback);
           } else {
              // If results.data is empty or just contains an empty object, use fallback
-             if (!results.data || results.data.length === 0 || Object.keys(results.data[0] as object).length === 0) {
+             if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.keys(results.data[0] as object).length === 0) ) {
                 console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
                 resolve(fallback);
              } else {
@@ -67,7 +67,8 @@ export type NavLink = {
     label: string;
 };
 export const getNavLinks = async (): Promise<NavLink[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, [], 'NavLinks');
+    const fallback: NavLink[] = [];
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, fallback, 'NavLinks');
 };
 
 
@@ -76,7 +77,7 @@ export type HeroData = {
     subtitle: string;
 };
 export const getHeroData = async (): Promise<HeroData> => {
-    const fallback = { title: 'SkillShikhun (Fallback)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
+    const fallback: HeroData = { title: 'SkillShikhun (Fallback)', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
     const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL, [fallback], 'Hero');
     return data[0] || fallback;
 };
@@ -94,7 +95,8 @@ export type CourseCarouselData = {
     description: string;
 };
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL, [], 'CourseCarousel');
+    const fallback: CourseCarouselData[] = [];
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL, fallback, 'CourseCarousel');
 }
 
 
@@ -110,7 +112,8 @@ export type Course = {
     priceSuffix?: string;
 };
 export const getCourses = async (): Promise<Course[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL, [], 'Courses');
+    const fallback: Course[] = [];
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL, fallback, 'Courses');
 }
 
 
@@ -148,7 +151,8 @@ export type Testimonial = {
     dataAiHint: string;
 };
 export const getTestimonials = async (): Promise<Testimonial[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL, [], 'Testimonials');
+    const fallback: Testimonial[] = [];
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL, fallback, 'Testimonials');
 }
 
 
