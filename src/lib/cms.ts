@@ -16,7 +16,9 @@ async function fetchAndParseCsv<T>(url: string | undefined): Promise<T[]> {
     try {
         const response = await fetch(url, { next: { revalidate: 3600 } }); // Revalidate every hour
         if (!response.ok) {
-            throw new Error(`Failed to fetch CSV from ${url}: ${response.statusText}`);
+            // Don't throw, just log the error and return an empty array.
+            console.error(`Failed to fetch CSV from ${url}: ${response.status} ${response.statusText}`);
+            return [];
         }
         const text = await response.text();
         
@@ -27,8 +29,9 @@ async function fetchAndParseCsv<T>(url: string | undefined): Promise<T[]> {
                 skipEmptyLines: true,
                 complete: (results) => {
                     if (results.errors.length) {
-                        console.error("Errors parsing CSV:", results.errors);
-                        reject(new Error("Failed to parse CSV data."));
+                        console.error("Errors parsing CSV from", url, results.errors);
+                        // Resolve with empty array instead of rejecting
+                        resolve([]); 
                     } else {
                         cache.set(url, results.data);
                         resolve(results.data);
@@ -36,7 +39,7 @@ async function fetchAndParseCsv<T>(url: string | undefined): Promise<T[]> {
                 },
                 error: (error: Error) => {
                     console.error("PapaParse error:", error);
-                    reject(error);
+                    resolve([]); // Resolve with empty array on error
                 },
             });
         });
@@ -111,11 +114,12 @@ export type AboutUsStat = {
 }
 export const getAboutUsData = async () => {
     const data = await fetchAndParseCsv<AboutUsData>(process.env.GOOGLE_SHEET_ABOUT_US_URL);
-    const stats = await fetchAndParseCsv<AboutUsStat>(`${process.env.GOOGLE_SHEET_ABOUT_US_URL}&gid=4_stats`); // Assuming a different gid for stats or a separate sheet
+    const stats = await fetchAndParseCsv<AboutUsStat>(process.env.GOOGLE_SHEET_ABOUT_US_STATS_URL);
+    const mainData = data[0] || { title: 'About Us', heading: 'Please configure this section', description: 'in your Google Sheet', image: 'https://placehold.co/800x600.png', dataAiHint: 'placeholder'};
     return { 
-        ...data[0],
+        ...mainData,
          stats: stats || []
-    } || { title: 'About Us', heading: 'Please configure this section', description: 'in your Google Sheet', image: 'https://placehold.co/800x600.png', dataAiHint: 'placeholder', stats: []};
+    };
 };
 
 
@@ -144,11 +148,12 @@ export type WhyChooseUsData = {
 }
 export const getWhyChooseUsData = async () => {
     const data = await fetchAndParseCsv<WhyChooseUsData>(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL);
-    const features = await fetchAndParseCsv<WhyChooseUsFeature>(`${process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL?.replace("&gid=6", "&gid=6_features")}`);
+    const features = await fetchAndParseCsv<WhyChooseUsFeature>(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL);
+    const mainData = data[0] || { title: 'Why Choose Us?', subtitle: 'Configure in Google Sheets.' };
     return {
-        ...data[0],
+        ...mainData,
         features: features || []
-    } || { title: 'Why Choose Us?', subtitle: 'Configure in Google Sheets.', features: [] };
+    };
 }
 
 
@@ -169,8 +174,8 @@ export type FooterData = {
 }
 export const getFooterData = async () => {
     const main = await fetchAndParseCsv<FooterData>(process.env.GOOGLE_SHEET_FOOTER_URL);
-    const links = await fetchAndParseCsv<FooterLink>(`${process.env.GOOGLE_SHEET_FOOTER_URL?.replace("&gid=7", "&gid=7_links")}`);
-    const contact = await fetchAndParseCsv<FooterContact>(`${process.env.GOOGLE_SHEET_FOOTER_URL?.replace("&gid=7", "&gid=7_contact")}`);
+    const links = await fetchAndParseCsv<FooterLink>(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL);
+    const contact = await fetchAndParseCsv<FooterContact>(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL);
 
     return {
         main: main[0] || {},
