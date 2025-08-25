@@ -9,11 +9,13 @@ export function Footer({ data }: { data: FooterData }) {
   const { main, links, contact } = data;
   const { description, newsletter_heading, newsletter_placeholder } = main;
   
-  const allFooterLinks = [
-      ...links,
+  const existingHrefs = new Set(links.map(link => link.href));
+  const staticLinks = [
       { href: "/about", label: "আমাদের সম্পর্কে" },
       { href: "/contact", label: "যোগাযোগ" },
-  ]
+  ].filter(link => !existingHrefs.has(link.href));
+
+  const allFooterLinks = [...links, ...staticLinks];
 
 
   return (

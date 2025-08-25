@@ -19,11 +19,13 @@ import type { Course } from '@/lib/cms';
 export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data: NavbarData, courses: Course[] }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
-  const allNavLinks = [
-    ...navLinks,
+  const existingHrefs = new Set(navLinks.map(link => link.href));
+  const staticLinks = [
     { href: "/about", label: "আমাদের সম্পর্কে" },
     { href: "/contact", label: "যোগাযোগ" },
-  ];
+  ].filter(link => !existingHrefs.has(link.href));
+
+  const allNavLinks = [...navLinks, ...staticLinks];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
