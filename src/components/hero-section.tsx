@@ -11,7 +11,7 @@ type HeroData = {
 export function HeroSection({ data }: { data: HeroData }) {
   return (
     <section className="bg-primary text-white">
-      <div className="container mx-auto px-4 flex flex-col items-center justify-center text-center min-h-[50vh] py-20">
+      <div className="container mx-auto px-4 flex flex-col items-center justify-center text-center pt-20 pb-12">
         <h1 className="text-4xl md:text-5xl font-bold font-headline tracking-tight mb-4">
           {data.title}
         </h1>
