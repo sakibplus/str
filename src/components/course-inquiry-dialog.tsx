@@ -93,22 +93,22 @@ Selected Course: ${selectedCourse.title}
 Please provide me with more information. Thank you!
     `;
     const whatsappUrl = `https://api.whatsapp.com/send?phone=8801234567890&text=${encodeURIComponent(
-      message
+      message.trim()
     )}`;
     window.open(whatsappUrl, '_blank');
   };
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle className="text-2xl font-bold text-center text-primary font-headline">আপনার তথ্য দিন</DialogTitle>
           <DialogDescription className="text-center">
             আপনি কোন কোর্স সম্পর্কে জানতে আগ্রহী তা নির্বাচন করুন এবং আপনার তথ্য জমা দিন।
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-6 py-4">
-          <div className="grid grid-cols-1 gap-4">
+        <div className="grid gap-4 py-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="name">আপনার নাম</Label>
                 <Input id="name" placeholder="সম্পূর্ণ নাম লিখুন" value={name} onChange={(e) => setName(e.target.value)} />
@@ -117,29 +117,30 @@ Please provide me with more information. Thank you!
                 <Label htmlFor="address">আপনার ঠিকানা</Label>
                 <Input id="address" placeholder="আপনার ঠিকানা লিখুন" value={address} onChange={(e) => setAddress(e.target.value)} />
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="course">কোর্স নির্বাচন করুন</Label>
-                <Select
-                  value={selectedCourseId}
-                  onValueChange={setSelectedCourseId}
-                >
-                  <SelectTrigger id="course">
-                    <SelectValue placeholder="কোর্স সিলেক্ট করুন" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {courses.map((course) => (
-                      <SelectItem key={course.id} value={course.id.toString()}>
-                        {course.title}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
           </div>
+          <div className="space-y-2">
+            <Label htmlFor="course">কোর্স নির্বাচন করুন</Label>
+            <Select
+              value={selectedCourseId}
+              onValueChange={setSelectedCourseId}
+            >
+              <SelectTrigger id="course">
+                <SelectValue placeholder="কোর্স সিলেক্ট করুন" />
+              </SelectTrigger>
+              <SelectContent>
+                {courses.map((course) => (
+                  <SelectItem key={course.id} value={course.id.toString()}>
+                    {course.title}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+          
 
           {selectedCourse && (
             <div className="p-4 border rounded-lg space-y-3 bg-gray-50">
-               <Image src={selectedCourse.image} alt={selectedCourse.title} width={400} height={200} className="rounded-md object-cover aspect-video" />
+               <Image src={selectedCourse.image} alt={selectedCourse.title} width={400} height={200} className="rounded-md object-cover aspect-video w-full" data-ai-hint={selectedCourse.dataAiHint} />
               <h3 className="font-bold text-lg text-primary">{selectedCourse.title}</h3>
               <div className="flex justify-between items-center text-sm">
                 <p className="text-muted-foreground">{selectedCourse.duration}</p>
