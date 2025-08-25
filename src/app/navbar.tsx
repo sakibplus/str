@@ -11,10 +11,12 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink, NavbarData } from '@/lib/cms';
+import type { NavLink, NavbarData, Course } from '@/lib/cms';
+import { ServiceInquiryDialog } from '@/components/service-inquiry-dialog';
 
+export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data: NavbarData, courses: Course[] }) {
+  const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
-export function Navbar({ navLinks, data }: { navLinks: NavLink[], data: NavbarData }) {
   const allNavLinks = [
     ...navLinks,
     { href: "/about", label: "আমাদের সম্পর্কে" },
@@ -46,7 +48,12 @@ export function Navbar({ navLinks, data }: { navLinks: NavLink[], data: NavbarDa
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button className="hidden md:flex bg-gray-800 text-white hover:bg-gray-900">{data.button_text}</Button>
+          <Button 
+            className="hidden md:flex bg-accent text-white hover:bg-accent/90"
+            onClick={() => setIsDialogOpen(true)}
+          >
+            সার্ভিস নিন
+          </Button>
 
           <div className="md:hidden">
             <Sheet>
@@ -77,13 +84,23 @@ export function Navbar({ navLinks, data }: { navLinks: NavLink[], data: NavbarDa
                       {link.label}
                     </Link>
                   ))}
-                   <Button className="bg-gray-800 text-white hover:bg-gray-900">{data.button_text}</Button>
+                   <Button 
+                    className="bg-accent text-white hover:bg-accent/90"
+                    onClick={() => setIsDialogOpen(true)}
+                   >
+                     সার্ভিস নিন
+                   </Button>
                 </div>
               </SheetContent>
             </Sheet>
           </div>
         </div>
       </div>
+      <ServiceInquiryDialog 
+        isOpen={isDialogOpen}
+        setIsOpen={setIsDialogOpen}
+        courses={courses}
+      />
     </header>
   );
 }

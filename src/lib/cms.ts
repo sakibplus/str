@@ -20,38 +20,65 @@ const GOOGLE_SHEET_FOOTER_CONTACT_URL = "https://docs.google.com/spreadsheets/d/
 
 // A robust, dependency-free CSV parser.
 function parseCsvText(csvText: string): Record<string, any>[] {
-  const lines = csvText.trim().split(/\r\n|\n/);
-  if (lines.length < 2) return [];
+    const lines = csvText.trim().split(/\r\n|\n/);
+    if (lines.length < 2) return [];
 
-  const header = lines[0].split(',').map(h => h.trim());
-  const rows = [];
+    const header = lines[0].split(',').map(h => h.trim());
+    const data = [];
 
-  for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split(',');
-    const rowObject: Record<string, any> = {};
-    for(let j=0; j < header.length; j++) {
-        const key = header[j];
-        let value = values[j]?.trim();
-
-        if (typeof value === 'string') {
-             if (!isNaN(Number(value)) && value.trim() !== '') {
-                rowObject[key] = Number(value);
-            } else if (value.toLowerCase() === 'true') {
-                rowObject[key] = true;
-            } else if (value.toLowerCase() === 'false') {
-                rowObject[key] = false;
-            } else {
-                rowObject[key] = value.replace(/^"|"$/g, ''); // Remove quotes
-            }
+    for (let i = 1; i < lines.length; i++) {
+        const row: { [key: string]: any } = {};
+        let currentLine = lines[i];
+        
+        // This regex handles quoted fields, including those with commas inside.
+        const values = currentLine.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
+        
+        if (values.length !== header.length) {
+             // Fallback for simple comma split if regex fails
+             const simpleValues = currentLine.split(',');
+             for (let j = 0; j < header.length; j++) {
+                let value = simpleValues[j]?.trim();
+                const key = header[j];
+                
+                if (typeof value === 'string') {
+                    if (!isNaN(Number(value)) && value.trim() !== '') {
+                        row[key] = Number(value);
+                    } else if (value.toLowerCase() === 'true') {
+                        row[key] = true;
+                    } else if (value.toLowerCase() === 'false') {
+                        row[key] = false;
+                    } else {
+                        row[key] = value.replace(/^"|"$/g, '');
+                    }
+                } else {
+                    row[key] = value;
+                }
+             }
         } else {
-            rowObject[key] = value;
-        }
-    }
-    rows.push(rowObject);
-  }
+            for (let j = 0; j < header.length; j++) {
+                let value = values[j]?.trim();
+                const key = header[j];
 
-  return rows;
+                if (typeof value === 'string') {
+                    if (!isNaN(Number(value)) && value.trim() !== '') {
+                        row[key] = Number(value);
+                    } else if (value.toLowerCase() === 'true') {
+                        row[key] = true;
+                    } else if (value.toLowerCase() === 'false') {
+                        row[key] = false;
+                    } else {
+                        row[key] = value.replace(/^"|"$/g, '');
+                    }
+                } else {
+                    row[key] = value;
+                }
+            }
+        }
+        data.push(row);
+    }
+    return data;
 }
+
 
 
 // Helper function to fetch and parse CSV data reliably.
@@ -112,7 +139,7 @@ export type NavbarData = {
     button_text: string;
 }
 export const getNavbarData = async (): Promise<NavbarData> => {
-    const fallback: NavbarData = { logo_url: '/logo.png', button_text: 'লগ ইন/সাইন আপ' };
+    const fallback: NavbarData = { logo_url: '/logo.png', button_text: 'সার্ভিস নিন' };
     const data = await fetchAndParseCsv(GOOGLE_SHEET_HERO_URL, [fallback], 'NavbarData');
     const transformedData = transformKeyValue(data, fallback);
     return {
@@ -316,5 +343,3 @@ export const getFooterData = async (): Promise<FooterData> => {
         }
     };
 }
-
-    

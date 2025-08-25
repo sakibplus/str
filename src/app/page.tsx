@@ -48,7 +48,7 @@ export default async function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <TopBanner />
-      <Navbar navLinks={navLinks} data={navbarData} />
+      <Navbar navLinks={navLinks} data={navbarData} courses={courses} />
       <main className="flex-1">
         <HeroSection data={heroData} />
         <CourseCarousel courses={courseCarouselData} />
