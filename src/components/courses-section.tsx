@@ -8,7 +8,6 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
 
 type Course = {
   id: number;
@@ -16,17 +15,24 @@ type Course = {
   image: string;
   dataAiHint: string;
   link: string;
+  duration: string;
+  price: string;
 };
 
 export function CoursesSection({ courses }: { courses: Course[] }) {
   return (
-    <section id="courses" className="py-12 md:py-20 bg-primary">
+    <section id="courses" className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
+            আমাদের কোর্সগুলো থেকে বাছাই করুন আপনার পছন্দের স্কিল
+          </h2>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {courses.map((course) => (
             <Card
               key={course.id}
-              className="overflow-hidden flex flex-col transform transition-all duration-300 hover:scale-105 hover:shadow-xl rounded-lg border-0 bg-card group"
+              className="overflow-hidden flex flex-col bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
             >
               <CardHeader className="p-0 relative">
                 <Image
@@ -37,20 +43,19 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                   className="w-full h-auto object-cover rounded-t-lg"
                   data-ai-hint={course.dataAiHint}
                 />
-                <div className="absolute top-2 left-2">
-                    <Badge variant="destructive" className="bg-red-500 text-white text-xs py-1 px-2 rounded-full">
-                        <span className="w-2 h-2 bg-white rounded-full mr-1.5"></span>
-                        LIVE BATCH
-                    </Badge>
-                </div>
               </CardHeader>
-              <CardContent className="p-4 flex-grow">
-                <CardTitle className="mb-2 font-headline text-md font-bold text-gray-800 group-hover:text-accent">
+              <CardContent className="p-4 flex-grow flex flex-col">
+                <CardTitle className="mb-2 font-headline text-lg font-bold text-gray-800 flex items-center">
                   {course.title}
+                  <span className="text-red-500 ml-2 text-xs">((🔴))</span>
                 </CardTitle>
+                <p className="text-sm text-muted-foreground">
+                  - {course.duration}
+                </p>
               </CardContent>
-              <CardFooter className="p-4 pt-0">
-                 <Button asChild className="w-full mt-auto" variant="outline">
+              <CardFooter className="p-4 pt-0 flex justify-between items-center">
+                 <span className="font-bold text-primary">৳{course.price} প্রতি মাস</span>
+                 <Button asChild variant="outline" size="sm">
                   <Link href={course.link}>
                     বিস্তারিত দেখুন
                   </Link>
