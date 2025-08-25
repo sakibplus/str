@@ -10,6 +10,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
     console.warn(`Invalid or missing Google Sheet URL for ${sheetName}. Using fallback data.`);
     return fallback;
   }
+  
   try {
     const response = await fetch(url, { 
         cache: 'no-store',
@@ -37,13 +38,11 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
           if (results.errors.length) {
             console.error(`Errors parsing CSV for ${sheetName} from ${url}:`, results.errors);
             resolve(fallback);
+          } else if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.values(results.data[0] as object).every(v => v === null || v === ''))) {
+             console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
+             resolve(fallback);
           } else {
-             if (!results.data || results.data.length === 0 || (results.data.length === 1 && Object.values(results.data[0] as object).every(v => v === null || v === ''))) {
-                console.warn(`CSV for ${sheetName} is empty or invalid. Using fallback.`);
-                resolve(fallback);
-             } else {
-                resolve(results.data);
-             }
+             resolve(results.data);
           }
         },
         error: (error: Error) => {
@@ -64,13 +63,8 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
 
 // Helper function to transform key-value pair array into an object
 function transformKeyValue(data: any, fallback: any): any {
-    // If the fetched data is not an array (e.g., single row parsed as an object), wrap it in an array.
     const dataArray = Array.isArray(data) ? data : (data ? [data] : []);
-
-    if (dataArray.length === 0) {
-        return fallback;
-    }
-
+    if (dataArray.length === 0) return fallback;
     return dataArray.reduce((obj, item) => {
         if (item && typeof item === 'object' && item.key) {
             obj[item.key] = item.value;
@@ -90,7 +84,7 @@ export const getNavLinks = async (): Promise<NavLink[]> => {
         { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন (ফলব্যাক)' },
     ];
     const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, fallback, 'NavLinks');
-    return Array.isArray(data) ? data : fallback;
+    return Array.isArray(data) && data.length > 0 ? data : fallback;
 };
 
 
