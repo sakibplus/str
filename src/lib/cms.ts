@@ -4,28 +4,29 @@
 
 import Papa from 'papaparse';
 
-// Helper function to fetch and parse CSV data
-async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
+// Helper function to fetch and parse CSV data reliably.
+async function fetchAndParseCsv(url: string | undefined, fallback: any[] = []): Promise<any[]> {
   if (!url || !url.startsWith('https://docs.google.com/spreadsheets/d/e/')) {
-    // Return empty array if URL is missing or doesn't look like a Google Sheet URL
-    // This prevents unnecessary fetch attempts for placeholder URLs.
-    return [];
+    console.warn(`Invalid or missing Google Sheet URL. Using fallback data.`);
+    return fallback;
   }
   try {
-    // Disable caching to get the latest data from Google Sheets
-    const response = await fetch(url, { cache: 'no-store' });
+    const response = await fetch(url, { 
+        cache: 'no-store',
+        // Add a timeout to prevent long waits
+        signal: AbortSignal.timeout(5000) 
+    });
     
     if (!response.ok) {
       console.error(`Failed to fetch CSV from ${url}: ${response.status} ${response.statusText}`);
-      return []; // Return empty array on fetch error
+      return fallback;
     }
 
     const text = await response.text();
     
-    // If the response is HTML (like a Google login page), it's not valid CSV.
     if (text.trim().startsWith('<!DOCTYPE html>')) {
-        console.error(`Failed to fetch CSV from ${url}: Received HTML content, not CSV. Check if the sheet is published correctly and accessible.`);
-        return [];
+        console.error(`Failed to fetch CSV from ${url}: Received HTML content. Check sheet's publish settings.`);
+        return fallback;
     }
 
     return new Promise((resolve) => {
@@ -36,18 +37,20 @@ async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
         complete: (results) => {
           if (results.errors.length) {
             console.error(`Errors parsing CSV from ${url}:`, results.errors);
+            resolve(fallback);
+          } else {
+            resolve(results.data || fallback);
           }
-          resolve(results.data || []);
         },
         error: (error: Error) => {
           console.error(`PapaParse error on URL ${url}:`, error);
-          resolve([]); // Resolve with empty array on critical parsing error
+          resolve(fallback);
         },
       });
     });
   } catch (error) {
     console.error(`General error fetching or parsing CSV from ${url}:`, error);
-    return []; // Return empty array on any other error
+    return fallback;
   }
 }
 
@@ -57,7 +60,7 @@ export type NavLink = {
     label: string;
 };
 export const getNavLinks = async (): Promise<NavLink[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL);
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_NAVLINKS_URL, []);
 };
 
 
@@ -66,8 +69,8 @@ export type HeroData = {
     subtitle: string;
 };
 export const getHeroData = async (): Promise<HeroData> => {
-    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL);
-    return data[0] || { title: 'Default Title', subtitle: 'Default subtitle' };
+    const data = await fetchAndParseCsv(process.env.GOOGLE_SHEET_HERO_URL, []);
+    return data[0] || { title: 'SkillShikhun', subtitle: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।' };
 };
 
 
@@ -83,7 +86,7 @@ export type CourseCarouselData = {
     description: string;
 };
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL);
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSE_CAROUSEL_URL, []);
 }
 
 
@@ -99,7 +102,7 @@ export type Course = {
     priceSuffix?: string;
 };
 export const getCourses = async (): Promise<Course[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL);
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_COURSES_URL, []);
 }
 
 
@@ -112,8 +115,8 @@ export type AboutUsData = {
     stats: { value: string; label: string }[];
 };
 export const getAboutUsData = async (): Promise<AboutUsData> => {
-    const aboutUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_URL);
-    const stats = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_STATS_URL);
+    const aboutUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_URL, []);
+    const stats = await fetchAndParseCsv(process.env.GOOGLE_SHEET_ABOUT_US_STATS_URL, []);
     
     const data = aboutUsInfo[0] || {};
     return { ...data, stats: stats };
@@ -129,7 +132,7 @@ export type Testimonial = {
     dataAiHint: string;
 };
 export const getTestimonials = async (): Promise<Testimonial[]> => {
-    return fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL);
+    return fetchAndParseCsv(process.env.GOOGLE_SHEET_TESTIMONIALS_URL, []);
 }
 
 
@@ -146,8 +149,8 @@ export type WhyChooseUsData = {
     features: WhyChooseUsFeature[];
 }
 export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
-    const whyChooseUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL);
-    const features = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL);
+    const whyChooseUsInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_URL, []);
+    const features = await fetchAndParseCsv(process.env.GOOGLE_SHEET_WHY_CHOOSE_US_FEATURES_URL, []);
 
     const data = whyChooseUsInfo[0] || {};
     return { ...data, features: features };
@@ -171,9 +174,9 @@ export type FooterData = {
     contact: FooterContact;
 }
 export const getFooterData = async (): Promise<FooterData> => {
-    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL);
-    const links = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL);
-    const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL);
+    const footerInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_URL, []);
+    const links = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_LINKS_URL, []);
+    const contactInfo = await fetchAndParseCsv(process.env.GOOGLE_SHEET_FOOTER_CONTACT_URL, []);
 
     const mainData = footerInfo[0] || {};
     const contactData = contactInfo[0] || {};
