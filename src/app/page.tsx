@@ -2,7 +2,6 @@ import { Navbar } from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { CoursesSection } from '@/components/courses-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
-import { BlogSection } from '@/components/blog-section';
 import { Footer } from '@/components/footer';
 import { AboutUsSection } from '@/components/about-us-section';
 import { TopBanner } from '@/components/top-banner';
@@ -10,12 +9,13 @@ import {
   heroData,
   courses,
   testimonials,
-  blogPosts,
   aboutUsData,
   courseCarouselData,
+  whyChooseUsData,
 } from '@/lib/data';
 import { CourseCarousel } from '@/components/course-carousel';
 import { FreeVideosForm } from '@/components/free-videos-form';
+import { WhyChooseUs } from '@/components/why-choose-us';
 
 export default function Home() {
   return (
@@ -29,7 +29,7 @@ export default function Home() {
         <CoursesSection courses={courses} />
         <AboutUsSection data={aboutUsData} />
         <TestimonialsSection testimonials={testimonials} />
-        <BlogSection posts={blogPosts} />
+        <WhyChooseUs data={whyChooseUsData} />
       </main>
       <Footer />
     </div>

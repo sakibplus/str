@@ -245,35 +245,37 @@ export const testimonials = [
   },
 ];
 
-export const blogPosts = [
-  {
-    id: 1,
-    title: 'ফ্রিল্যান্সিং-এ সফল হওয়ার উপায়',
-    excerpt:
-      'ফ্রিল্যান্সিং জগতে সফলতা পেতে হলে কিছু নির্দিষ্ট কৌশল অবলম্বন করা জরুরি। এই ব্লগে আমরা সেই কৌশলগুলো নিয়ে আলোচনা করেছি।',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'laptop desk',
-    date: 'জুলাই ২৫, ২০২৪',
-    link: '#',
-  },
-  {
-    id: 2,
-    title: 'কেন শিখবেন ওয়েব ডেভেলপমেন্ট?',
-    excerpt:
-      'বর্তমান সময়ে ওয়েব ডেভেলপমেন্ট একটি চাহিদা সম্পন্ন পেশা। এর ভবিষ্যৎ সম্ভাবনা এবং ক্যারিয়ার গড়ার উপায় জানতে পড়ুন।',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'code screen',
-    date: 'জুলাই ২০, ২০২৪',
-    link: '#',
-  },
-  {
-    id: 3,
-    title: 'ডিজিটাল মার্কেটিং এর গুরুত্ব',
-    excerpt:
-      'ব্যবসার প্রসারে ডিজিটাল মার্কেটিং এর ভূমিকা অপরিসীম। কিভাবে ডিজিটাল মার্কেটিং আপনার ব্যবসাকে এগিয়ে নিতে পারে তা জানুন।',
-    image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'marketing chart',
-    date: 'জুলাই ১৫, ২০২৪',
-    link: '#',
-  },
-];
+export const whyChooseUsData = {
+  title: 'স্কিলশিখুন কেন বেছে নেবেন?',
+  subtitle: 'ফিচারগুলো দেখে নিন!',
+  features: [
+    {
+      id: 1,
+      title: 'এক্সক্লুসিভ কন্টেন্ট',
+      description: 'সেরা এবং অভিজ্ঞ মেন্টরদের দ্বারা তৈরি ও যাচাইকৃত মানসম্মত কন্টেন্ট',
+      image: '/images/feature-1.png',
+      dataAiHint: 'exclusive content',
+    },
+    {
+      id: 2,
+      title: 'সোশ্যাল মিডিয়ায় নিয়মিত আপডেট',
+      description: 'কোর্স সম্পর্কিত আপডেট এবং তথ্য পাবেন নিয়মিত',
+      image: '/images/feature-2.png',
+      dataAiHint: 'social media update',
+    },
+    {
+      id: 3,
+      title: '২৪ ঘন্টা সাপোর্ট সিস্টেম',
+      description: 'সব প্রয়োজনে সহায়তার জন্য থাকছে সার্বক্ষনিক এক্টিভ সাপোর্ট টিম',
+      image: '/images/feature-3.png',
+      dataAiHint: '24/7 support',
+    },
+    {
+      id: 4,
+      title: 'হাতে-কলমে শেখানো',
+      description: 'কোর্সগুলো সাজানো হয়েছে পূর্ব অভিজ্ঞতা ছাড়া সকল মেধার শিক্ষার্থীর জন্য',
+      image: '/images/feature-4.png',
+      dataAiHint: 'hands-on learning',
+    },
+  ],
+};
