@@ -11,7 +11,6 @@ type Course = {
   title: string;
   image: string;
   dataAiHint: string;
-  bgColor: string;
   price?: string;
   discountedPrice?: string;
   promoCode?: string;
@@ -35,49 +34,44 @@ export function CourseCarousel({ courses }: { courses: Course[] }) {
                 key={course.id}
                 className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
-                <Card className={`overflow-hidden rounded-2xl border-0 shadow-lg ${course.bgColor}`}>
-                  <CardContent className="p-0 text-white text-center">
-                    <div className="relative p-2">
-                       <div className="absolute top-4 left-4 z-10">
-                          <div className="flex items-center gap-1.5 bg-red-500 text-white text-xs py-1 px-2 rounded-full">
-                            <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                            LIVE BATCH
-                          </div>
-                       </div>
-                      <h3 className="font-bold text-lg mt-8 h-16">{course.title}</h3>
-                    </div>
-                    <div className="relative h-64">
-                      <Image
-                        src={course.image}
-                        alt={course.title}
-                        width={250}
-                        height={250}
-                        className="w-full h-full object-contain absolute bottom-0"
-                        data-ai-hint={course.dataAiHint}
-                      />
-                    </div>
-                    {course.price ? (
-                      <div className="p-4 space-y-2">
-                         <div className="flex items-center justify-center gap-2">
-                            <span className="text-sm line-through text-gray-300">{course.duration}</span>
-                         </div>
-                         <div className="flex items-center justify-center gap-2">
-                            <span className="text-lg line-through text-gray-300">৳{course.price}</span>
-                            <span className="text-2xl font-bold text-green-400">৳{course.discountedPrice}</span>
-                         </div>
-                         <p className="text-sm">প্রতি মাস</p>
-                         <div className="bg-white text-gray-800 font-bold py-2 px-4 rounded-lg inline-block mt-1">
-                           PROMO CODE: <span className="text-purple-600">{course.promoCode}</span>
-                         </div>
+                <Card className="overflow-hidden rounded-2xl border-0 shadow-lg bg-transparent">
+                  <CardContent className="p-0 text-white text-center relative">
+                    <Image
+                      src={course.image}
+                      alt={course.title}
+                      width={300}
+                      height={450}
+                      className="w-full h-full object-cover"
+                      data-ai-hint={course.dataAiHint}
+                    />
+                    <div className="absolute inset-0 bg-black/20"></div>
+                    <div className="absolute inset-0 flex flex-col justify-between p-4">
+                      <div className="flex justify-start">
+                        <div className="flex items-center gap-1.5 bg-red-500 text-white text-xs py-1 px-2 rounded-full">
+                          <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                          LIVE BATCH
+                        </div>
                       </div>
-                    ) : (
-                       <div className="p-4 text-center mt-4">
-                          <p className="text-sm">ক্র্যাশ কোর্স</p>
-                          <div className="bg-white text-black rounded-full inline-block px-8 py-2 mt-2">
-                            <p className="text-3xl font-bold">৭৫০৳</p>
-                          </div>
-                       </div>
-                    )}
+                      <h3 className="font-bold text-lg">{course.title}</h3>
+                      
+                      <div className="space-y-2">
+                        {course.price ? (
+                          <>
+                            <p className="text-sm">{course.duration}</p>
+                            <div className="bg-white text-gray-800 font-bold py-1 px-4 rounded-lg inline-block text-sm">
+                              {course.discountedPrice}৳ প্রতি মাস
+                            </div>
+                          </>
+                        ) : (
+                          <>
+                            <div className="text-sm inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full">ক্র্যাশ কোর্স</div>
+                            <div className="bg-white text-black rounded-full inline-block px-8 py-1 mt-2">
+                              <p className="text-3xl font-bold">৭৫০৳</p>
+                            </div>
+                          </>
+                        )}
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </CarouselItem>
