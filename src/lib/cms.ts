@@ -64,11 +64,8 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
 
 // Helper function to transform key-value pair array into an object
 function transformKeyValue(data: any, fallback: any): any {
-    if (!data) {
-        return fallback;
-    }
-    // Ensure data is an array
-    const dataArray = Array.isArray(data) ? data : [data];
+    // If the fetched data is not an array (e.g., single row parsed as an object), wrap it in an array.
+    const dataArray = Array.isArray(data) ? data : (data ? [data] : []);
 
     if (dataArray.length === 0) {
         return fallback;
