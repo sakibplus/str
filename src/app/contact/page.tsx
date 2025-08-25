@@ -1,9 +1,59 @@
+
+'use client';
+
+import { useState } from 'react';
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
 import { Button } from "@/components/ui/button";
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Label } from '@/components/ui/label';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getNavLinks, getFooterData, getNavbarData, getCourses } from "@/lib/cms";
 import { Mail, Phone, MapPin } from "lucide-react";
+
+// This is a dummy fetch function because we are in a client component.
+// In a real app, this data would likely be fetched in a parent server component
+// or from a global state/context.
+const useDummyData = () => {
+    const DUMMY_NAVBAR_DATA = { logo_url: '/logo.png', button_text: 'লগ ইন' };
+      const DUMMY_NAV_LINKS = [
+        { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট' },
+        { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন' },
+        { href: '/about', label: 'আমাদের সম্পর্কে' },
+        { href: '/contact', label: 'যোগাযোগ' },
+      ];
+      const DUMMY_FOOTER_DATA = {
+        main: {
+          description: "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+          newsletter_heading: "নিউজলেটার",
+          newsletter_placeholder: "আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।",
+        },
+        links: [
+            { href: "/about", label: "আমাদের সম্পর্কে"},
+            { href: "#courses", label: "আমাদের কোর্স"},
+            { href: "#blog", label: "ব্লগ"},
+            { href: "/contact", label: "যোগাযোগ"},
+        ],
+        contact: {
+            line1: "ঢাকা, বাংলাদেশ",
+            line2: "info@skillshikhun.com",
+            line3: "+880 1234 567890",
+            logo_url: '/logo-white.png',
+        }
+      };
+      const DUMMY_COURSES_DATA = [
+          { id: 1, title: 'Course 1' },
+          { id: 2, title: 'Course 2' },
+      ] as any[];
+
+      return {
+          navLinks: DUMMY_NAV_LINKS,
+          footerData: DUMMY_FOOTER_DATA,
+          navbarData: DUMMY_NAVBAR_DATA,
+          courses: DUMMY_COURSES_DATA,
+      }
+}
 
 const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
     <svg
@@ -22,13 +72,34 @@ const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (
     </svg>
   );
 
-export default async function ContactPage() {
-  const [navLinks, footerData, navbarData, courses] = await Promise.all([
-    getNavLinks(),
-    getFooterData(),
-    getNavbarData(),
-    getCourses(),
-  ]);
+export default function ContactPage() {
+  const { navLinks, footerData, navbarData, courses } = useDummyData();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+
+  const handleWhatsAppSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if(!name || !email || !message) {
+      setError("অনুগ্রহ করে সকল তথ্য পূরণ করুন।");
+      return;
+    }
+    setError('');
+
+    const whatsappMessage = `
+Hello SkillShikhun,
+
+I have an inquiry.
+Name: ${name}
+Email: ${email}
+Message: ${message}
+    `;
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=8801234567890&text=${encodeURIComponent(
+      whatsappMessage.trim()
+    )}`;
+    window.open(whatsappUrl, '_blank');
+  };
 
   const contactInfo = [
     {
@@ -67,8 +138,8 @@ export default async function ContactPage() {
           </div>
         </section>
 
-        {/* Contact Info Section */}
-        <section className="py-16 md:py-24">
+        {/* Contact Info Cards */}
+        <section className="py-16">
           <div className="container mx-auto px-4">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {contactInfo.map((item, index) => (
@@ -90,30 +161,39 @@ export default async function ContactPage() {
           </div>
         </section>
 
-        {/* WhatsApp & Map Section */}
-        <section className="py-16 md:py-24 bg-white">
+        {/* Form and Map Section */}
+        <section className="py-16 bg-white">
           <div className="container mx-auto px-4">
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div className="text-center lg:text-left">
-                <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
-                  দ্রুত যোগাযোগের জন্য
-                </h2>
-                <p className="text-lg text-muted-foreground mt-4 mb-8">
-                  আপনার প্রশ্নটি সরাসরি আমাদের জানানোর জন্য হোয়াটসঅ্যাপে মেসেজ
-                  দিন। আমাদের প্রতিনিধি দ্রুত আপনার সাথে যোগাযোগ করবে।
-                </p>
-                <a
-                  href={`https://api.whatsapp.com/send?phone=8801234567890&text=${encodeURIComponent("Hello SkillShikhun, I have a question.")}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <Button size="lg" className="h-14 text-lg bg-green-500 hover:bg-green-600 text-white w-full sm:w-auto">
-                    <WhatsappIcon className="mr-3 h-6 w-6" />
-                    হোয়াটসঅ্যাপে মেসেজ দিন
-                  </Button>
-                </a>
-              </div>
-              <div className="h-80 md:h-96 w-full rounded-xl overflow-hidden shadow-lg">
+            <div className="text-center mb-12">
+                <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">আমাদের মেসেজ পাঠান</h2>
+                <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">আমরা আপনার বার্তার অপেক্ষায় আছি।</p>
+            </div>
+            <div className="grid lg:grid-cols-2 gap-12 items-start">
+              {/* Contact Form */}
+              <Card className="shadow-lg p-8">
+                <form onSubmit={handleWhatsAppSubmit} className="space-y-6">
+                    <div>
+                        <Label htmlFor="name" className="font-semibold">আপনার নাম</Label>
+                        <Input id="name" type="text" placeholder="সম্পূর্ণ নাম" className="mt-2" value={name} onChange={(e) => setName(e.target.value)} />
+                    </div>
+                    <div>
+                        <Label htmlFor="email" className="font-semibold">আপনার ইমেইল</Label>
+                        <Input id="email" type="email" placeholder="ইমেইল অ্যাড্রেস" className="mt-2" value={email} onChange={(e) => setEmail(e.target.value)} />
+                    </div>
+                    <div>
+                        <Label htmlFor="message" className="font-semibold">আপনার বার্তা</Label>
+                        <Textarea id="message" placeholder="আপনার প্রশ্ন বা বার্তাটি এখানে লিখুন..." className="mt-2" rows={5} value={message} onChange={(e) => setMessage(e.target.value)} />
+                    </div>
+                    {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+                    <Button type="submit" size="lg" className="w-full h-14 text-lg bg-green-500 hover:bg-green-600 text-white">
+                      <WhatsappIcon className="mr-3 h-6 w-6" />
+                      হোয়াটসঅ্যাপে পাঠান
+                    </Button>
+                </form>
+              </Card>
+
+              {/* Google Map */}
+              <div className="h-96 lg:h-full w-full rounded-xl overflow-hidden shadow-lg border">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.879940198188!2d90.39053831543154!3d23.75167699462529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1f1178de1f6f3!2sDhaka!5e0!3m2!1sen!2sbd!4v1678886363028!5m2!1sen!2sbd"
                   width="100%"
