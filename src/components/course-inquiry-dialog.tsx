@@ -17,6 +17,7 @@ import {
 } from '@/components/ui/select';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import { Input } from '@/components/ui/input';
 import Image from 'next/image';
 
 type Course = {
@@ -63,18 +64,29 @@ export function CourseInquiryDialog({
   const [selectedCourseId, setSelectedCourseId] = useState<string | undefined>(
     courses[0]?.id.toString()
   );
+  const [name, setName] = useState('');
+  const [address, setAddress] = useState('');
+  const [error, setError] = useState('');
 
   const selectedCourse = useMemo(() => {
     return courses.find((c) => c.id.toString() === selectedCourseId);
   }, [selectedCourseId, courses]);
 
   const handleWhatsAppSubmit = () => {
+    if(!name || !address) {
+      setError("অনুগ্রহ করে আপনার নাম এবং ঠিকানা পূরণ করুন।");
+      return;
+    }
+    setError('');
+
     if (!selectedCourse) return;
 
     const message = `
 Hello SkillShikhun,
 
 I am interested in one of your courses. Here are my details:
+Name: ${name}
+Address: ${address}
 Mobile Number: +88${mobileNumber}
 Selected Course: ${selectedCourse.title}
 
@@ -88,47 +100,59 @@ Please provide me with more information. Thank you!
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogContent className="sm:max-w-[425px]">
+      <DialogContent className="sm:max-w-md">
         <DialogHeader>
-          <DialogTitle>কোর্স নির্বাচন করুন</DialogTitle>
-          <DialogDescription>
-            আপনি কোন কোর্স সম্পর্কে জানতে আগ্রহী তা নির্বাচন করুন এবং তথ্য জমা দিন।
+          <DialogTitle className="text-2xl font-bold text-center text-primary font-headline">আপনার তথ্য দিন</DialogTitle>
+          <DialogDescription className="text-center">
+            আপনি কোন কোর্স সম্পর্কে জানতে আগ্রহী তা নির্বাচন করুন এবং আপনার তথ্য জমা দিন।
           </DialogDescription>
         </DialogHeader>
-        <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="course" className="text-right">
-              কোর্স
-            </Label>
-            <Select
-              value={selectedCourseId}
-              onValueChange={setSelectedCourseId}
-            >
-              <SelectTrigger id="course" className="col-span-3">
-                <SelectValue placeholder="কোর্স সিলেক্ট করুন" />
-              </SelectTrigger>
-              <SelectContent>
-                {courses.map((course) => (
-                  <SelectItem key={course.id} value={course.id.toString()}>
-                    {course.title}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+        <div className="grid gap-6 py-4">
+          <div className="grid grid-cols-1 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="name">আপনার নাম</Label>
+                <Input id="name" placeholder="সম্পূর্ণ নাম লিখুন" value={name} onChange={(e) => setName(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="address">আপনার ঠিকানা</Label>
+                <Input id="address" placeholder="আপনার ঠিকানা লিখুন" value={address} onChange={(e) => setAddress(e.target.value)} />
+              </div>
+              <div className="space-y-2">
+                <Label htmlFor="course">কোর্স নির্বাচন করুন</Label>
+                <Select
+                  value={selectedCourseId}
+                  onValueChange={setSelectedCourseId}
+                >
+                  <SelectTrigger id="course">
+                    <SelectValue placeholder="কোর্স সিলেক্ট করুন" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {courses.map((course) => (
+                      <SelectItem key={course.id} value={course.id.toString()}>
+                        {course.title}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
           </div>
 
           {selectedCourse && (
-            <div className="p-4 border rounded-lg space-y-3">
-               <Image src={selectedCourse.image} alt={selectedCourse.title} width={400} height={200} className="rounded-md object-cover" />
-              <h3 className="font-bold text-lg">{selectedCourse.title}</h3>
-              <p className="text-sm text-muted-foreground">{selectedCourse.duration}</p>
-              <p className="font-bold text-primary text-md">৳{selectedCourse.price} প্রতি মাস</p>
+            <div className="p-4 border rounded-lg space-y-3 bg-gray-50">
+               <Image src={selectedCourse.image} alt={selectedCourse.title} width={400} height={200} className="rounded-md object-cover aspect-video" />
+              <h3 className="font-bold text-lg text-primary">{selectedCourse.title}</h3>
+              <div className="flex justify-between items-center text-sm">
+                <p className="text-muted-foreground">{selectedCourse.duration}</p>
+                <p className="font-bold text-accent text-lg">৳{selectedCourse.price} প্রতি মাস</p>
+              </div>
             </div>
           )}
 
-          <div className="mt-4">
-             <Button onClick={handleWhatsAppSubmit} className="w-full bg-green-500 hover:bg-green-600 text-white">
-                <WhatsappIcon className="mr-2 h-5 w-5" />
+          {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+
+          <div className="mt-2">
+             <Button onClick={handleWhatsAppSubmit} className="w-full bg-green-500 hover:bg-green-600 text-white text-lg py-6">
+                <WhatsappIcon className="mr-2 h-6 w-6" />
                 হোয়াটসঅ্যাপে তথ্য পাঠান
              </Button>
           </div>
