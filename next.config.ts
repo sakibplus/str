@@ -12,34 +12,8 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'placehold.co',
-        port: '',
-        pathname: '/**',
+        hostname: '**',
       },
-      {
-        protocol: 'https',
-        hostname: 'skill-shikhun.netlify.app',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'ecdn.dhakatribune.net',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'image4.owler.com',
-        port: '',
-        pathname: '/**',
-      },
-      {
-        protocol: 'https',
-        hostname: 'img.freepik.com',
-        port: '',
-        pathname: '/**',
-      }
     ],
   },
 };

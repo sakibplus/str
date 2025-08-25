@@ -39,9 +39,9 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
-          {allNavLinks?.map((link) => (
+          {allNavLinks?.map((link, index) => (
             <Link
-              key={link.href}
+              key={`${link.href}-${index}`}
               href={link.href}
               className="text-muted-foreground transition-colors hover:text-primary"
             >
@@ -78,9 +78,9 @@ export function Navbar({ navLinks, data, courses }: { navLinks: NavLink[], data:
                   </Link>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">
-                  {allNavLinks?.map((link) => (
+                  {allNavLinks?.map((link, index) => (
                     <Link
-                      key={link.href}
+                      key={`${link.href}-${index}-mobile`}
                       href={link.href}
                       className="text-lg font-medium"
                     >

@@ -47,8 +47,8 @@ export function Footer({ data }: { data: FooterData }) {
           <div>
             <h3 className="font-bold font-headline mb-4">গুরুত্বপূর্ণ লিংক</h3>
             <ul className="space-y-2 text-sm">
-              {allFooterLinks?.map(link => (
-                 <li key={link.href}><Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground">{link.label}</Link></li>
+              {allFooterLinks?.map((link, index) => (
+                 <li key={`${link.href}-${index}`}><Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground">{link.label}</Link></li>
               ))}
             </ul>
           </div>
