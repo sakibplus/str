@@ -19,16 +19,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
-
-type Course = {
-  id: number;
-  title: string;
-  image: string;
-  dataAiHint: string;
-  link: string;
-  duration: string;
-  price: string;
-};
+import type { Course } from '@/lib/cms';
 
 type CourseInquiryDialogProps = {
   isOpen: boolean;
@@ -144,7 +135,7 @@ Please provide me with more information. Thank you!
               <h3 className="font-bold text-lg text-primary">{selectedCourse.title}</h3>
               <div className="flex justify-between items-center text-sm">
                 <p className="text-muted-foreground">{selectedCourse.duration}</p>
-                <p className="font-bold text-accent text-lg">৳{selectedCourse.price} প্রতি মাস</p>
+                <p className="font-bold text-accent text-lg">৳{selectedCourse.price} {selectedCourse.priceSuffix}</p>
               </div>
             </div>
           )}

@@ -11,17 +11,11 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Autoplay from "embla-carousel-autoplay";
-
-type Testimonial = {
-  id: number;
-  name: string;
-  role: string;
-  quote: string;
-  avatar: string;
-  dataAiHint: string;
-};
+import type { Testimonial } from '@/lib/cms';
 
 export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+  if (!testimonials || testimonials.length === 0) return null;
+
   return (
     <section id="testimonials" className="py-12 md:py-20">
       <div className="container mx-auto px-4">

@@ -1,21 +1,16 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
+import type { WhyChooseUsData, WhyChooseUsFeature } from '@/lib/cms';
 
-type Feature = {
-  id: number;
-  title: string;
-  description: string;
-  image: string;
-  dataAiHint: string;
-};
-
-type WhyChooseUsData = {
-    title: string;
-    subtitle: string;
-    features: Feature[];
+type WhyChooseUsProps = {
+    data: WhyChooseUsData & {
+        features: WhyChooseUsFeature[];
+    }
 }
 
-export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {
+export function WhyChooseUs({ data }: { data: WhyChooseUsProps }) {
+  if (!data?.title) return null;
+
   return (
     <section id="why-us" className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">

@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -7,21 +6,13 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Card, CardContent } from './ui/card';
+import type { CourseCarouselData } from '@/lib/cms';
 
-type Course = {
-  id: number;
-  title: string;
-  image: string;
-  dataAiHint: string;
-  price?: string;
-  discountedPrice?: string;
-  promoCode?: string;
-  duration?: string;
-};
+export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
+  if (!courses || courses.length === 0) return null;
 
-export function CourseCarousel({ courses }: { courses: Course[] }) {
   return (
-    <section className="bg-primary pt-0 pb-12">
+    <section className="bg-primary pt-12 pb-12">
       <div className="container mx-auto">
         <Carousel
           opts={{
@@ -43,8 +34,8 @@ export function CourseCarousel({ courses }: { courses: Course[] }) {
                         src={course.image}
                         alt={course.title}
                         width={300}
-                        height={450}
-                        className="w-full h-full object-cover aspect-square sm:aspect-[2/3]"
+                        height={300}
+                        className="w-full h-full object-cover aspect-square"
                         data-ai-hint={course.dataAiHint}
                       />
                       <div className="absolute inset-0 bg-black/20"></div>

@@ -1,21 +1,16 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
+import type { AboutUsData } from '@/lib/cms';
 
-type Stat = {
-  value: string;
-  label: string;
-};
+type AboutUsProps = {
+    data: AboutUsData & {
+        stats: { value: string; label: string }[];
+    };
+}
 
-type AboutUsData = {
-  title: string;
-  heading: string;
-  description: string;
-  image: string;
-  dataAiHint: string;
-  stats: Stat[];
-};
+export function AboutUsSection({ data }: AboutUsProps) {
+  if (!data?.title) return null;
 
-export function AboutUsSection({ data }: { data: AboutUsData }) {
   return (
     <section id="about" className="py-12 md:py-20">
       <div className="container mx-auto px-4">

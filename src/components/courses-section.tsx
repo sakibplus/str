@@ -1,4 +1,3 @@
-
 'use client'
 
 import Image from 'next/image';
@@ -10,20 +9,11 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
-
-type Course = {
-  id: number;
-  title: string;
-  image: string;
-  dataAiHint: string;
-  link: string;
-  duration: string;
-  price: string;
-  live?: boolean;
-  priceSuffix?: string;
-};
+import type { Course } from '@/lib/cms';
 
 export function CoursesSection({ courses }: { courses: Course[] }) {
+  if (!courses || courses.length === 0) return null;
+
   return (
     <section id="courses" className="py-12 md:py-20 bg-gray-50">
       <div className="container mx-auto px-4">
@@ -57,7 +47,7 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
                   </div>
                   <CardContent className="p-4 flex-grow flex flex-col">
                     <h3 className="mb-2 font-headline text-lg font-bold text-gray-800 flex items-center">
-                      {course.title} <span className="text-red-500 ml-2 text-xs">((🔴))</span>
+                      {course.title} {course.live && <span className="text-red-500 ml-2 text-xs">((🔴))</span>}
                     </h3>
                     <p className="text-sm text-muted-foreground">
                       - {course.duration}{' '}

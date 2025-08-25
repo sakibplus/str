@@ -1,8 +1,21 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import type { FooterData, FooterLink, FooterContact } from '@/lib/cms';
 
-export function Footer() {
+type FooterProps = {
+    data: {
+        main: FooterData;
+        links: FooterLink[];
+        contact: FooterContact;
+    }
+}
+
+export function Footer({ data }: FooterProps) {
+  const { main, links, contact } = data;
+
+  if (!main) return null;
+
   return (
     <footer id="contact" className="bg-primary text-primary-foreground">
       <div className="container mx-auto px-4 py-12">
@@ -12,7 +25,7 @@ export function Footer() {
               <Image src="/logo-white.png" alt="SkillShikhun Logo" width={150} height={40} />
             </Link>
             <p className="text-sm text-primary-foreground/80">
-              আপনার দক্ষতা বিকাশে আমাদের পথচলা।
+              {main.description}
             </p>
             <div className="flex space-x-4">
               <Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">
@@ -32,23 +45,24 @@ export function Footer() {
           <div>
             <h3 className="font-bold font-headline mb-4">গুরুত্বপূর্ণ লিংক</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link href="#about" className="text-primary-foreground/80 hover:text-primary-foreground">আমাদের সম্পর্কে</Link></li>
-              <li><Link href="#courses" className="text-primary-foreground/80 hover:text-primary-foreground">আমাদের কোর্স</Link></li>
-              <li><Link href="#blog" className="text-primary-foreground/80 hover:text-primary-foreground">ব্লগ</Link></li>
-              <li><Link href="#" className="text-primary-foreground/80 hover:text-primary-foreground">গোপনীয়তা নীতি</Link></li>
+              {links?.map(link => (
+                 <li key={link.href}><Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground">{link.label}</Link></li>
+              ))}
             </ul>
           </div>
           <div>
             <h3 className="font-bold font-headline mb-4">যোগাযোগ</h3>
-            <ul className="space-y-2 text-sm text-primary-foreground/80">
-              <li>ঢাকা, বাংলাদেশ</li>
-              <li>info@skillshikhun.com</li>
-              <li>+880 1234 567890</li>
-            </ul>
+            {contact && (
+                <ul className="space-y-2 text-sm text-primary-foreground/80">
+                <li>{contact.line1}</li>
+                <li>{contact.line2}</li>
+                <li>{contact.line3}</li>
+                </ul>
+            )}
           </div>
           <div>
-            <h3 className="font-bold font-headline mb-4">নিউজলেটার</h3>
-            <p className="text-sm text-primary-foreground/80 mb-4">আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।</p>
+            <h3 className="font-bold font-headline mb-4">{main.newsletter_heading}</h3>
+            <p className="text-sm text-primary-foreground/80 mb-4">{main.newsletter_placeholder}</p>
             <form className="flex">
               <input type="email" placeholder="আপনার ইমেইল" className="w-full rounded-l-md px-3 py-2 text-foreground focus:outline-none" />
               <button type="submit" className="bg-accent hover:bg-accent/90 text-accent-foreground px-4 py-2 rounded-r-md">সাবস্ক্রাইব</button>

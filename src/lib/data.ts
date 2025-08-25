@@ -1,3 +1,5 @@
+// This file is no longer in use. All data is now fetched from Google Sheets via src/lib/cms.ts
+// You can remove this file if you want. I'm keeping it for reference.
 
 export const heroData = {
   title: 'স্কিল শিখুন এর হাত ধরে শিখুন ঘরে বসে আয় করার মাধ্যম!',
