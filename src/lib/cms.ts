@@ -6,22 +6,25 @@ import Papa from 'papaparse';
 
 // Helper function to fetch and parse CSV data
 async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
-  if (!url || url.includes('YOUR_GOOGLE_SHEET_CSV_URL_HERE')) {
-    console.warn(`Google Sheet URL is not configured: ${url}`);
+  if (!url || !url.startsWith('https://docs.google.com/spreadsheets/d/e/')) {
+    // Return empty array if URL is missing or doesn't look like a Google Sheet URL
+    // This prevents unnecessary fetch attempts for placeholder URLs.
     return [];
   }
   try {
     // Disable caching to get the latest data from Google Sheets
     const response = await fetch(url, { cache: 'no-store' });
+    
     if (!response.ok) {
       console.error(`Failed to fetch CSV from ${url}: ${response.status} ${response.statusText}`);
       return []; // Return empty array on fetch error
     }
+
     const text = await response.text();
     
     // If the response is HTML (like a Google login page), it's not valid CSV.
     if (text.trim().startsWith('<!DOCTYPE html>')) {
-        console.error(`Failed to fetch CSV from ${url}: Received HTML content, not CSV. Check if the sheet is published correctly.`);
+        console.error(`Failed to fetch CSV from ${url}: Received HTML content, not CSV. Check if the sheet is published correctly and accessible.`);
         return [];
     }
 
@@ -33,13 +36,11 @@ async function fetchAndParseCsv(url: string | undefined): Promise<any[]> {
         complete: (results) => {
           if (results.errors.length) {
             console.error(`Errors parsing CSV from ${url}:`, results.errors);
-            resolve(results.data || []);
-          } else {
-            resolve(results.data);
           }
+          resolve(results.data || []);
         },
         error: (error: Error) => {
-          console.error(`PapaParse error from ${url}:`, error);
+          console.error(`PapaParse error on URL ${url}:`, error);
           resolve([]); // Resolve with empty array on critical parsing error
         },
       });
