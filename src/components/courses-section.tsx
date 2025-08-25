@@ -1,13 +1,15 @@
+
+'use client'
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
   Card,
   CardContent,
   CardFooter,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 
 type Course = {
   id: number;
@@ -17,6 +19,8 @@ type Course = {
   link: string;
   duration: string;
   price: string;
+  live?: boolean;
+  priceSuffix?: string;
 };
 
 export function CoursesSection({ courses }: { courses: Course[] }) {
@@ -28,42 +32,53 @@ export function CoursesSection({ courses }: { courses: Course[] }) {
             আমাদের কোর্সগুলো থেকে বাছাই করুন আপনার পছন্দের স্কিল
           </h2>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {courses.map((course) => (
-            <Card
-              key={course.id}
-              className="overflow-hidden flex flex-col bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1"
-            >
-              <CardHeader className="p-0 relative">
-                <Image
-                  src={course.image}
-                  alt={course.title}
-                  width={600}
-                  height={400}
-                  className="w-full h-auto object-cover rounded-t-lg"
-                  data-ai-hint={course.dataAiHint}
-                />
-              </CardHeader>
-              <CardContent className="p-4 flex-grow flex flex-col">
-                <CardTitle className="mb-2 font-headline text-lg font-bold text-gray-800 flex items-center">
-                  {course.title}
-                  <span className="text-red-500 ml-2 text-xs">((🔴))</span>
-                </CardTitle>
-                <p className="text-sm text-muted-foreground">
-                  - {course.duration}
-                </p>
-              </CardContent>
-              <CardFooter className="p-4 pt-0 flex justify-between items-center">
-                 <span className="font-bold text-primary">৳{course.price} প্রতি মাস</span>
-                 <Button asChild variant="outline" size="sm">
-                  <Link href={course.link}>
-                    বিস্তারিত দেখুন
-                  </Link>
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
-        </div>
+        <Carousel
+          opts={{
+            align: 'start',
+            loop: true,
+          }}
+          className="w-full"
+        >
+          <CarouselContent className="-ml-4">
+            {courses.map((course) => (
+              <CarouselItem key={course.id} className="pl-4 md:basis-1/2 lg:basis-1/3 xl:basis-1/4">
+                <Card
+                  className="overflow-hidden flex flex-col bg-white rounded-lg shadow-md transition-all duration-300 hover:shadow-xl hover:-translate-y-1 h-full"
+                >
+                  <div className="relative">
+                    <Image
+                      src={course.image}
+                      alt={course.title}
+                      width={600}
+                      height={400}
+                      className="w-full h-auto object-cover rounded-t-lg"
+                      data-ai-hint={course.dataAiHint}
+                    />
+                  </div>
+                  <CardContent className="p-4 flex-grow flex flex-col">
+                    <h3 className="mb-2 font-headline text-lg font-bold text-gray-800 flex items-center">
+                      {course.title} <span className="text-red-500 ml-2 text-xs">((🔴))</span>
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      - {course.duration}{' '}
+                      {course.live && <span className="text-red-500 font-bold">LIVE</span>} কোর্স
+                    </p>
+                  </CardContent>
+                  <CardFooter className="p-4 pt-0 flex justify-between items-center">
+                     <span className="font-bold text-primary">৳{course.price} {course.priceSuffix}</span>
+                     <Button asChild variant="outline" size="sm">
+                      <Link href={`/course/${course.id}`}>
+                        বিস্তারিত দেখুন
+                      </Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-8 hidden md:flex" />
+          <CarouselNext className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-8 hidden md:flex" />
+        </Carousel>
       </div>
     </section>
   );

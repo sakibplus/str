@@ -13,11 +13,11 @@ import {
 } from '@/components/ui/sheet';
 
 const navLinks = [
-  { href: '#', label: 'ফ্রিল্যান্সিং' },
-  { href: '#', label: 'ডিজিটাল মার্কেটিং' },
-  { href: '#courses', label: 'ওয়েব ডেভেলপমেন্ট' },
-  { href: '#', label: 'গ্রাফিক্স ডিজাইন' },
-  { href: '#', label: 'ভিডিও এডিটিং' },
+  { href: '/course/2', label: 'ওয়েব ডেভেলপমেন্ট' },
+  { href: '/course/4', label: 'গ্রাফিক্স ডিজাইন' },
+  { href: '#', label: 'বেসিক কম্পিউটার' },
+  { href: '#', label: 'সিসি ক্যামেরা সেটআপ' },
+  
 ];
 
 export function Navbar() {
