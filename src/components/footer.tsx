@@ -8,6 +8,12 @@ export function Footer({ data }: { data: FooterData }) {
   if (!data?.main) return null;
   const { main, links, contact } = data;
   const { description, newsletter_heading, newsletter_placeholder } = main;
+  
+  const allFooterLinks = [
+      ...links,
+      { href: "/about", label: "আমাদের সম্পর্কে" },
+      { href: "/contact", label: "যোগাযোগ" },
+  ]
 
 
   return (
@@ -39,7 +45,7 @@ export function Footer({ data }: { data: FooterData }) {
           <div>
             <h3 className="font-bold font-headline mb-4">গুরুত্বপূর্ণ লিংক</h3>
             <ul className="space-y-2 text-sm">
-              {links?.map(link => (
+              {allFooterLinks?.map(link => (
                  <li key={link.href}><Link href={link.href} className="text-primary-foreground/80 hover:text-primary-foreground">{link.label}</Link></li>
               ))}
             </ul>
