@@ -1,4 +1,5 @@
 
+
 'use server';
 
 // This file is the single source of truth for all data in the app.
@@ -94,8 +95,7 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
   
   try {
     const response = await fetch(url, { 
-        cache: 'no-store',
-        next: { revalidate: 0 } 
+        next: { revalidate: 3600 } // Revalidate data every hour
     });
     
     if (!response.ok) {
@@ -418,5 +418,3 @@ export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
         link: item.link
     }));
 }
-
-    
