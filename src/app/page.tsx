@@ -5,6 +5,7 @@ import { TestimonialsSection } from '@/components/testimonials-section';
 import { BlogSection } from '@/components/blog-section';
 import { Footer } from '@/components/footer';
 import { AboutUsSection } from '@/components/about-us-section';
+import { TopBanner } from '@/components/top-banner';
 import {
   heroData,
   courses,
@@ -16,6 +17,7 @@ import {
 export default function Home() {
   return (
     <div className="flex min-h-screen flex-col bg-background">
+      <TopBanner />
       <Navbar />
       <main className="flex-1">
         <HeroSection data={heroData} />

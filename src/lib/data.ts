@@ -1,7 +1,6 @@
 export const heroData = {
-  title: 'স্কিল শিখুন এবং ঘরে বসে আয় করুন',
-  subtitle:
-    'ঘরে বসে স্কিল ডেভেলপ করুন নিজের সময় মতো। দেশের সেরা ইন্সট্রাক্টরদের সাথে।',
+  title: 'স্কিল শিখুন এর হাত ধরে শিখুন ঘরে বসে আয় করার মাধ্যম!',
+  subtitle: 'সাশ্রয়ী মূল্যে ঘরে বসে লাইভ ক্লাস করুন ইন্সট্রাক্টর এর সাথে!',
   image: 'https://placehold.co/1920x1080.png',
   ctaText: 'সার্টিফিকেট ভেরিফাই করুন',
   ctaLink: '#',
@@ -10,50 +9,37 @@ export const heroData = {
 export const courses = [
   {
     id: 1,
-    title: 'সম্পূর্ণ ওয়েব ডেভেলপমেন্ট',
-    description:
-      'এইচটিএমএল, সিএসএস, জাভাস্ক্রিপ্ট, রিয়্যাক্ট এবং নোড.জেএস শিখে একজন ফুল-স্ট্যাক ওয়েব ডেভেলপার হোন।',
+    title: 'ফ্রিল্যান্সিং কমপ্লিট গাইডলাইন',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'web development',
-    price: '৫,০০০ ৳',
-    students: 120,
-    lessons: 45,
+    dataAiHint: 'freelancing guide',
     link: '#',
   },
   {
     id: 2,
-    title: 'গ্রাফিক ডিজাইন ও ফ্রিল্যান্সিং',
-    description:
-      'অ্যাডোবি ফটোশপ, ইলাস্ট্রেটর এবং ফিগমা ব্যবহার করে আকর্ষণীয় ডিজাইন তৈরি করুন এবং ফ্রিল্যান্সিং মার্কেটে কাজ করুন।',
+    title: 'ওয়েব ডেভেলপমেন্ট',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'graphic design',
-    price: '৪,৫০০ ৳',
-    students: 95,
-    lessons: 38,
+    dataAiHint: 'web development',
     link: '#',
   },
   {
     id: 3,
-    title: 'ডিজিটাল মার্কেটিং',
-    description:
-      'এসইও, এসএমএম, এবং কন্টেন্ট মার্কেটিং শিখে ডিজিটাল দুনিয়ায় আপনার ব্যবসাকে প্রসারিত করুন।',
+    title: 'ভিডিও এডিটিং',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'digital marketing',
-    price: '৪,০০০ ৳',
-    students: 150,
-    lessons: 55,
+    dataAiHint: 'video editing',
     link: '#',
   },
   {
     id: 4,
-    title: 'অ্যান্ড্রয়েড অ্যাপ ডেভেলপমেন্ট',
-    description:
-      'কোটলিন এবং জাভা ব্যবহার করে অ্যান্ড্রয়েড অ্যাপ তৈরি করা শিখুন এবং প্লে স্টোরে আপনার অ্যাপ প্রকাশ করুন।',
+    title: 'গ্রাফিক ডিজাইন',
     image: 'https://placehold.co/600x400.png',
-    dataAiHint: 'app development',
-    price: '৬,০০০ ৳',
-    students: 80,
-    lessons: 60,
+    dataAiHint: 'graphic design',
+    link: '#',
+  },
+  {
+    id: 5,
+    title: 'ডিজিটাল মার্কেটিং',
+    image: 'https://placehold.co/600x400.png',
+    dataAiHint: 'digital marketing',
     link: '#',
   },
 ];
