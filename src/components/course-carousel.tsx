@@ -1,4 +1,6 @@
 
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -8,6 +10,8 @@ import {
 } from '@/components/ui/carousel';
 import { Card, CardContent } from './ui/card';
 import type { CourseCarouselData } from '@/lib/cms';
+import Autoplay from "embla-carousel-autoplay";
+
 
 export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
   if (!courses || courses.length === 0) return null;
@@ -20,6 +24,12 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
             align: 'start',
             loop: true,
           }}
+          plugins={[
+            Autoplay({
+              delay: 3000,
+              stopOnInteraction: false,
+            }),
+          ]}
           className="w-full"
         >
           <CarouselContent>

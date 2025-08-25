@@ -4,14 +4,16 @@ import React from 'react';
 import { Button } from './ui/button';
 
 export function TopBanner() {
-  const [isVisible, setIsVisible] = React.useState(true);
 
-  if (!isVisible) {
-    return null;
-  }
+  const handleClose = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const banner = (e.currentTarget as HTMLElement).closest('#top-banner');
+    if (banner) {
+      (banner as HTMLElement).style.display = 'none';
+    }
+  };
 
   return (
-    <div className="bg-purple-800 text-white">
+    <div id="top-banner" className="bg-purple-800 text-white">
         <div className="container mx-auto px-4 py-2 flex justify-between items-center">
             <div className="flex items-center space-x-4">
                 <div>
@@ -27,7 +29,7 @@ export function TopBanner() {
                 <div className="hidden md:block">
                      <span className="font-bold text-yellow-400 text-lg">SUPER <span className="bg-yellow-400 text-purple-900 px-2 py-1 rounded-full">SALE</span></span>
                 </div>
-                <Button type="button" variant="ghost" size="icon" onClick={() => setIsVisible(false)} className="hover:bg-white/20">
+                <Button type="button" variant="ghost" size="icon" onClick={handleClose} className="hover:bg-white/20">
                     <X className="h-5 w-5" />
                 </Button>
             </div>
