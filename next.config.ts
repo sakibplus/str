@@ -21,6 +21,12 @@ const nextConfig: NextConfig = {
         hostname: 'skill-shikhun.netlify.app',
         port: '',
         pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ecdn.dhakatribune.net',
+        port: '',
+        pathname: '/**',
       }
     ],
   },
