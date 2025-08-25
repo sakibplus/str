@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import Link from 'next/link';
 import {
@@ -22,9 +23,9 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
           className="w-full"
         >
           <CarouselContent>
-            {courses.map((course) => (
+            {courses.map((course, index) => (
               <CarouselItem
-                key={course.id}
+                key={`${course.id}-${index}`}
                 className="basis-full sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
               >
                 <Link href={`/course/${course.id}`}>
