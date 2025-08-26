@@ -7,7 +7,7 @@ import { Footer } from '@/components/footer';
 import { Button } from '@/components/ui/button';
 import { CheckCircle2, Copy } from 'lucide-react';
 import { EnrollDialog } from '@/components/enroll-dialog';
-import type { Course, NavbarData, NavLink, FooterData } from '@/lib/cms';
+import type { Course, NavbarData, NavLink, FooterData } from '@/lib/types';
 import { useToast } from '@/hooks/use-toast';
 
 type CoursePageProps = {

@@ -8,7 +8,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Card, CardContent } from './ui/card';
-import type { CourseCarouselData } from '@/lib/cms';
+import type { CourseCarouselData } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
 
 export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {

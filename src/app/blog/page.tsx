@@ -26,10 +26,10 @@ export default async function BlogPage() {
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold font-headline">
-              {blogPageData.hero_title || "আমাদের ব্লগ"}
+              {blogPageData.hero_title}
             </h1>
             <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
-              {blogPageData.hero_subtitle || "প্রযুক্তি, ফ্রিল্যান্সিং এবং অনলাইন ক্যারিয়ার নিয়ে আমাদের লেখাগুলো পড়ুন।"}
+              {blogPageData.hero_subtitle}
             </p>
           </div>
         </section>

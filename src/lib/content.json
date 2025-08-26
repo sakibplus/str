@@ -1,0 +1,347 @@
+
+{
+  "navbar": {
+    "logo_url": "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png",
+    "button_text": "সার্ভিস নিন"
+  },
+  "navLinks": [
+    { "href": "/about", "label": "আমাদের সম্পর্কে" },
+    { "href": "#courses", "label": "আমাদের কোর্স" },
+    { "href": "#testimonials", "label": "শিক্ষার্থীদের মতামত" },
+    { "href": "/blog", "label": "ব্লগ" },
+    { "href": "/contact", "label": "যোগাযোগ" }
+  ],
+  "homePage": {
+    "hero": {
+      "title": "রঙিনবাড়ি আইটির হাত ধরে স্কিল শিখুন!",
+      "subtitle": "সাশ্রয়ী মূল্যে রঙিনবাড়ি আইটিতে কিংবা ঘরে বসে লাইভ ক্লাস করুন ইন্সট্রাক্টর এর সাথে!",
+      "helpline_text": "কোর্স সম্পর্কিত যেকোনো তথ্যের জন্য কল করুন",
+      "phone_number": "09613823645"
+    },
+    "aboutUsSection": {
+      "title": "আমরা কারা?",
+      "heading": "আপনার সফলতার পথে, আমরা আপনার বিশ্বস্ত সঙ্গী।",
+      "description": "রঙিনবাড়ি আইটি একটি শীর্ষস্থানীয় আইটি প্রশিক্ষণ কেন্দ্র যেখানে আমরা শিক্ষার্থীদের প্রযুক্তিগত জ্ঞান এবং দক্ষতার মাধ্যমে তাদের স্বপ্ন পূরণে সহায়তা করি।",
+      "image": "https://img.freepik.com/premium-photo/education-technology-friendship-school-concept-smiling-male-student-with-classmates-computer-class_380164-79006.jpg?semt=ais_hybrid&w=740&q=80",
+      "dataAiHint": "team meeting",
+      "stats": [
+        { "value": "1k+", "label": "সফল শিক্ষার্থী" },
+        { "value": "5+", "label": "দক্ষ প্রশিক্ষক" },
+        { "value": "10+", "label": "কোর্সসমূহ" }
+      ]
+    },
+    "whyChooseUs": {
+      "title": "স্কিলশিখুন কেন বেছে নেবেন?",
+      "subtitle": "আমাদের সেরা ফিচারগুলো যা আপনাকে অন্যদের থেকে এগিয়ে রাখবে।",
+      "features": [
+        {
+          "id": 1,
+          "title": "এক্সক্লুসিভ সার্ভিস",
+          "description": "সেরা এবং অভিজ্ঞ মেন্টরদের দ্বারা বেসিক অফিস এ্যাপ্লিকেশন সহ কম্পিউটার প্রশিক্ষণ।",
+          "image": "https://skill-shikhun.netlify.app/static/media/highQuality.289c84fe6bbdf15c09bf541534eea20f.svg",
+          "dataAiHint": "exclusive content"
+        },
+        {
+          "id": 2,
+          "title": "২৪ ঘন্টা সাপোর্ট",
+          "description": "সব প্রয়োজনে সহায়তার জন্য থাকছে সার্বক্ষনিক এক্টিভ সাপোর্ট টিম।",
+          "image": "https://skill-shikhun.netlify.app/static/media/socialMedia.4d07e703643b0c028cc96b25ed6f3f37.svg",
+          "dataAiHint": "24/7 support"
+        },
+        {
+          "id": 3,
+          "title": "হাতে-কলমে শেখানো",
+          "description": "কোর্সগুলো সাজানো হয়েছে পূর্ব অভিজ্ঞতা ছাড়া সকল মেধার শিক্ষার্থীর জন্য।",
+          "image": "https://skill-shikhun.netlify.app/static/media/24Hour.39ab995a260bcfb40163b1604ff65966.svg",
+          "dataAiHint": "hands-on learning"
+        },
+        {
+          "id": 4,
+          "title": "সনদ প্রদান",
+          "description": "কোর্স শেষে রঙিন বাড়ি আইটি হতে সরকারি সনদ গ্রহণ।",
+          "image": "https://skill-shikhun.netlify.app/static/media/easyToPractice.c391f04a500bce36c7ada1f517a0b015.svg",
+          "dataAiHint": "certificate"
+        }
+      ]
+    }
+  },
+  "courseCarousel": [
+    {
+      "id": 1,
+      "title": "ফ্রিল্যান্সিং কমপ্লিট গাইডলাইন",
+      "image": "https://i.ytimg.com/vi/OimhhvuKRAQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAD6SWHpDH6OT6yRy_299ZXEIUwrA",
+      "dataAiHint": "freelancing guide",
+      "discountedPrice": "750",
+      "duration": "২ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 2,
+      "title": "ওয়েব ডেভেলপমেন্ট",
+      "image": "https://skill-shikhun.netlify.app/static/media/DM.f0f690691a1af9996b02.png",
+      "dataAiHint": "web development",
+      "discountedPrice": "1500",
+      "duration": "৩ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 3,
+      "title": "কম্পিউটার সেলস এন্ড সার্ভিস",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToc09JsYio5-dpOBHS7DdMpbvJVocCvGmqKw&s",
+      "dataAiHint": "computer service",
+      "discountedPrice": "আলোচনা সাপেক্ষে",
+      "duration": "২ মাসের কোর্স",
+      "priceSuffix": ""
+    },
+    {
+      "id": 4,
+      "title": "গ্রাফিক্স ডিজাইন",
+      "image": "https://tripleclickacademy.com/wp-content/uploads/2023/12/WEBSITE-SQUARE-GRAPHICS.webp",
+      "dataAiHint": "graphic design",
+      "discountedPrice": "1500",
+      "duration": "৩ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 5,
+      "title": "সিসি ক্যামেরা সেটআপ",
+      "image": "https://cdn.bdstall.com/product-image/giant_283097.jpg",
+      "dataAiHint": "cctv setup",
+      "discountedPrice": "আলোচনা সাপেক্ষে",
+      "duration": "আলোচনা সাপেক্ষে",
+      "priceSuffix": ""
+    }
+  ],
+  "courses": [
+    {
+      "id": 1,
+      "title": "সবার জন্য ফ্রিল্যান্সিং",
+      "image": "https://skill-shikhun.netlify.app/static/media/FL.36b4e5cbb64728ca3c0a.png",
+      "dataAiHint": "freelancing course",
+      "duration": "৬ মাসের",
+      "price": "750",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 2,
+      "title": "ওয়েব ডেভেলপমেন্ট",
+      "image": "https://skill-shikhun.netlify.app/static/media/WD.3c2e0df1e4412a1f69a5.png",
+      "dataAiHint": "web development",
+      "duration": "৩ মাসের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 3,
+      "title": "ডিজিটাল মার্কেটিং",
+      "image": "https://skill-shikhun.netlify.app/static/media/GD.63300e1ce24623e1f031.png",
+      "dataAiHint": "digital marketing",
+      "duration": "২ মাসের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 4,
+      "title": "গ্রাফিক্স ডিজাইন",
+      "image": "https://skill-shikhun.netlify.app/static/media/DM.f0f690691a1af9996b02.png",
+      "dataAiHint": "graphic design",
+      "duration": "৩ মাসের",
+      "price": "5000",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 5,
+      "title": "সিসি ক্যামেরা সেটআপ",
+      "image": "https://cdn.bdstall.com/product-image/giant_283097.jpg",
+      "dataAiHint": "cctv setup",
+      "duration": "আলোচনা সাপেক্ষে",
+      "price": "7000",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 6,
+      "title": "পিসি বিল্ডিং",
+      "image": "https://img.youtube.com/vi/zYYv_12CY38/sddefault.jpg",
+      "dataAiHint": "pc building",
+      "duration": "আলোচনা সাপেক্ষে",
+      "price": "15000",
+      "live": true,
+      "priceSuffix": "থেকে শুরু"
+    },
+    {
+      "id": 7,
+      "title": "পেইজ প্রমোট",
+      "image": "https://i.ytimg.com/vi/8Y4mG_y-p9o/maxresdefault.jpg",
+      "dataAiHint": "page promotion",
+      "duration": "৩ দিনের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": ""
+    }
+  ],
+  "detailedCourses": [
+    {
+      "id": 1,
+      "description": "ফ্রিল্যান্সিং করে কিভাবে সফল হবেন তার পূর্ণাঙ্গ গাইডলাইন।",
+      "discountedPrice": "750",
+      "promoCode": "SKILL750",
+      "details": [
+        { "heading": "এই কোর্সে যা শিখবেন", "points": ["ফ্রিল্যান্সিং কি এবং কেন?", "জনপ্রিয় মার্কেটপ্লেস পরিচিতি", "প্রোফাইল তৈরি এবং অপটিমাইজেশন", "গিগ তৈরি ও মার্কেটিং", "কাজ পাওয়া ও ডেলিভারি দেওয়ার নিয়ম"] }
+      ]
+    },
+    {
+      "id": 2,
+      "description": "নতুনদের জন্য ফুল স্ট্যাক ওয়েব ডেভেলপমেন্ট শিখুন।",
+      "discountedPrice": "1500",
+      "promoCode": "SKILL999",
+      "details": [
+        { "heading": "এই কোর্সে যা শিখবেন", "points": ["HTML5, CSS3, JavaScript", "React.js এবং Next.js", "Node.js এবং Express.js", "MongoDB ডাটাবেস", "সম্পূর্ণ একটি ই-কমার্স ওয়েবসাইট তৈরি"] }
+      ]
+    }
+  ],
+  "testimonials": [
+    {
+      "id": 1,
+      "name": "আকাশ রহমান",
+      "role": "ওয়েব ডেভেলপার",
+      "quote": "রঙিনবাড়ি আইটি থেকে ওয়েব ডেভেলপমেন্ট কোর্সটি করে আমি আজ একজন সফল ফ্রিল্যান্সার।",
+      "avatar": "https://ddn.ezzecloud.com/assets/2139/Pic-12.jpeg",
+      "dataAiHint": "man portrait"
+    },
+    {
+      "id": 2,
+      "name": "সুমাইয়া আক্তার",
+      "role": "গ্রাফিক ডিজাইনার",
+      "quote": "গ্রাফিক ডিজাইন কোর্সটি আমার ক্যারিয়ারের মোড় ঘুরিয়ে দিয়েছে। ধন্যবাদ রঙিনবাড়ি আইটিকে।",
+      "avatar": "https://asset.kalerkantho.com/public/news_images/2016/11/05/030220Program_kalerkantho_pic.jpg",
+      "dataAiHint": "woman portrait"
+    },
+    {
+      "id": 3,
+      "name": "রাকিবুল হাসান",
+      "role": "ডিজিটাল মার্কেটার",
+      "quote": "এখানকার ডিজিটাল মার্কেটিং কোর্সটি খুবই কার্যকরী। আমি নিজের অনলাইন ব্যবসাকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://techtunes.tech/wp-content/uploads/2021/08/%E0%A6%A8%E0%A6%A4%E0%A7%81%E0%A6%A8-%E0%A6%95%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A6%BE%E0%A6%B0-%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B9%E0%A6%BE%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%80%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF-%E0%A7%A7%E0%A7%A6-%E0%A6%9F%E0%A6%BF-%E0%A6%9F%E0%A6%BF%E0%A6%AA%E0%A6%B8-Feature.jpeg",
+      "dataAiHint": "person smiling"
+    },
+    {
+      "id": 4,
+      "name": "সাগর রেজা",
+      "role": "অফিস প্রোগ্রাম",
+      "quote": "এখানকার অফিস প্রোগ্রাম কোর্সটি খুবই কার্যকরী। আমি নিজেকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://prosnouttor.com/wp-content/uploads/2022/09/1-2.jpg.webp",
+      "dataAiHint": "person smiling"
+    },
+    {
+      "id": 5,
+      "name": "প্রীতি ইসলাম",
+      "role": "টি-শার্ট ডিজাইনার",
+      "quote": "এখানকার গ্রাফিক্স ডিজাইন কোর্সটি খুবই কার্যকরী। আমি নিজের টিশার্ট ডিজাইন ক্যারীয়ারকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://cdn.dhakapost.com/media/imgAll/BG/2022October/pharma-jobs-20220919135453-20220929134754-20221025152732.jpg",
+      "dataAiHint": "person smiling"
+    }
+  ],
+  "footer": {
+    "logo_url": "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png",
+    "description": "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+    "address_line1": "কোর্ট রোড, সোনালী ব্যাংক সংলগ্ন",
+    "address_line2": "কেন্দুয়া, নেত্রকোণা।",
+    "email": "info@ronginbari.com",
+    "phone": "01711 466 850",
+    "links": [
+      { "label": "বাংলা টাইপিং", "href": "https://Banglatype.vercel.app" },
+      { "label": "গোপনীয়তা নীতি", "href": "/privacy-policy" },
+      { "label": "ব্লগ", "href": "/blog" },
+      { "label": "রঙিনবাড়ি শপ", "href": "https://shop.ronginbari.com" }
+    ],
+    "newsletter_heading": "নিউজলেটার",
+    "newsletter_placeholder": "আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।",
+    "copyright_text": "© ২০২৪ SkillShikhun। সর্বস্বত্ব সংরক্ষিত।"
+  },
+  "blog": {
+    "pageData": {
+      "hero_title": "আমাদের ব্লগ",
+      "hero_subtitle": "প্রযুক্তি, ফ্রিল্যান্সিং এবং অনলাইন ক্যারিয়ার নিয়ে আমাদের লেখাগুলো পড়ুন।"
+    },
+    "posts": [
+      {
+        "id": 1,
+        "title": "ফ্রিল্যান্সিং শুরু করার আগে যে ৫টি বিষয় জানা জরুরি",
+        "excerpt": "ফ্রিল্যান্সিং এখন তরুণদের কাছে একটি জনপ্রিয় পেশা। ঘরে বসে আয় করার এই সুযোগটি কাজে লাগাতে চান অনেকেই। কিন্তু সঠিক প্রস্তুতির অভাবে অনেকেই সফল হতে পারেন না।",
+        "image": "https://images.unsplash.com/photo-1552664730-d307ca884978?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "dataAiHint": "freelancing meeting",
+        "date": "জুলাই ২০, ২০২৪",
+        "author": "আকাশ রহমান",
+        "author_avatar": "https://ddn.ezzecloud.com/assets/2139/Pic-12.jpeg",
+        "content": "ফ্রিল্যান্সিং এখন তরুণদের কাছে একটি জনপ্রিয় পেশা।\\nঘরে বসে আয় করার এই সুযোগটি কাজে লাগাতে চান অনেকেই। কিন্তু সঠিক প্রস্তুতির অভাবে অনেকেই সফল হতে পারেন না। এই আর্টিকেলে আমরা ফ্রিল্যান্সিং শুরু করার আগে যে ৫টি বিষয় অবশ্যই জানা উচিত, তা নিয়ে আলোচনা করব।\\n\\n১. দক্ষতা অর্জন করুন\\n২. একটি শক্তিশালী পোর্টফোলিও তৈরি করুন\\n৩. মার্কেটপ্লেস সম্পর্কে জানুন\\n৪. যোগাযোগের দক্ষতা বাড়ান\\n৫. ধৈর্যশীল হন"
+      },
+      {
+        "id": 2,
+        "title": "ওয়েব ডেভেলপমেন্ট শিখবেন কিভাবে?",
+        "excerpt": "বর্তমান সময়ে ওয়েব ডেভেলপমেন্ট একটি চাহিদা সম্পন্ন স্কিল। এই ব্লগ পোস্টে আমরা ওয়েব ডেভেলপমেন্ট শেখার একটি পূর্ণাঙ্গ রোডম্যাপ নিয়ে আলোচনা করব।",
+        "image": "https://images.unsplash.com/photo-1542831371-29b0f74f9713?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "dataAiHint": "web development code",
+        "date": "জুলাই ২২, ২০২৪",
+        "author": "রাকিবুল হাসান",
+        "author_avatar": "https://techtunes.tech/wp-content/uploads/2021/08/%E0%A6%A8%E0%A6%A4%E0%A7%81%E0%A6%A8-%E0%A6%95%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A6%BE%E0%A6%B0-%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B9%E0%A6%BE%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%80%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF-%E0%A7%A7%E0%A7%A6-%E0%A6%9F%E0%A6%BF-%E0%A6%9F%E0%A6%BF%E0%A6%AA%E0%A6%B8-Feature.jpeg",
+        "content": "বর্তমান সময়ে ওয়েব ডেভেলপমেন্ট একটি চাহিদা সম্পন্ন স্কিল। এই ব্লগ পোস্টে আমরা ওয়েব ডেভেলপমেন্ট শেখার একটি পূর্ণাঙ্গ রোডম্যাপ নিয়ে আলোচনা করব।\\n\\nপ্রথমে HTML, CSS এবং JavaScript শিখুন। এরপর React অথবা Vue.js এর মতো ফ্রন্টএন্ড লাইব্রেরি শিখতে পারেন। ব্যাকএন্ডের জন্য Node.js, Python অথবা PHP শিখতে পারেন।"
+      }
+    ]
+  },
+  "contactPage": {
+    "pageData": {
+      "hero_title": "যোগাযোগ করুন",
+      "hero_subtitle": "আপনার যেকোনো প্রশ্ন, পরামর্শ বা সহযোগিতার জন্য আমরা সর্বদা প্রস্তুত।",
+      "info_title": "যোগাযোগের তথ্য",
+      "info_subtitle": "যেকোনো প্রয়োজনে আমাদের সাথে সরাসরি যোগাযোগ করুন।",
+      "map_url": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.879940198188!2d90.39053831543154!3d23.75167699462529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1f1178de1f6f3!2sDhaka!5e0!3m2!1sen!2sbd!4v1678886363028!5m2!1sen!2sbd",
+      "form_title": "আমাদের মেসেজ পাঠান",
+      "form_subtitle": "আমরা আপনার বার্তার অপেক্ষায় আছি।"
+    },
+    "infoCards": [
+      {
+        "icon": "Mail",
+        "title": "ইমেইল",
+        "value": "info@skillshikhun.com",
+        "link": "mailto:info@skillshikhun.com"
+      },
+      {
+        "icon": "Phone",
+        "title": "ফোন",
+        "value": "+880 1234 567890",
+        "link": "tel:+8801234567890"
+      },
+      {
+        "icon": "MapPin",
+        "title": "অফিস",
+        "value": "ধানমন্ডি ৩২, ঢাকা, বাংলাদেশ"
+      }
+    ]
+  },
+  "aboutPage": {
+    "hero_title": "আমাদের সম্পর্কে",
+    "hero_subtitle": "আপনার সফলতার পথে, আমরা আপনার বিশ্বস্ত সঙ্গী। SkillShikhun-এ আমরা প্রযুক্তির মাধ্যমে আপনার স্বপ্ন পূরণে সহায়তা করি।",
+    "story_tagline": "আমাদের পথচলা",
+    "story_heading": "আপনার সফলতার পথে, আমরা আপনার বিশ্বস্ত সঙ্গী।",
+    "story_description_1": "SkillShikhun একটি শীর্ষস্থানীয় আইটি প্রশিক্ষণ কেন্দ্র যেখানে আমরা শিক্ষার্থীদের প্রযুক্তিগত জ্ঞান এবং দক্ষতার মাধ্যমে তাদের স্বপ্ন পূরণে সহায়তা করি।",
+    "story_description_2": "আমাদের লক্ষ্য হল দেশের প্রতিটি প্রান্তে মানসম্মত আইটি শিক্ষা পৌঁছে দেওয়া এবং একটি ডিজিটাল বাংলাদেশ গঠনে ভূমিকা রাখা। আমরা বিশ্বাস করি, সঠিক দক্ষতা অর্জনের মাধ্যমে যে কেউ নিজের পায়ে দাঁড়াতে পারে এবং দেশের অর্থনীতিতে অবদান রাখতে পারে।",
+    "story_image": "https://img.freepik.com/premium-photo/education-technology-friendship-school-concept-smiling-male-student-with-classmates-computer-class_380164-79006.jpg?w=740",
+    "vision_title": "আমাদের লক্ষ্য (Our Vision)",
+    "vision_description": "বাংলাদেশের তরুণ প্রজন্মকে বিশ্বমানের প্রযুক্তিগত শিক্ষায় শিক্ষিত করে একটি দক্ষ ও স্বনির্ভর জাতি হিসেবে গড়ে তোলা, যেখানে প্রত্যেকেই ডিজিটাল অর্থনীতির অংশীদার হবে।",
+    "mission_title": "আমাদের উদ্দেশ্য (Our Mission)",
+    "mission_description": "সাশ্রয়ী মূল্যে মানসম্মত ও practically আইটি প্রশিক্ষণ প্রদান করা। শিক্ষার্থীদের জন্য সার্বক্ষণিক সাপোর্ট নিশ্চিত করা এবং ক্যারিয়ার গড়তে প্রয়োজনীয় গাইডলাইন প্রদান করা।",
+    "stats_heading": "এক নজরে SkillShikhun",
+    "stats_subheading": "আমরা যা অর্জন করেছি এবং যা নিয়ে আমরা গর্বিত",
+    "stats": [
+      { "value": "1k+", "label": "সফল শিক্ষার্থী" },
+      { "value": "5+", "label": "দক্ষ প্রশিক্ষক" },
+      { "value": "10+", "label": "অ্যাক্টিভ কোর্স" },
+      { "value": "95%", "label": "সফলতার হার" }
+    ]
+  }
+}

@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import type { AboutUsSectionData } from '@/lib/cms';
+import type { AboutUsSectionData } from '@/lib/types';
 
 export function AboutUsSection({ data }: {data: AboutUsSectionData}) {
   if (!data?.title) return null;

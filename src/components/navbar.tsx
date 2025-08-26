@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink, NavbarData, Course } from '@/lib/cms';
+import type { NavLink, NavbarData, Course } from '@/lib/types';
 import { ServiceInquiryDialog } from '@/components/service-inquiry-dialog';
 
 export function Navbar({
@@ -32,7 +32,7 @@ export function Navbar({
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={data.logo_url || "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png"}
+            src={data.logo_url}
             alt="SkillShikhun Logo"
             width={120}
             height={32}
@@ -56,7 +56,7 @@ export function Navbar({
             className="hidden md:flex bg-accent text-white hover:bg-accent/90"
             onClick={() => setIsDialogOpen(true)}
           >
-            {data.button_text || "সার্ভিস নিন"}
+            {data.button_text}
           </Button>
 
           <div className="md:hidden">
@@ -71,7 +71,7 @@ export function Navbar({
                 <SheetHeader>
                   <Link href="/" className="flex items-center gap-2 mb-4">
                     <Image
-                      src={data.logo_url || "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png"}
+                      src={data.logo_url}
                       alt="SkillShikhun Logo"
                       width={150}
                       height={40}
@@ -92,7 +92,7 @@ export function Navbar({
                     className="bg-accent text-white hover:bg-accent/90"
                     onClick={() => setIsDialogOpen(true)}
                   >
-                    {data.button_text || "সার্ভিস নিন"}
+                    {data.button_text}
                   </Button>
                 </div>
               </SheetContent>
