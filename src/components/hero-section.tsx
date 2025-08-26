@@ -1,8 +1,6 @@
-import Image from 'next/image';
-import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Phone } from 'lucide-react';
-import type { HeroData } from '@/lib/cms';
+import type { HeroData } from '@/lib/types';
 
 export function HeroSection({ data }: { data: HeroData }) {
   if (!data) return null;
@@ -17,11 +15,11 @@ export function HeroSection({ data }: { data: HeroData }) {
           {data.subtitle}
         </p>
         <div className="bg-white/10 p-6 rounded-lg border border-white/20">
-          <p className="text-neutral-200 mb-2">কোর্স সম্পর্কিত যেকোনো তথ্যের জন্য কল করুন</p>
+          <p className="text-neutral-200 mb-2">{data.helpline_text}</p>
           <Button size="lg" className="bg-accent hover:bg-accent/90 text-accent-foreground h-14 text-lg w-full" asChild>
-            <a href="tel:09613823645">
+            <a href={`tel:${data.phone_number}`}>
               <Phone className="mr-2 h-5 w-5" />
-              09613823645
+              {data.phone_number}
             </a>
           </Button>
         </div>

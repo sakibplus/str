@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import type { WhyChooseUsData } from '@/lib/cms';
+import type { WhyChooseUsData } from '@/lib/types';
 
 
 export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {

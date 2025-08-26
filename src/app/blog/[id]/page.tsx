@@ -4,7 +4,7 @@ import { getBlogPosts, getNavbarData, getNavLinks, getFooterData, getCourses } f
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';
-import { Calendar, User } from 'lucide-react';
+import { Calendar } from 'lucide-react';
 
 export default async function BlogPostPage({ params }: { params: { id: string } }) {
   const [
@@ -41,7 +41,7 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
                 <div className="flex items-center gap-2">
                   <Avatar className="h-8 w-8">
                     <AvatarImage src={post.author_avatar} alt={post.author} />
-                    <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+                    <AvatarFallback>{post.author?.charAt(0) || 'A'}</AvatarFallback>
                   </Avatar>
                   <span>{post.author}</span>
                 </div>
@@ -63,7 +63,7 @@ export default async function BlogPostPage({ params }: { params: { id: string } 
 
             <div 
               className="prose prose-lg max-w-none"
-              dangerouslySetInnerHTML={{ __html: post.content.replace(/\\n/g, '<br />') }} 
+              dangerouslySetInnerHTML={{ __html: post.content?.replace(/\\n/g, '<br />') || '' }} 
             />
           </article>
         </div>

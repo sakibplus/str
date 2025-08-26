@@ -2,19 +2,20 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getNavbarData, getCourses, getBlogPosts } from "@/lib/cms";
+import { getNavLinks, getFooterData, getNavbarData, getCourses, getBlogPosts, getBlogPageData } from "@/lib/cms";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
-import { ArrowRight, Calendar } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default async function BlogPage() {
-  const [navLinks, footerData, navbarData, courses, posts] = await Promise.all([
+  const [navLinks, footerData, navbarData, courses, posts, blogPageData] = await Promise.all([
     getNavLinks(),
     getFooterData(),
     getNavbarData(),
     getCourses(),
-    getBlogPosts()
+    getBlogPosts(),
+    getBlogPageData()
   ]);
 
   return (
@@ -25,10 +26,10 @@ export default async function BlogPage() {
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold font-headline">
-              আমাদের ব্লগ
+              {blogPageData.hero_title}
             </h1>
             <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
-              প্রযুক্তি, ফ্রিল্যান্সিং এবং অনলাইন ক্যারিয়ার নিয়ে আমাদের লেখাগুলো পড়ুন।
+              {blogPageData.hero_subtitle}
             </p>
           </div>
         </section>
@@ -65,7 +66,7 @@ export default async function BlogPage() {
                     <div className="flex items-center gap-3">
                         <Avatar className="h-9 w-9">
                             <AvatarImage src={post.author_avatar} alt={post.author} />
-                            <AvatarFallback>{post.author.charAt(0)}</AvatarFallback>
+                            <AvatarFallback>{post.author?.charAt(0) || 'A'}</AvatarFallback>
                         </Avatar>
                         <div>
                             <p className="font-semibold text-foreground">{post.author}</p>

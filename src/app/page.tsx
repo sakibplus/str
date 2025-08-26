@@ -1,11 +1,9 @@
-
 import { Navbar } from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { CoursesSection } from '@/components/courses-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { Footer } from '@/components/footer';
 import { AboutUsSection } from '@/components/about-us-section';
-import { TopBanner } from '@/components/top-banner';
 import { CourseCarousel } from '@/components/course-carousel';
 import { FreeVideosForm } from '@/components/free-videos-form';
 import { WhyChooseUs } from '@/components/why-choose-us';
@@ -15,22 +13,19 @@ import {
     getHeroData,
     getCourseCarouselData,
     getCourses,
-    getAboutUsData,
+    getAboutUsSectionData,
     getTestimonials,
     getWhyChooseUsData,
-    getFooterData,
-    getInquiryCourses
+    getFooterData
 } from '@/lib/cms';
 
 export default async function Home() {
-  // Fetch all data from the CMS in parallel
   const [
     navbarData,
     navLinks,
     heroData,
     courseCarouselData,
     courses,
-    inquiryCourses,
     aboutUsData,
     testimonials,
     whyChooseUsData,
@@ -41,8 +36,7 @@ export default async function Home() {
     getHeroData(),
     getCourseCarouselData(),
     getCourses(),
-    getInquiryCourses(),
-    getAboutUsData(),
+    getAboutUsSectionData(),
     getTestimonials(),
     getWhyChooseUsData(),
     getFooterData()
@@ -50,12 +44,11 @@ export default async function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <TopBanner />
       <Navbar navLinks={navLinks} data={navbarData} courses={courses} />
       <main className="flex-1">
         <HeroSection data={heroData} />
         <CourseCarousel courses={courseCarouselData} />
-        <FreeVideosForm courses={inquiryCourses} />
+        <FreeVideosForm courses={courses} />
         <CoursesSection courses={courses} />
         <AboutUsSection data={aboutUsData} />
         <TestimonialsSection testimonials={testimonials} />

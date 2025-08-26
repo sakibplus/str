@@ -1,0 +1,55 @@
+
+{
+    "hero": {
+      "title": "রঙিনবাড়ি আইটির হাত ধরে স্কিল শিখুন!",
+      "subtitle": "সাশ্রয়ী মূল্যে রঙিনবাড়ি আইটিতে কিংবা ঘরে বসে লাইভ ক্লাস করুন ইন্সট্রাক্টর এর সাথে!",
+      "helpline_text": "কোর্স সম্পর্কিত যেকোনো তথ্যের জন্য কল করুন",
+      "phone_number": "09613823645"
+    },
+    "aboutUsSection": {
+      "title": "আমরা কারা?",
+      "heading": "আপনার সফলতার পথে, আমরা আপনার বিশ্বস্ত সঙ্গী।",
+      "description": "রঙিনবাড়ি আইটি একটি শীর্ষস্থানীয় আইটি প্রশিক্ষণ কেন্দ্র যেখানে আমরা শিক্ষার্থীদের প্রযুক্তিগত জ্ঞান এবং দক্ষতার মাধ্যমে তাদের স্বপ্ন পূরণে সহায়তা করি।",
+      "image": "https://img.freepik.com/premium-photo/education-technology-friendship-school-concept-smiling-male-student-with-classmates-computer-class_380164-79006.jpg?semt=ais_hybrid&w=740&q=80",
+      "dataAiHint": "team meeting",
+      "stats": [
+        { "value": "1k+", "label": "সফল শিক্ষার্থী" },
+        { "value": "5+", "label": "দক্ষ প্রশিক্ষক" },
+        { "value": "10+", "label": "কোর্সসমূহ" }
+      ]
+    },
+    "whyChooseUs": {
+      "title": "স্কিলশিখুন কেন বেছে নেবেন?",
+      "subtitle": "আমাদের সেরা ফিচারগুলো যা আপনাকে অন্যদের থেকে এগিয়ে রাখবে।",
+      "features": [
+        {
+          "id": 1,
+          "title": "এক্সক্লুসিভ সার্ভিস",
+          "description": "সেরা এবং অভিজ্ঞ মেন্টরদের দ্বারা বেসিক অফিস এ্যাপ্লিকেশন সহ কম্পিউটার প্রশিক্ষণ।",
+          "image": "https://skill-shikhun.netlify.app/static/media/highQuality.289c84fe6bbdf15c09bf541534eea20f.svg",
+          "dataAiHint": "exclusive content"
+        },
+        {
+          "id": 2,
+          "title": "২৪ ঘন্টা সাপোর্ট",
+          "description": "সব প্রয়োজনে সহায়তার জন্য থাকছে সার্বক্ষনিক এক্টিভ সাপোর্ট টিম।",
+          "image": "https://skill-shikhun.netlify.app/static/media/socialMedia.4d07e703643b0c028cc96b25ed6f3f37.svg",
+          "dataAiHint": "24/7 support"
+        },
+        {
+          "id": 3,
+          "title": "হাতে-কলমে শেখানো",
+          "description": "কোর্সগুলো সাজানো হয়েছে পূর্ব অভিজ্ঞতা ছাড়া সকল মেধার শিক্ষার্থীর জন্য।",
+          "image": "https://skill-shikhun.netlify.app/static/media/24Hour.39ab995a260bcfb40163b1604ff65966.svg",
+          "dataAiHint": "hands-on learning"
+        },
+        {
+          "id": 4,
+          "title": "সনদ প্রদান",
+          "description": "কোর্স শেষে রঙিন বাড়ি আইটি হতে সরকারি সনদ গ্রহণ।",
+          "image": "https://skill-shikhun.netlify.app/static/media/easyToPractice.c391f04a500bce36c7ada1f517a0b015.svg",
+          "dataAiHint": "certificate"
+        }
+      ]
+    }
+}

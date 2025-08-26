@@ -1,0 +1,48 @@
+
+[
+    {
+      "id": 1,
+      "title": "ফ্রিল্যান্সিং কমপ্লিট গাইডলাইন",
+      "image": "https://i.ytimg.com/vi/OimhhvuKRAQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLAD6SWHpDH6OT6yRy_299ZXEIUwrA",
+      "dataAiHint": "freelancing guide",
+      "discountedPrice": "750",
+      "duration": "২ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 2,
+      "title": "ওয়েব ডেভেলপমেন্ট",
+      "image": "https://skill-shikhun.netlify.app/static/media/DM.f0f690691a1af9996b02.png",
+      "dataAiHint": "web development",
+      "discountedPrice": "1500",
+      "duration": "৩ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 3,
+      "title": "কম্পিউটার সেলস এন্ড সার্ভিস",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcToc09JsYio5-dpOBHS7DdMpbvJVocCvGmqKw&s",
+      "dataAiHint": "computer service",
+      "discountedPrice": "আলোচনা সাপেক্ষে",
+      "duration": "২ মাসের কোর্স",
+      "priceSuffix": ""
+    },
+    {
+      "id": 4,
+      "title": "গ্রাফিক্স ডিজাইন",
+      "image": "https://tripleclickacademy.com/wp-content/uploads/2023/12/WEBSITE-SQUARE-GRAPHICS.webp",
+      "dataAiHint": "graphic design",
+      "discountedPrice": "1500",
+      "duration": "৩ মাসের কোর্স",
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 5,
+      "title": "সিসি ক্যামেরা সেটআপ",
+      "image": "https://cdn.bdstall.com/product-image/giant_283097.jpg",
+      "dataAiHint": "cctv setup",
+      "discountedPrice": "আলোচনা সাপেক্ষে",
+      "duration": "আলোচনা সাপেক্ষে",
+      "priceSuffix": ""
+    }
+]

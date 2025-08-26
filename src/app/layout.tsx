@@ -4,6 +4,8 @@ import { Toaster } from '@/components/ui/toaster';
 import { cn } from '@/lib/utils';
 import { Hind_Siliguri } from 'next/font/google';
 import { BackToTopButton } from '@/components/back-to-top-button';
+import { TopBanner } from '@/components/top-banner';
+import { getTopBannerData } from '@/lib/cms';
 
 const hindSiliguri = Hind_Siliguri({
   weight: ['400', '500', '600', '700'],
@@ -16,11 +18,13 @@ export const metadata: Metadata = {
   description: 'আপনার দক্ষতা বিকাশে আমাদের পথচলা।',
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const topBannerData = await getTopBannerData();
+
   return (
     <html lang="bn" suppressHydrationWarning>
       <body
@@ -29,6 +33,7 @@ export default function RootLayout({
           hindSiliguri.variable
         )}
       >
+        <TopBanner data={topBannerData} />
         {children}
         <Toaster />
         <BackToTopButton />

@@ -1,0 +1,73 @@
+
+[
+    {
+      "id": 1,
+      "title": "সবার জন্য ফ্রিল্যান্সিং",
+      "image": "https://skill-shikhun.netlify.app/static/media/FL.36b4e5cbb64728ca3c0a.png",
+      "dataAiHint": "freelancing course",
+      "duration": "৬ মাসের",
+      "price": "750",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 2,
+      "title": "ওয়েব ডেভেলপমেন্ট",
+      "image": "https://skill-shikhun.netlify.app/static/media/WD.3c2e0df1e4412a1f69a5.png",
+      "dataAiHint": "web development",
+      "duration": "৩ মাসের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 3,
+      "title": "ডিজিটাল মার্কেটিং",
+      "image": "https://skill-shikhun.netlify.app/static/media/GD.63300e1ce24623e1f031.png",
+      "dataAiHint": "digital marketing",
+      "duration": "২ মাসের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": "প্রতি মাস"
+    },
+    {
+      "id": 4,
+      "title": "গ্রাফিক্স ডিজাইন",
+      "image": "https://skill-shikhun.netlify.app/static/media/DM.f0f690691a1af9996b02.png",
+      "dataAiHint": "graphic design",
+      "duration": "৩ মাসের",
+      "price": "5000",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 5,
+      "title": "সিসি ক্যামেরা সেটআপ",
+      "image": "https://cdn.bdstall.com/product-image/giant_283097.jpg",
+      "dataAiHint": "cctv setup",
+      "duration": "আলোচনা সাপেক্ষে",
+      "price": "7000",
+      "live": true,
+      "priceSuffix": ""
+    },
+    {
+      "id": 6,
+      "title": "পিসি বিল্ডিং",
+      "image": "https://img.youtube.com/vi/zYYv_12CY38/sddefault.jpg",
+      "dataAiHint": "pc building",
+      "duration": "আলোচনা সাপেক্ষে",
+      "price": "15000",
+      "live": true,
+      "priceSuffix": "থেকে শুরু"
+    },
+    {
+      "id": 7,
+      "title": "পেইজ প্রমোট",
+      "image": "https://i.ytimg.com/vi/8Y4mG_y-p9o/maxresdefault.jpg",
+      "dataAiHint": "page promotion",
+      "duration": "৩ দিনের",
+      "price": "1500",
+      "live": true,
+      "priceSuffix": ""
+    }
+]
