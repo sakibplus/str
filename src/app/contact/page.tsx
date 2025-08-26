@@ -1,18 +1,15 @@
-
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/data";
+import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/cms";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ContactForm from "./contact-form";
-import { Card, CardContent } from "@/components/ui/card";
-import type { ContactInfoCard } from "@/lib/data";
+import type { ContactInfoCard } from "@/lib/cms";
 
 const iconComponents: { [key: string]: React.ElementType } = {
   Mail,
   Phone,
   MapPin,
 };
-
 
 export default async function ContactPage() {
   const [
@@ -39,10 +36,10 @@ export default async function ContactPage() {
         <section className="bg-primary text-white py-20">
           <div className="container mx-auto px-4 text-center">
             <h1 className="text-4xl md:text-5xl font-bold font-headline">
-              {contactPageData.hero_title}
+              {contactPageData.hero_title || "যোগাযোগ করুন"}
             </h1>
             <p className="mt-4 text-lg md:text-xl max-w-3xl mx-auto text-primary-foreground/80">
-              {contactPageData.hero_subtitle}
+              {contactPageData.hero_subtitle || "আপনার যেকোনো প্রশ্ন, পরামর্শ বা সহযোগিতার জন্য আমরা সর্বদা প্রস্তুত।"}
             </p>
           </div>
         </section>
@@ -54,8 +51,8 @@ export default async function ContactPage() {
                     {/* Left side: Info Cards and Map */}
                     <div className="space-y-8">
                          <div className="text-left">
-                            <h2 className="text-3xl font-bold font-headline text-primary">যোগাযোগের তথ্য</h2>
-                            <p className="text-muted-foreground mt-2">যেকোনো প্রয়োজনে আমাদের সাথে সরাসরি যোগাযোগ করুন।</p>
+                            <h2 className="text-3xl font-bold font-headline text-primary">{contactPageData.info_title || "যোগাযোগের তথ্য"}</h2>
+                            <p className="text-muted-foreground mt-2">{contactPageData.info_subtitle || "যেকোনো প্রয়োজনে আমাদের সাথে সরাসরি যোগাযোগ করুন।"}</p>
                         </div>
                         
                         <div className="space-y-6">
@@ -82,7 +79,7 @@ export default async function ContactPage() {
                         {/* Google Map */}
                         <div className="h-72 lg:h-80 w-full rounded-xl overflow-hidden shadow-lg border">
                             <iframe
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.879940198188!2d90.39053831543154!3d23.75167699462529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1f1178de1f6f3!2sDhaka!5e0!3m2!1sen!2sbd!4v1678886363028!5m2!1sen!2sbd"
+                            src={contactPageData.map_url || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3651.879940198188!2d90.39053831543154!3d23.75167699462529!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3755b8bd552c2b3b%3A0x4e70f1f1178de1f6f3!2sDhaka!5e0!3m2!1sen!2sbd!4v1678886363028!5m2!1sen!2sbd"}
                             width="100%"
                             height="100%"
                             style={{ border: 0 }}
@@ -97,8 +94,8 @@ export default async function ContactPage() {
                     {/* Right side: Contact Form */}
                      <div>
                         <div className="text-left mb-8">
-                            <h2 className="text-3xl font-bold font-headline text-primary">{contactPageData.form_title}</h2>
-                            <p className="text-muted-foreground mt-2">{contactPageData.form_subtitle}</p>
+                            <h2 className="text-3xl font-bold font-headline text-primary">{contactPageData.form_title || "আমাদের মেসেজ পাঠান"}</h2>
+                            <p className="text-muted-foreground mt-2">{contactPageData.form_subtitle || "আমরা আপনার বার্তার অপেক্ষায় আছি।"}</p>
                         </div>
                          <ContactForm />
                      </div>
@@ -110,5 +107,3 @@ export default async function ContactPage() {
     </div>
   );
 }
-
-

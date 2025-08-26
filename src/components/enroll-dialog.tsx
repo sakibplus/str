@@ -1,4 +1,3 @@
-
 'use client';
 
 import React, { useState } from 'react';
@@ -105,7 +104,7 @@ Please guide me with the next steps. Thank you!
                   {course.discountedPrice ? (
                       <p className="font-bold text-accent text-lg">৳{course.discountedPrice} {course.priceSuffix}</p>
                   ) : (
-                      <p className="font-bold text-accent text-lg">৳৭৫০</p>
+                      <p className="font-bold text-accent text-lg">{course.price ? `৳${course.price}` : 'আলোচনা সাপেক্ষে'}</p>
                   )}
                 </div>
               </div>

@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink, NavbarData, Course } from '@/lib/data';
+import type { NavLink, NavbarData, Course } from '@/lib/cms';
 import { ServiceInquiryDialog } from '@/components/service-inquiry-dialog';
 
 export function Navbar({
@@ -25,24 +25,14 @@ export function Navbar({
 }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
-  // Combine dynamic navLinks with static ones, preventing duplicates
-  const staticLinks = [
-    { href: '/about', label: 'আমাদের সম্পর্কে' },
-    { href: '/contact', label: 'যোগাযোগ' },
-  ];
-
-  const existingHrefs = new Set(navLinks.map(link => link.href));
-  const uniqueStaticLinks = staticLinks.filter(link => !existingHrefs.has(link.href));
-  
-  const allNavLinks = [...navLinks, ...uniqueStaticLinks];
-
+  const allNavLinks = navLinks || [];
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
           <Image
-            src={data.logo_url}
+            src={data.logo_url || "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png"}
             alt="SkillShikhun Logo"
             width={120}
             height={32}
@@ -66,7 +56,7 @@ export function Navbar({
             className="hidden md:flex bg-accent text-white hover:bg-accent/90"
             onClick={() => setIsDialogOpen(true)}
           >
-            সার্ভিস নিন
+            {data.button_text || "সার্ভিস নিন"}
           </Button>
 
           <div className="md:hidden">
@@ -81,7 +71,7 @@ export function Navbar({
                 <SheetHeader>
                   <Link href="/" className="flex items-center gap-2 mb-4">
                     <Image
-                      src={data.logo_url}
+                      src={data.logo_url || "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png"}
                       alt="SkillShikhun Logo"
                       width={150}
                       height={40}
@@ -102,7 +92,7 @@ export function Navbar({
                     className="bg-accent text-white hover:bg-accent/90"
                     onClick={() => setIsDialogOpen(true)}
                   >
-                    সার্ভিস নিন
+                    {data.button_text || "সার্ভিস নিন"}
                   </Button>
                 </div>
               </SheetContent>

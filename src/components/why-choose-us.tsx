@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import type { WhyChooseUsData } from '@/lib/data';
+import type { WhyChooseUsData } from '@/lib/cms';
 
 
 export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {
@@ -11,10 +11,10 @@ export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold font-headline text-primary">
-            {data.title}
+            {data.title || "স্কিলশিখুন কেন বেছে নেবেন?"}
           </h2>
           <p className="text-lg text-muted-foreground mt-2 max-w-2xl mx-auto">
-            {data.subtitle}
+            {data.subtitle || "আমাদের সেরা ফিচারগুলো যা আপনাকে অন্যদের থেকে এগিয়ে রাখবে।"}
           </p>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">

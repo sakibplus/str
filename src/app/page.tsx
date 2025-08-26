@@ -1,4 +1,3 @@
-
 import { Navbar } from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { CoursesSection } from '@/components/courses-section';
@@ -15,22 +14,19 @@ import {
     getHeroData,
     getCourseCarouselData,
     getCourses,
-    getAboutUsData,
+    getAboutUsSectionData,
     getTestimonials,
     getWhyChooseUsData,
-    getFooterData,
-    getInquiryCourses
-} from '@/lib/data';
+    getFooterData
+} from '@/lib/cms';
 
 export default async function Home() {
-  // Fetch all data from the local data file in parallel
   const [
     navbarData,
     navLinks,
     heroData,
     courseCarouselData,
     courses,
-    inquiryCourses,
     aboutUsData,
     testimonials,
     whyChooseUsData,
@@ -41,8 +37,7 @@ export default async function Home() {
     getHeroData(),
     getCourseCarouselData(),
     getCourses(),
-    getInquiryCourses(),
-    getAboutUsData(),
+    getAboutUsSectionData(),
     getTestimonials(),
     getWhyChooseUsData(),
     getFooterData()
@@ -55,7 +50,7 @@ export default async function Home() {
       <main className="flex-1">
         <HeroSection data={heroData} />
         <CourseCarousel courses={courseCarouselData} />
-        <FreeVideosForm courses={inquiryCourses} />
+        <FreeVideosForm courses={courses} />
         <CoursesSection courses={courses} />
         <AboutUsSection data={aboutUsData} />
         <TestimonialsSection testimonials={testimonials} />

@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Input } from './ui/input';
 import { Button } from './ui/button';
 import { CourseInquiryDialog } from './course-inquiry-dialog';
-import type { Course } from '@/lib/data';
+import type { Course } from '@/lib/cms';
 
 export function FreeVideosForm({ courses }: { courses: Course[] }) {
   const [mobileNumber, setMobileNumber] = useState('');

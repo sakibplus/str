@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
-import type { AboutUsData } from '@/lib/data';
+import type { AboutUsSectionData } from '@/lib/cms';
 
-
-export function AboutUsSection({ data }: {data: AboutUsData}) {
+export function AboutUsSection({ data }: {data: AboutUsSectionData}) {
   if (!data?.title) return null;
 
   return (

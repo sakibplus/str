@@ -1,4 +1,3 @@
-
 'use client';
 
 import Image from 'next/image';
@@ -9,9 +8,8 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Card, CardContent } from './ui/card';
-import type { CourseCarouselData } from '@/lib/data';
+import type { CourseCarouselData } from '@/lib/cms';
 import Autoplay from "embla-carousel-autoplay";
-
 
 export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
   if (!courses || courses.length === 0) return null;
@@ -60,21 +58,10 @@ export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
                         <h3 className="font-bold text-lg">{course.title}</h3>
                         
                         <div className="space-y-2">
-                          {course.price ? (
-                            <>
-                              <p className="text-sm">{course.duration}</p>
-                              <div className="bg-white text-gray-800 font-bold py-1 px-4 rounded-lg inline-block text-sm">
-                                {course.discountedPrice}৳ {course.priceSuffix}
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              <div className="text-sm inline-block bg-white/20 backdrop-blur-sm px-4 py-1 rounded-full">ক্র্যাশ কোর্স</div>
-                              <div className="bg-white text-black rounded-full inline-block px-8 py-1 mt-2">
-                                <p className="text-3xl font-bold">৭৫০৳</p>
-                              </div>
-                            </>
-                          )}
+                           <p className="text-sm">{course.duration}</p>
+                           <div className="bg-white text-gray-800 font-bold py-1 px-4 rounded-lg inline-block text-sm">
+                             ৳{course.discountedPrice} {course.priceSuffix}
+                           </div>
                         </div>
                       </div>
                     </CardContent>

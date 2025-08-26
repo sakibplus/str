@@ -11,7 +11,7 @@ import {
 import { Card, CardContent } from '@/components/ui/card';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Autoplay from "embla-carousel-autoplay";
-import type { Testimonial } from '@/lib/data';
+import type { Testimonial } from '@/lib/cms';
 
 export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
   if (!testimonials || testimonials.length === 0) return null;
