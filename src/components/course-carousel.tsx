@@ -9,7 +9,7 @@ import {
   CarouselItem,
 } from '@/components/ui/carousel';
 import { Card, CardContent } from './ui/card';
-import type { CourseCarouselData } from '@/lib/cms';
+import type { CourseCarouselData } from '@/lib/data';
 import Autoplay from "embla-carousel-autoplay";
 
 

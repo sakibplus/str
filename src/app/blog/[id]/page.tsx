@@ -1,6 +1,6 @@
 import { notFound } from 'next/navigation';
 import Image from 'next/image';
-import { getBlogPosts, getNavbarData, getNavLinks, getFooterData, getCourses } from '@/lib/cms';
+import { getBlogPosts, getNavbarData, getNavLinks, getFooterData, getCourses } from '@/lib/data';
 import { Navbar } from '@/components/navbar';
 import { Footer } from '@/components/footer';
 import { Avatar, AvatarImage, AvatarFallback } from '@/components/ui/avatar';

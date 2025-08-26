@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getNavbarData, getCourses, getBlogPosts } from "@/lib/cms";
+import { getNavLinks, getFooterData, getNavbarData, getCourses, getBlogPosts } from "@/lib/data";
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { ArrowRight, Calendar } from "lucide-react";

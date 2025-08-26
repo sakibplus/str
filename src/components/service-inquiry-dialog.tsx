@@ -20,7 +20,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Input } from '@/components/ui/input';
 import Image from 'next/image';
-import type { Course } from '@/lib/cms';
+import type { Course } from '@/lib/data';
 import { Mail } from 'lucide-react';
 
 const WhatsappIcon = (props: React.SVGProps<SVGSVGElement>) => (

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Phone } from 'lucide-react';
-import type { HeroData } from '@/lib/cms';
+import type { HeroData } from '@/lib/data';
 
 export function HeroSection({ data }: { data: HeroData }) {
   if (!data) return null;

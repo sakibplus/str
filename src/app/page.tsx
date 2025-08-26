@@ -20,10 +20,10 @@ import {
     getWhyChooseUsData,
     getFooterData,
     getInquiryCourses
-} from '@/lib/cms';
+} from '@/lib/data';
 
 export default async function Home() {
-  // Fetch all data from the CMS in parallel
+  // Fetch all data from the local data file in parallel
   const [
     navbarData,
     navLinks,

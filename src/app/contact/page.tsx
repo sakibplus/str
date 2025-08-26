@@ -1,11 +1,11 @@
 
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/cms";
+import { getNavLinks, getFooterData, getNavbarData, getCourses, getContactPageData, getContactInfoCards } from "@/lib/data";
 import { Mail, Phone, MapPin } from "lucide-react";
 import ContactForm from "./contact-form";
 import { Card, CardContent } from "@/components/ui/card";
-import type { ContactInfoCard } from "@/lib/cms";
+import type { ContactInfoCard } from "@/lib/data";
 
 const iconComponents: { [key: string]: React.ElementType } = {
   Mail,
@@ -110,4 +110,5 @@ export default async function ContactPage() {
     </div>
   );
 }
+
 

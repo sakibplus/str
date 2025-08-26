@@ -11,7 +11,7 @@ import {
   SheetHeader,
   SheetTrigger,
 } from '@/components/ui/sheet';
-import type { NavLink, NavbarData, Course } from '@/lib/cms';
+import type { NavLink, NavbarData, Course } from '@/lib/data';
 import { ServiceInquiryDialog } from '@/components/service-inquiry-dialog';
 
 export function Navbar({
@@ -25,13 +25,17 @@ export function Navbar({
 }) {
   const [isDialogOpen, setIsDialogOpen] = React.useState(false);
 
-  const existingHrefs = new Set(navLinks.map(link => link.href));
+  // Combine dynamic navLinks with static ones, preventing duplicates
   const staticLinks = [
     { href: '/about', label: 'আমাদের সম্পর্কে' },
     { href: '/contact', label: 'যোগাযোগ' },
-  ].filter(link => !existingHrefs.has(link.href));
+  ];
 
-  const allNavLinks = [...navLinks, ...staticLinks];
+  const existingHrefs = new Set(navLinks.map(link => link.href));
+  const uniqueStaticLinks = staticLinks.filter(link => !existingHrefs.has(link.href));
+  
+  const allNavLinks = [...navLinks, ...uniqueStaticLinks];
+
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">

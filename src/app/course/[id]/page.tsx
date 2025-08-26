@@ -1,6 +1,6 @@
 
 import { notFound } from 'next/navigation';
-import { getCourseCarouselData, getCourses, getNavbarData, getNavLinks, getFooterData } from '@/lib/cms';
+import { getCourseCarouselData, getCourses, getNavbarData, getNavLinks, getFooterData } from '@/lib/data';
 import CourseDetailClientPage from './client-page';
 
 // This is a server component to fetch data

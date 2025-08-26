@@ -10,7 +10,7 @@ import {
 } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
-import type { Course } from '@/lib/cms';
+import type { Course } from '@/lib/data';
 
 export function CoursesSection({ courses }: { courses: Course[] }) {
   if (!courses || courses.length === 0) return null;

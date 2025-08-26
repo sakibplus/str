@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Building, Goal, Eye } from "lucide-react";
 import { Navbar } from "@/components/navbar";
 import { Footer } from "@/components/footer";
-import { getNavLinks, getFooterData, getAboutUsData, getNavbarData, getCourses } from "@/lib/cms";
+import { getNavLinks, getFooterData, getAboutUsData, getNavbarData, getCourses } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AboutPage() {

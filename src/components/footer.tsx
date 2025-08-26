@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
-import type { FooterData } from '@/lib/cms';
+import type { FooterData } from '@/lib/data';
 
 export function Footer({ data }: { data: FooterData }) {
 
