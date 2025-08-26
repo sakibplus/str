@@ -4,7 +4,6 @@ import { CoursesSection } from '@/components/courses-section';
 import { TestimonialsSection } from '@/components/testimonials-section';
 import { Footer } from '@/components/footer';
 import { AboutUsSection } from '@/components/about-us-section';
-import { TopBanner } from '@/components/top-banner';
 import { CourseCarousel } from '@/components/course-carousel';
 import { FreeVideosForm } from '@/components/free-videos-form';
 import { WhyChooseUs } from '@/components/why-choose-us';
@@ -45,7 +44,6 @@ export default async function Home() {
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      <TopBanner />
       <Navbar navLinks={navLinks} data={navbarData} courses={courses} />
       <main className="flex-1">
         <HeroSection data={heroData} />

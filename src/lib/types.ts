@@ -1,6 +1,16 @@
 // Type definitions for the entire application content.
 // This provides a single source of truth for all data structures.
 
+export type TopBannerData = {
+  enabled: boolean;
+  title: string;
+  subtitle: string;
+  promo_code_label: string;
+  promo_code: string;
+  sale_text_1: string;
+  sale_text_2: string;
+};
+
 export type NavbarData = {
   logo_url: string;
   button_text: string;

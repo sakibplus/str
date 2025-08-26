@@ -9,6 +9,7 @@ import footerData from './content/footer.json';
 import blogData from './content/blog.json';
 import contactPageData from './content/contact.json';
 import aboutPageData from './content/about.json';
+import topBannerData from './content/topBanner.json';
 
 import type {
   NavbarData,
@@ -26,10 +27,15 @@ import type {
   ContactInfoCard,
   AboutUsData,
   DetailedCourse,
+  TopBannerData,
 } from './types';
 
 // These functions read directly from the imported JSON files.
 // This is extremely fast and reliable as it doesn't involve any network requests.
+
+export const getTopBannerData = async (): Promise<TopBannerData> => {
+  return topBannerData;
+};
 
 export const getNavbarData = async (): Promise<NavbarData> => {
   return navbarData;
