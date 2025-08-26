@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sanity:import": "tsx sanity/seed.ts"
   },
   "dependencies": {
     "@genkit-ai/googleai": "^1.14.1",
@@ -36,6 +37,7 @@
     "@radix-ui/react-tabs": "^1.1.3",
     "@radix-ui/react-toast": "^1.2.6",
     "@radix-ui/react-tooltip": "^1.1.8",
+    "@sanity/client": "^6.20.2",
     "@sanity/vision": "^3.57.2",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -48,6 +50,7 @@
     "lucide-react": "^0.475.0",
     "next": "15.3.3",
     "next-sanity": "^9.4.2",
+    "p-limit": "^5.0.0",
     "patch-package": "^8.0.0",
     "react": "^18.3.1",
     "react-day-picker": "^8.10.1",
@@ -67,6 +70,7 @@
     "genkit-cli": "^1.14.1",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
+    "tsx": "^4.16.2",
     "typescript": "^5"
   }
 }
