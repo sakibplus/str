@@ -43,7 +43,6 @@ export default function Home() {
   const { toast } = useToast();
 
   const fetchData = async () => {
-    setIsLoading(true);
     try {
       const [
         navbar,
@@ -108,7 +107,7 @@ export default function Home() {
     }
   };
 
-  const isDataMissing = !navbarData && !heroData && !footerData;
+  const isDataMissing = !navbarData || !heroData || !footerData;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
