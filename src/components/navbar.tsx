@@ -1,3 +1,4 @@
+
 'use client';
 
 import * as React from 'react';
@@ -31,12 +32,14 @@ export function Navbar({
     <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-20 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <Image
-            src={data.logo_url}
-            alt="SkillShikhun Logo"
-            width={120}
-            height={32}
-          />
+          {data?.logo_url && (
+            <Image
+              src={data.logo_url}
+              alt="SkillShikhun Logo"
+              width={120}
+              height={32}
+            />
+          )}
         </Link>
 
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium">
@@ -52,12 +55,14 @@ export function Navbar({
         </nav>
 
         <div className="flex items-center gap-4">
-          <Button
-            className="hidden md:flex bg-accent text-white hover:bg-accent/90"
-            onClick={() => setIsDialogOpen(true)}
-          >
-            {data.button_text}
-          </Button>
+          {data?.button_text && (
+            <Button
+              className="hidden md:flex bg-accent text-white hover:bg-accent/90"
+              onClick={() => setIsDialogOpen(true)}
+            >
+              {data.button_text}
+            </Button>
+          )}
 
           <div className="md:hidden">
             <Sheet>
@@ -70,12 +75,14 @@ export function Navbar({
               <SheetContent side="right">
                 <SheetHeader>
                   <Link href="/" className="flex items-center gap-2 mb-4">
-                    <Image
-                      src={data.logo_url}
-                      alt="SkillShikhun Logo"
-                      width={150}
-                      height={40}
-                    />
+                    {data?.logo_url && (
+                      <Image
+                        src={data.logo_url}
+                        alt="SkillShikhun Logo"
+                        width={150}
+                        height={40}
+                      />
+                    )}
                   </Link>
                 </SheetHeader>
                 <div className="flex flex-col gap-4">
@@ -88,12 +95,14 @@ export function Navbar({
                       {link.label}
                     </Link>
                   ))}
-                  <Button
-                    className="bg-accent text-white hover:bg-accent/90"
-                    onClick={() => setIsDialogOpen(true)}
-                  >
-                    {data.button_text}
-                  </Button>
+                  {data?.button_text && (
+                    <Button
+                      className="bg-accent text-white hover:bg-accent/90"
+                      onClick={() => setIsDialogOpen(true)}
+                    >
+                      {data.button_text}
+                    </Button>
+                  )}
                 </div>
               </SheetContent>
             </Sheet>
