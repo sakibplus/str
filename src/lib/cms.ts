@@ -1,3 +1,4 @@
+
 import { client } from './sanity.client';
 import type {
   NavbarData,
@@ -20,11 +21,13 @@ import { groq } from 'next-sanity';
 
 // Reusable function to fetch a single document type
 async function getSingleton(docType: string, query: string): Promise<any> {
+  if (!client) return {};
   return client.fetch(groq`*[_type == "${docType}"][0]{ ${query} }`);
 }
 
 // Reusable function to fetch all documents of a certain type
 async function getAllDocs(docType: string, query: string): Promise<any[]> {
+  if (!client) return [];
   return client.fetch(groq`*[_type == "${docType}"]{ ${query} } | order(_createdAt asc)`);
 }
 
@@ -55,6 +58,7 @@ export const getCourses = async (): Promise<Course[]> => {
 };
 
 export const getCourseById = async (id: number): Promise<DetailedCourse | undefined> => {
+  if (!client) return undefined;
   const query = groq`*[_type == "detailedCourse" && id == ${id}][0]{
     "courseData": *[_type == "course" && id == ${id}][0]{
       id, title, "image": image.asset->url, "dataAiHint": image.alt,
