@@ -1,10 +1,11 @@
-import data from './content.json';
+import { client } from './sanity.client';
 import type {
   NavbarData,
   NavLink,
   HeroData,
   CourseCarouselData,
   Course,
+  DetailedCourse,
   AboutUsSectionData,
   Testimonial,
   WhyChooseUsData,
@@ -15,75 +16,120 @@ import type {
   ContactInfoCard,
   AboutUsData,
 } from './types';
+import { groq } from 'next-sanity';
 
-// Since we are using a local JSON file, all functions will be synchronous.
-// We keep the async structure to minimize changes in the components.
+// Reusable function to fetch a single document type
+async function getSingleton(docType: string, query: string): Promise<any> {
+  return client.fetch(groq`*[_type == "${docType}"][0]{ ${query} }`);
+}
+
+// Reusable function to fetch all documents of a certain type
+async function getAllDocs(docType: string, query: string): Promise<any[]> {
+  return client.fetch(groq`*[_type == "${docType}"]{ ${query} } | order(_createdAt asc)`);
+}
 
 export const getNavbarData = async (): Promise<NavbarData> => {
-  return data.navbar;
+  return getSingleton('navbar', `"logo_url": logo.asset->url, button_text`);
 };
 
 export const getNavLinks = async (): Promise<NavLink[]> => {
-  return data.navLinks;
+  return getAllDocs('navLink', `href, label`);
 };
 
 export const getHeroData = async (): Promise<HeroData> => {
-  return data.homePage.hero;
+  return getSingleton('hero', `title, subtitle, helpline_text, phone_number`);
 };
 
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
-  return data.courseCarousel;
+  return getAllDocs('courseCarousel', `
+    id, title, "image": image.asset->url, "dataAiHint": image.alt,
+    discountedPrice, duration, priceSuffix
+  `);
 };
 
 export const getCourses = async (): Promise<Course[]> => {
-  return data.courses;
+  return getAllDocs('course', `
+    id, title, "image": image.asset->url, "dataAiHint": image.alt,
+    duration, price, live, priceSuffix
+  `);
 };
 
-export const getCourseById = async (id: number): Promise<Course | undefined> => {
-  const course = data.courses.find((c) => c.id === id);
-  if (!course) return undefined;
-  
-  // Find details from the detailedCourses section in JSON
-  const courseDetails = data.detailedCourses.find(dc => dc.id === id);
-  
+export const getCourseById = async (id: number): Promise<DetailedCourse | undefined> => {
+  const query = groq`*[_type == "detailedCourse" && id == ${id}][0]{
+    "courseData": *[_type == "course" && id == ${id}][0]{
+      id, title, "image": image.asset->url, "dataAiHint": image.alt,
+      duration, price, live, priceSuffix
+    },
+    description, discountedPrice, promoCode,
+    details[]{ heading, points }
+  }`;
+  const result = await client.fetch(query);
+  if (!result || !result.courseData) return undefined;
+
   return {
-    ...course,
-    ...courseDetails, // Combine basic and detailed info
+    ...result.courseData,
+    ...result,
   };
 };
 
+
 export const getAboutUsSectionData = async (): Promise<AboutUsSectionData> => {
-  return data.homePage.aboutUsSection;
+  return getSingleton('aboutUsSection', `
+    title, heading, description, "image": image.asset->url, "dataAiHint": image.alt,
+    stats[]{ value, label }
+  `);
 };
 
 export const getTestimonials = async (): Promise<Testimonial[]> => {
-  return data.testimonials;
+  return getAllDocs('testimonial', `
+    id, name, role, quote, "avatar": avatar.asset->url, "dataAiHint": avatar.alt
+  `);
 };
 
 export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
-  return data.homePage.whyChooseUs;
+  return getSingleton('whyChooseUs', `
+    title, subtitle,
+    features[]{ id, title, description, "image": image.asset->url, "dataAiHint": image.alt }
+  `);
 };
 
 export const getFooterData = async (): Promise<FooterData> => {
-  return data.footer;
+  return getSingleton('footer', `
+    "logo_url": logo.asset->url, description, newsletter_heading, newsletter_placeholder,
+    copyright_text, address_line1, address_line2, email, phone,
+    links[]{ label, href }
+  `);
 };
 
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
-  return data.blog.posts;
+  return getAllDocs('blogPost', `
+    id, title, excerpt, "image": image.asset->url, "dataAiHint": image.alt,
+    date, author, "author_avatar": author_avatar.asset->url, content
+  `);
 };
 
 export const getBlogPageData = async (): Promise<BlogPageData> => {
-  return data.blog.pageData;
+  return getSingleton('blogPage', `hero_title, hero_subtitle`);
 };
 
 export const getContactPageData = async (): Promise<ContactPageData> => {
-  return data.contactPage.pageData;
+  return getSingleton('contactPage', `
+    hero_title, hero_subtitle, info_title, info_subtitle,
+    map_url, form_title, form_subtitle
+  `);
 };
 
 export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
-  return data.contactPage.infoCards;
+  const pageData = await getSingleton('contactPage', 'infoCards');
+  return pageData?.infoCards || [];
 };
 
 export const getAboutUsData = async (): Promise<AboutUsData> => {
-  return data.aboutPage;
+  return getSingleton('aboutPage', `
+    hero_title, hero_subtitle, story_tagline, story_heading,
+    story_description_1, story_description_2, "story_image": story_image.asset->url,
+    vision_title, vision_description, mission_title, mission_description,
+    stats_heading, stats_subheading,
+    stats[]{ value, label }
+  `);
 };

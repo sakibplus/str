@@ -137,7 +137,7 @@ export type AboutUsData = {
     story_heading: string;
     story_description_1: string;
     story_description_2: string;
-story_image: string;
+    story_image: string;
     vision_title: string;
     vision_description: string;
     mission_title: string;
