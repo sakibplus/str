@@ -1,0 +1,43 @@
+
+[
+    {
+      "id": 1,
+      "name": "আকাশ রহমান",
+      "role": "ওয়েব ডেভেলপার",
+      "quote": "রঙিনবাড়ি আইটি থেকে ওয়েব ডেভেলপমেন্ট কোর্সটি করে আমি আজ একজন সফল ফ্রিল্যান্সার।",
+      "avatar": "https://ddn.ezzecloud.com/assets/2139/Pic-12.jpeg",
+      "dataAiHint": "man portrait"
+    },
+    {
+      "id": 2,
+      "name": "সুমাইয়া আক্তার",
+      "role": "গ্রাফিক ডিজাইনার",
+      "quote": "গ্রাফিক ডিজাইন কোর্সটি আমার ক্যারিয়ারের মোড় ঘুরিয়ে দিয়েছে। ধন্যবাদ রঙিনবাড়ি আইটিকে।",
+      "avatar": "https://asset.kalerkantho.com/public/news_images/2016/11/05/030220Program_kalerkantho_pic.jpg",
+      "dataAiHint": "woman portrait"
+    },
+    {
+      "id": 3,
+      "name": "রাকিবুল হাসান",
+      "role": "ডিজিটাল মার্কেটার",
+      "quote": "এখানকার ডিজিটাল মার্কেটিং কোর্সটি খুবই কার্যকরী। আমি নিজের অনলাইন ব্যবসাকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://techtunes.tech/wp-content/uploads/2021/08/%E0%A6%A8%E0%A6%A4%E0%A7%81%E0%A6%A8-%E0%A6%95%E0%A6%AE%E0%A7%8D%E0%A6%AA%E0%A6%BF%E0%A6%89%E0%A6%9F%E0%A6%BE%E0%A6%B0-%E0%A6%AC%E0%A7%8D%E0%A6%AF%E0%A6%AC%E0%A6%B9%E0%A6%BE%E0%A6%B0%E0%A6%95%E0%A6%BE%E0%A6%B0%E0%A7%80%E0%A6%A6%E0%A7%87%E0%A6%B0-%E0%A6%9C%E0%A6%A8%E0%A7%8D%E0%A6%AF-%E0%A7%A7%E0%A7%A6-%E0%A6%9F%E0%A6%BF-%E0%A6%9F%E0%A6%BF%E0%A6%AA%E0%A6%B8-Feature.jpeg",
+      "dataAiHint": "person smiling"
+    },
+    {
+      "id": 4,
+      "name": "সাগর রেজা",
+      "role": "অফিস প্রোগ্রাম",
+      "quote": "এখানকার অফিস প্রোগ্রাম কোর্সটি খুবই কার্যকরী। আমি নিজেকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://prosnouttor.com/wp-content/uploads/2022/09/1-2.jpg.webp",
+      "dataAiHint": "person smiling"
+    },
+    {
+      "id": 5,
+      "name": "প্রীতি ইসলাম",
+      "role": "টি-শার্ট ডিজাইনার",
+      "quote": "এখানকার গ্রাফিক্স ডিজাইন কোর্সটি খুবই কার্যকরী। আমি নিজের টিশার্ট ডিজাইন ক্যারীয়ারকে সফলভাবে প্রতিষ্ঠিত করতে পেরেছি।",
+      "avatar": "https://cdn.dhakapost.com/media/imgAll/BG/2022October/pharma-jobs-20220919135453-20220929134754-20221025152732.jpg",
+      "dataAiHint": "person smiling"
+    }
+]

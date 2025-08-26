@@ -1,0 +1,18 @@
+
+{
+    "logo_url": "https://image4.owler.com/logo/shikho-technologies-bangladesh_owler_20230320_171601_original.png",
+    "description": "আপনার দক্ষতা বিকাশে আমাদের পথচলা।",
+    "address_line1": "কোর্ট রোড, সোনালী ব্যাংক সংলগ্ন",
+    "address_line2": "কেন্দুয়া, নেত্রকোণা।",
+    "email": "info@ronginbari.com",
+    "phone": "01711 466 850",
+    "links": [
+      { "label": "বাংলা টাইপিং", "href": "https://Banglatype.vercel.app" },
+      { "label": "গোপনীয়তা নীতি", "href": "/privacy-policy" },
+      { "label": "ব্লগ", "href": "/blog" },
+      { "label": "রঙিনবাড়ি শপ", "href": "https://shop.ronginbari.com" }
+    ],
+    "newsletter_heading": "নিউজলেটার",
+    "newsletter_placeholder": "আমাদের নিউজলেটারে সাবস্ক্রাইব করে নতুন কোর্স এবং অফার সম্পর্কে জানুন।",
+    "copyright_text": "© ২০২৪ SkillShikhun। সর্বস্বত্ব সংরক্ষিত।"
+}

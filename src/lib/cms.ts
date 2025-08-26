@@ -1,4 +1,15 @@
-import data from './content.json';
+import navbarData from './content/navbar.json';
+import navLinksData from './content/navLinks.json';
+import homePageData from './content/home.json';
+import courseCarouselData from './content/courseCarousel.json';
+import coursesData from './content/courses.json';
+import detailedCoursesData from './content/detailedCourses.json';
+import testimonialsData from './content/testimonials.json';
+import footerData from './content/footer.json';
+import blogData from './content/blog.json';
+import contactPageData from './content/contact.json';
+import aboutPageData from './content/about.json';
+
 import type {
   NavbarData,
   NavLink,
@@ -14,76 +25,76 @@ import type {
   ContactPageData,
   ContactInfoCard,
   AboutUsData,
+  DetailedCourse,
 } from './types';
 
-// Since we are using a local JSON file, all functions will be synchronous.
-// We keep the async structure to minimize changes in the components.
+// These functions read directly from the imported JSON files.
+// This is extremely fast and reliable as it doesn't involve any network requests.
 
 export const getNavbarData = async (): Promise<NavbarData> => {
-  return data.navbar;
+  return navbarData;
 };
 
 export const getNavLinks = async (): Promise<NavLink[]> => {
-  return data.navLinks;
+  return navLinksData;
 };
 
 export const getHeroData = async (): Promise<HeroData> => {
-  return data.homePage.hero;
+  return homePageData.hero;
 };
 
 export const getCourseCarouselData = async (): Promise<CourseCarouselData[]> => {
-  return data.courseCarousel;
+  return courseCarouselData;
 };
 
 export const getCourses = async (): Promise<Course[]> => {
-  return data.courses;
+  return coursesData;
 };
 
-export const getCourseById = async (id: number): Promise<Course | undefined> => {
-  const course = data.courses.find((c) => c.id === id);
+export const getCourseById = async (id: number): Promise<DetailedCourse | undefined> => {
+  const course = coursesData.find((c) => c.id === id);
   if (!course) return undefined;
   
-  // Find details from the detailedCourses section in JSON
-  const courseDetails = data.detailedCourses.find(dc => dc.id === id);
+  const courseDetails = detailedCoursesData.find(dc => dc.id === id);
   
   return {
     ...course,
-    ...courseDetails, // Combine basic and detailed info
+    ...courseDetails, 
   };
 };
 
 export const getAboutUsSectionData = async (): Promise<AboutUsSectionData> => {
-  return data.homePage.aboutUsSection;
+  return homePageData.aboutUsSection;
 };
 
 export const getTestimonials = async (): Promise<Testimonial[]> => {
-  return data.testimonials;
+  return testimonialsData;
 };
 
 export const getWhyChooseUsData = async (): Promise<WhyChooseUsData> => {
-  return data.homePage.whyChooseUs;
+  return homePageData.whyChooseUs;
 };
 
 export const getFooterData = async (): Promise<FooterData> => {
-  return data.footer;
+  return footerData;
 };
 
 export const getBlogPosts = async (): Promise<BlogPost[]> => {
-  return data.blog.posts;
+  return blogData.posts;
 };
 
 export const getBlogPageData = async (): Promise<BlogPageData> => {
-  return data.blog.pageData;
+  return blogData.pageData;
 };
 
 export const getContactPageData = async (): Promise<ContactPageData> => {
-  return data.contactPage.pageData;
+  return contactPageData.pageData;
 };
 
 export const getContactInfoCards = async (): Promise<ContactInfoCard[]> => {
-  return data.contactPage.infoCards;
+  return contactPageData.infoCards;
 };
 
 export const getAboutUsData = async (): Promise<AboutUsData> => {
-  return data.aboutPage;
+  return aboutPageData;
 };
