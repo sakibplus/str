@@ -33,50 +33,30 @@ function parseCsvText(csvText: string): Record<string, any>[] {
 
     for (let i = 1; i < lines.length; i++) {
         const row: { [key: string]: any } = {};
-        let currentLine = lines[i];
+        const currentLine = lines[i];
         
         // This regex handles quoted fields, including those with commas inside.
-        const values = currentLine.match(/(".*?"|[^",]+)(?=\s*,|\s*$)/g) || [];
-        
-        if (values.length !== header.length) {
-             // Fallback for simple comma split if regex fails
-             const simpleValues = currentLine.split(',');
-             for (let j = 0; j < header.length; j++) {
-                let value = simpleValues[j]?.trim();
-                const key = header[j];
-                
-                if (typeof value === 'string') {
-                    if (!isNaN(Number(value)) && value.trim() !== '') {
-                        row[key] = Number(value);
-                    } else if (value.toLowerCase() === 'true') {
-                        row[key] = true;
-                    } else if (value.toLowerCase() === 'false') {
-                        row[key] = false;
-                    } else {
-                        row[key] = value.replace(/^"|"$/g, '');
-                    }
-                } else {
-                    row[key] = value;
-                }
-             }
-        } else {
-            for (let j = 0; j < header.length; j++) {
-                let value = values[j]?.trim();
-                const key = header[j];
+        const values = currentLine.match(/(?:"[^"]*(?:""[^"]*)*"|[^,]*)(?:,|$)/g) || [];
 
-                if (typeof value === 'string') {
-                    if (!isNaN(Number(value)) && value.trim() !== '') {
-                        row[key] = Number(value);
-                    } else if (value.toLowerCase() === 'true') {
-                        row[key] = true;
-                    } else if (value.toLowerCase() === 'false') {
-                        row[key] = false;
-                    } else {
-                        row[key] = value.replace(/^"|"$/g, '');
-                    }
-                } else {
-                    row[key] = value;
-                }
+        for (let j = 0; j < header.length; j++) {
+            let value = values[j] || '';
+            value = value.endsWith(',') ? value.slice(0, -1) : value; // remove trailing comma
+            value = value.trim();
+
+            const key = header[j];
+
+            if (value.startsWith('"') && value.endsWith('"')) {
+                value = value.slice(1, -1).replace(/""/g, '"'); // handle escaped quotes
+            }
+            
+            if (!isNaN(Number(value)) && value.trim() !== '') {
+                row[key] = Number(value);
+            } else if (value.toLowerCase() === 'true') {
+                row[key] = true;
+            } else if (value.toLowerCase() === 'false') {
+                row[key] = false;
+            } else {
+                row[key] = value;
             }
         }
         data.push(row);
@@ -126,10 +106,9 @@ async function fetchAndParseCsv(url: string | undefined, fallback: any, sheetNam
 }
 
 // Helper function to transform key-value pair array into an object
-function transformKeyValue(data: any, fallback: any): any {
-    const dataArray = Array.isArray(data) ? data : (data ? [data] : []);
-    if (dataArray.length === 0) return fallback;
-    return dataArray.reduce((obj, item) => {
+function transformKeyValue(data: any[], fallback: any): any {
+    if (!Array.isArray(data) || data.length === 0) return fallback;
+    return data.reduce((obj, item) => {
         if (item && typeof item === 'object' && item.key) {
             obj[item.key] = item.value;
         }
