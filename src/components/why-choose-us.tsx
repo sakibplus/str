@@ -3,8 +3,8 @@ import { Card, CardContent } from '@/components/ui/card';
 import type { WhyChooseUsData } from '@/lib/types';
 
 
-export function WhyChooseUs({ data }: { data: WhyChooseUsData }) {
-  if (!data?.title) return null;
+export function WhyChooseUs({ data }: { data: WhyChooseUsData | null }) {
+  if (!data || !data.features || data.features.length === 0) return null;
 
   return (
     <section id="why-us" className="py-12 md:py-20 bg-gray-50">

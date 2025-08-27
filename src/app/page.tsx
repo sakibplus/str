@@ -43,6 +43,7 @@ export default function Home() {
   const { toast } = useToast();
 
   const fetchData = async () => {
+    setIsLoading(true);
     try {
       const [
         navbar,

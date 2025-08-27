@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -11,7 +12,7 @@ import { Card, CardContent } from './ui/card';
 import type { CourseCarouselData } from '@/lib/types';
 import Autoplay from "embla-carousel-autoplay";
 
-export function CourseCarousel({ courses }: { courses: CourseCarouselData[] }) {
+export function CourseCarousel({ courses }: { courses: CourseCarouselData[] | null }) {
   if (!courses || courses.length === 0) return null;
 
   return (

@@ -1,3 +1,4 @@
+
 'use client'
 
 import Image from 'next/image';
@@ -11,7 +12,7 @@ import { Button } from '@/components/ui/button';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from './ui/carousel';
 import type { Course } from '@/lib/types';
 
-export function CoursesSection({ courses }: { courses: Course[] }) {
+export function CoursesSection({ courses }: { courses: Course[] | null }) {
   if (!courses || courses.length === 0) return null;
 
   return (

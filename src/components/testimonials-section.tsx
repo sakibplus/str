@@ -1,3 +1,4 @@
+
 'use client';
 
 import Image from 'next/image';
@@ -13,7 +14,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import Autoplay from "embla-carousel-autoplay";
 import type { Testimonial } from '@/lib/types';
 
-export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] }) {
+export function TestimonialsSection({ testimonials }: { testimonials: Testimonial[] | null }) {
   if (!testimonials || testimonials.length === 0) return null;
 
   return (

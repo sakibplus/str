@@ -2,8 +2,8 @@ import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import type { AboutUsSectionData } from '@/lib/types';
 
-export function AboutUsSection({ data }: {data: AboutUsSectionData}) {
-  if (!data?.title) return null;
+export function AboutUsSection({ data }: {data: AboutUsSectionData | null}) {
+  if (!data) return null;
 
   return (
     <section id="about" className="py-12 md:py-20">
