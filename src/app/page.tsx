@@ -1,7 +1,4 @@
 
-'use client';
-
-import { useState, useEffect } from 'react';
 import { Navbar } from '@/components/navbar';
 import { HeroSection } from '@/components/hero-section';
 import { CoursesSection } from '@/components/courses-section';
@@ -23,71 +20,35 @@ import {
     getWhyChooseUsData,
     getFooterData
 } from '@/lib/cms';
-import type { NavbarData, NavLink, HeroData, CourseCarouselData, Course, AboutUsSectionData, Testimonial, WhyChooseUsData, FooterData } from '@/lib/types';
-import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
 
-export default function Home() {
-  const [navbarData, setNavbarData] = useState<NavbarData | null>(null);
-  const [navLinks, setNavLinks] = useState<NavLink[]>([]);
-  const [heroData, setHeroData] = useState<HeroData | null>(null);
-  const [courseCarouselData, setCourseCarouselData] = useState<CourseCarouselData[]>([]);
-  const [courses, setCourses] = useState<Course[]>([]);
-  const [aboutUsData, setAboutUsData] = useState<AboutUsSectionData | null>(null);
-  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
-  const [whyChooseUsData, setWhyChooseUsData] = useState<WhyChooseUsData | null>(null);
-  const [footerData, setFooterData] = useState<FooterData | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const fetchData = async () => {
-    setIsLoading(true);
-    try {
-      const [
-        navbar,
-        nav,
-        hero,
-        carousel,
-        allCourses,
-        about,
-        testimonialData,
-        whyChoose,
-        footer
-      ] = await Promise.all([
-        getNavbarData(),
-        getNavLinks(),
-        getHeroData(),
-        getCourseCarouselData(),
-        getCourses(),
-        getAboutUsSectionData(),
-        getTestimonials(),
-        getWhyChooseUsData(),
-        getFooterData()
-      ]);
-      setNavbarData(navbar || null);
-      setNavLinks(nav || []);
-      setHeroData(hero || null);
-      setCourseCarouselData(carousel || []);
-      setCourses(allCourses || []);
-      setAboutUsData(about || null);
-      setTestimonials(testimonialData || []);
-      setWhyChooseUsData(whyChoose || null);
-      setFooterData(footer || null);
-    } catch (error) {
-      console.error("Failed to fetch data:", error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+export default async function Home() {
+  const [
+    navbarData,
+    navLinks,
+    heroData,
+    courseCarouselData,
+    courses,
+    aboutUsData,
+    testimonials,
+    whyChooseUsData,
+    footerData
+  ] = await Promise.all([
+    getNavbarData(),
+    getNavLinks(),
+    getHeroData(),
+    getCourseCarouselData(),
+    getCourses(),
+    getAboutUsSectionData(),
+    getTestimonials(),
+    getWhyChooseUsData(),
+    getFooterData()
+  ]);
 
   const isDataMissing = !navbarData || !heroData || !footerData || courses.length === 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
-      {isDataMissing && !isLoading && (
+      {isDataMissing && (
          <div className="bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 container mx-auto my-4 rounded-md shadow-lg">
            <div className="flex items-center justify-between">
              <div>
