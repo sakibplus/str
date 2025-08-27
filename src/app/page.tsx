@@ -24,7 +24,6 @@ import {
     getFooterData
 } from '@/lib/cms';
 import type { NavbarData, NavLink, HeroData, CourseCarouselData, Course, AboutUsSectionData, Testimonial, WhyChooseUsData, FooterData } from '@/lib/types';
-import { seedSanityData } from '@/ai/flows/seed-sanity-data';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/hooks/use-toast';
 
@@ -39,8 +38,6 @@ export default function Home() {
   const [whyChooseUsData, setWhyChooseUsData] = useState<WhyChooseUsData | null>(null);
   const [footerData, setFooterData] = useState<FooterData | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isSeeding, setIsSeeding] = useState(false);
-  const { toast } = useToast();
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -86,29 +83,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  const handleSeedData = async () => {
-    setIsSeeding(true);
-    try {
-      const result = await seedSanityData();
-      toast({
-        title: "ডেটা আপলোড সফল হয়েছে!",
-        description: "আপনার অ্যাডমিন প্যানেলে সমস্ত কনটেন্ট যুক্ত করা হয়েছে।",
-      });
-      // Refetch data to update the UI
-      await fetchData();
-    } catch (error: any) {
-      console.error("Seeding failed:", error);
-      toast({
-        title: "ডেটা আপলোড ব্যর্থ হয়েছে",
-        description: error.message || "অনুগ্রহ করে আবার চেষ্টা করুন।",
-        variant: "destructive",
-      });
-    } finally {
-      setIsSeeding(false);
-    }
-  };
-
-  const isDataMissing = !navbarData || !heroData || !footerData;
+  const isDataMissing = !navbarData || !heroData || !footerData || courses.length === 0;
 
   return (
     <div className="flex min-h-screen flex-col bg-background">
@@ -117,11 +92,8 @@ export default function Home() {
            <div className="flex items-center justify-between">
              <div>
                <p className="font-bold">ওয়েবসাইট সেটআপ করুন</p>
-               <p>আপনার ওয়েবসাইটে কনটেন্ট যুক্ত করতে নিচের বাটনে ক্লিক করুন।</p>
+               <p>আপনার ওয়েবসাইটে কনটেন্ট যুক্ত করতে অ্যাডমিন প্যানেলে (/studio) যান এবং "Seed Content" টুলটি ব্যবহার করুন।</p>
              </div>
-             <Button onClick={handleSeedData} disabled={isSeeding}>
-               {isSeeding ? 'লোড হচ্ছে...' : 'Seed Initial Data'}
-             </Button>
            </div>
          </div>
       )}

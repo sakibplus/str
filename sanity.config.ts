@@ -2,6 +2,7 @@ import {defineConfig} from 'sanity'
 import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './sanity/schemas'
+import {seedContentTool} from './sanity/plugins/seed-content'
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
@@ -21,7 +22,7 @@ export default defineConfig({
   projectId: projectId || '',
   dataset: dataset || '',
 
-  plugins: [structureTool(), visionTool()],
+  plugins: [structureTool(), visionTool(), seedContentTool()],
 
   schema: {
     types: schemaTypes,
