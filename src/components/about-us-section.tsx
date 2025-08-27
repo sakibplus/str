@@ -18,7 +18,7 @@ export function AboutUsSection({ data }: {data: AboutUsSectionData}) {
               {data.description}
             </p>
             <div className="grid grid-cols-3 gap-4">
-              {data.stats.map((stat, index) => (
+              {data.stats && data.stats.map((stat, index) => (
                 <div key={index} className="text-center p-4 bg-secondary rounded-lg">
                   <p className="text-3xl font-bold text-primary">{stat.value}</p>
                   <p className="text-sm text-muted-foreground">{stat.label}</p>
